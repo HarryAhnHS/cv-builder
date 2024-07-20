@@ -1,22 +1,22 @@
 function Personal({form, handleForm}) {
 
-    function handleNameChange(e) {
+    function handlePersonalNameChange(e) {
         handleForm({...form, personal: {...form.personal, name:e.target.value}});
     }
 
-    function handleJobChange(e) {
+    function handlePersonalJobChange(e) {
         handleForm({...form, personal: {...form.personal, job:e.target.value}});
     }
 
-    function handleEmailChange(e) {
+    function handlePersonalEmailChange(e) {
         handleForm({...form, personal: {...form.personal, email:e.target.value}});
     }
 
-    function handlePhoneChange(e) {
+    function handlePersonalPhoneChange(e) {
         handleForm({...form, personal: {...form.personal, phone:e.target.value}});
     }
 
-    function handleLocationChange(e) {
+    function handlePersonalLocationChange(e) {
         handleForm({...form, personal: {...form.personal, location:e.target.value}});
     }
 
@@ -24,44 +24,44 @@ function Personal({form, handleForm}) {
         <>
             <div className="input-box">
                 <h4>Personal</h4>
-                <label htmlFor="name">Name:
+                <label htmlFor="personalName">Name:
                     <input
-                        id="name"
+                        id="personalName"
                         type="text"
                         value = {form.personal.name}
-                        onChange = {handleNameChange}
+                        onChange = {handlePersonalNameChange}
                     />
                 </label>
-                <label htmlFor="job">Job:
+                <label htmlFor="personalJob">Job:
                     <input
-                        id="job"
+                        id="personalJob"
                         type="text"
                         value = {form.personal.job}
-                        onChange = {handleJobChange}
+                        onChange = {handlePersonalJobChange}
                     />
                 </label>
-                <label htmlFor="email">Email:
+                <label htmlFor="personalEmail">Email:
                     <input
-                        id="email"
+                        id="personalEmail"
                         type="email"
                         value = {form.personal.email}
-                        onChange = {handleEmailChange}
+                        onChange = {handlePersonalEmailChange}
                     />
                 </label>
-                <label htmlFor="phone">Phone:
+                <label htmlFor="personalPhone">Phone:
                     <input
-                        id="phone"
+                        id="personalPhone"
                         type="number"
                         value = {form.personal.phone}
-                        onChange = {handlePhoneChange}
+                        onChange = {handlePersonalPhoneChange}
                     />
                 </label>
-                <label htmlFor="location">Location:
+                <label htmlFor="personalLocation">Location:
                     <input
-                        id="location"
+                        id="personalLocation"
                         type="text"
                         value = {form.personal.location}
-                        onChange = {handleLocationChange}
+                        onChange = {handlePersonalLocationChange}
                     />
                 </label>
             </div>

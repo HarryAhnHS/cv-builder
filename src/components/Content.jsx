@@ -15,10 +15,10 @@ function Content() {
             phone: '',
             location: ''
         },
-        experiences: {},
-        educations: {},
-        skills: {},
-        categories: {}
+        educations: [],
+        experiences: [{}],
+        skills: [{}],
+        categories: [{}]
     });
 
     function handleForm(data) {

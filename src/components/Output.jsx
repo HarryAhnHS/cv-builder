@@ -6,7 +6,11 @@ function Output({form}) {
             <div className="output">
                 <button id="download">Download</button>
                 <div className="deliverable-output">
-                    {form.personal.name}
+                    Name: {form.personal.name}
+                    Job: {form.personal.job}
+                    Email: {form.personal.email}
+                    Phone: {form.personal.phone}
+                    Location: {form.personal.location}
                 </div>
             </div>
         </>
