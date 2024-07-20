@@ -22,7 +22,7 @@ function Personal({form, handleForm}) {
 
     return (
         <>
-            <div className="input-box">
+            <div className="input-box personal">
                 <h4>Personal</h4>
                 <label htmlFor="personalName">Name:
                     <input

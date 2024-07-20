@@ -34,11 +34,12 @@ function Education({form, handleForm}) {
 
     return (
         <>
-            <div className="input-box">
+            <div className="input-box education">
                 <h4>Education</h4>
 
-                {form.educations.length > 0 ? form.educations.map((entry) => {
-                    <div className="educationField" key={entry.uuid}>
+                {form.educations.length > 0 && 
+                form.educations.map((entry) => {
+                    return <div className="educationField" key={entry.uuid}>
                         <label htmlFor="schoolName">School Name:
                             <input
                                 name="schoolName"
@@ -72,7 +73,7 @@ function Education({form, handleForm}) {
                             />
                         </label>
                     </div>
-                }) : null}
+                })}
 
                 <button id="new-education" onClick={handleNewEducationEntry}>
                     Add new
