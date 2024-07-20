@@ -1,0 +1,22 @@
+.output {
+    width: 50%;
+
+    background-color: #bbb9b9;
+
+    box-sizing: border-box;
+}
+
+.deliverable-output {
+    aspect-ratio: 1/ 1.41;
+
+    width: 90%;
+
+    background-color: white;
+
+    margin: 15px auto;
+}
+
+#download {
+    margin-top: 15px;
+    margin-left: 30px;
+}

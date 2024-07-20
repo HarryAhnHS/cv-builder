@@ -1,11 +1,12 @@
+import '../styles/Content.css';
+
 import Loader from './Loader';
 import Output from './Output';
 
 function Content() {
     return (
         <>
-            <section>
-                Content
+            <section className="content">
                 <Loader />
                 <Output />
             </section> 

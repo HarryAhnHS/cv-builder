@@ -1,9 +1,14 @@
+import '../styles/Output.css'
+
 function Output() {
     return (
         <>
-            <section className="output">
-                Output
-            </section>
+            <div className="output">
+                <button id="download">Download</button>
+                <div className="deliverable-output">
+
+                </div>
+            </div>
         </>
     )
 }
