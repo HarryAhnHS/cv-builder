@@ -142,12 +142,14 @@ function Experience({onDataChange}) {
                                 <div className="entry-summary experience">
                                     - {entry.expCompanyName}
                                 </div>
-                                <button id="edit-entry" onClick={() => editExperienceEntry(entry.uuid)}>
-                                    Edit entry
-                                </button>
-                                <button id="delete-entry" onClick={() => deleteExperienceEntry(entry.uuid)}>
-                                    Delete entry
-                                </button>
+                                <div className="entry-controls experience">
+                                    <button id="edit-entry" onClick={() => editExperienceEntry(entry.uuid)}>
+                                        Edit entry
+                                    </button>
+                                    <button id="delete-entry" onClick={() => deleteExperienceEntry(entry.uuid)}>
+                                        Delete entry
+                                    </button>
+                                </div>
                             </div>
                             )
                     })}

@@ -57,6 +57,14 @@ input {
     align-items: center;
 }
 
+.form-inputs.categories > label {
+    width: 100%;
+}
+
+.form-inputs.categories > input {
+    margin: 0 auto;
+}
+
 .form-controls {
     padding-left: 15px;
     padding-bottom: 15px;
@@ -75,15 +83,38 @@ input {
 }
 
 /* List Display */
+.list {
+    display: flex;
+    flex-direction: column;
+}
+
 
 .entry {
-    height: 50px;
+    padding:  15px 0;
+
     display: flex;
+
     background-color: #e2e2e2;
 }
 
 .entry-summary {
     flex: 1;
+
+    margin-left: 15px;
+}
+
+.entry-controls > * {
+    margin: 0px 5px;
+}
+
+#new-entry {
+    width: 100%;
+    margin: 15px auto;
+}
+
+#add-category-item {
+    width: 100%;
+    margin: 15px auto;
 }
 
 
@@ -92,8 +123,30 @@ input {
     display: flex;
     flex-direction: column;
 
-    align-items: center;
     gap: 15px;
 
     padding: 15px;
+}
+
+.layouts, .fonts, .accent-color {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.style-inputs {
+    display: flex;
+    justify-content: center;
+}
+
+.style-inputs > button {
+    width: 33%;
+}
+
+.style-inputs > button.active {
+    transform: scale(1.2);
+}
+
+.style-label {
+    margin-bottom: 5px;
 }

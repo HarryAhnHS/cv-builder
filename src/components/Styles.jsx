@@ -30,41 +30,52 @@ function Styles({setTheme}) {
     return (
         <div className="form styles">
             <div className="layouts">
-                <button 
-                    onClick={(e)=>handleStyleChange(e)} 
-                    id="layout-1" name="layout" 
-                    className={selectedTheme.layout == 1 ? 'active' : null}>1</button>
-                <button 
-                    onClick={(e)=>handleStyleChange(e)} 
-                    id="layout-2" name="layout" 
-                    className={selectedTheme.layout == 2 ? 'active' : null}>2</button>
-                <button 
-                    onClick={(e)=>handleStyleChange(e)} 
-                    id="layout-3" name="layout" 
-                    className={selectedTheme.layout == 3 ? 'active' : null}>3</button>
+                <div className="style-label layout">Choose your layout</div>
+                <div className='style-inputs layout'>
+                    <button 
+                        onClick={(e)=>handleStyleChange(e)} 
+                        id="layout-1" name="layout" 
+                        className={selectedTheme.layout == 1 ? 'active' : null}>1</button>
+                    <button 
+                        onClick={(e)=>handleStyleChange(e)} 
+                        id="layout-2" name="layout" 
+                        className={selectedTheme.layout == 2 ? 'active' : null}>2</button>
+                    <button 
+                        onClick={(e)=>handleStyleChange(e)} 
+                        id="layout-3" name="layout" 
+                        className={selectedTheme.layout == 3 ? 'active' : null}>3</button>
+                </div>
+   
             </div>
             <div className="fonts">
-                <button 
-                    onClick={(e)=>handleStyleChange(e)} 
-                    id="font-1" name="font" 
-                    className={selectedTheme.font == 1 ? 'active' : null}>A</button>
-                <button 
-                    onClick={(e)=>handleStyleChange(e)} 
-                    id="font-2" name="font" 
-                    className={selectedTheme.font == 2 ? 'active' : null}>B</button>
-                <button 
-                    onClick={(e)=>handleStyleChange(e)} 
-                    id="font-3" name="font" 
-                    className={selectedTheme.font == 3 ? 'active' : null}>C</button>
+                <div className="style-label font">Choose your font</div>
+                <div className='style-inputs font'>
+                    <button 
+                        onClick={(e)=>handleStyleChange(e)} 
+                        id="font-1" name="font" 
+                        className={selectedTheme.font == 1 ? 'active' : null}>A</button>
+                    <button 
+                        onClick={(e)=>handleStyleChange(e)} 
+                        id="font-2" name="font" 
+                        className={selectedTheme.font == 2 ? 'active' : null}>B</button>
+                    <button 
+                        onClick={(e)=>handleStyleChange(e)} 
+                        id="font-3" name="font" 
+                        className={selectedTheme.font == 3 ? 'active' : null}>C</button>
+                </div>
+                
             </div>
 
             <div className="accent-color">
-                <input 
-                    type="color"
-                    name="color"
-                    value={selectedTheme.color}
-                    onChange={(e)=>handleStyleChange(e)} 
-                />
+                <div className="style-label color">Choose your accent color</div>
+                <div className='style-inputs color'>
+                    <input 
+                        type="color"
+                        name="color"
+                        value={selectedTheme.color}
+                        onChange={(e)=>handleStyleChange(e)} 
+                    />
+                </div>
             </div>
         </div>
     )

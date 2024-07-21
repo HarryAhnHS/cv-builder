@@ -113,7 +113,7 @@ function Categories({onDataChange}) {
                 // Edit Mode
                 <div className="form categories">
                     <div className="form-inputs categories">
-                        <label htmlFor="categoryTitle">
+                        <label htmlFor="categoryTitle">Name your category
                             <input
                                 name = "categoryTitle"
                                 type = "text"
@@ -133,7 +133,7 @@ function Categories({onDataChange}) {
                                 <button id="delete-category-item" onClick={() => deleteCategoryItem(item.uuid)}>Delete Item</button>
                             </div>)
                         })}
-                        <button id="add-category" onClick={addCategoryItem}>
+                        <button id="add-category-item" onClick={addCategoryItem}>
                                 Add Item
                         </button>
                     </div>  
