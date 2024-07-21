@@ -111,43 +111,49 @@ function Categories({onDataChange}) {
         <>
             {editId ? 
                 // Edit Mode
-                <div>
-                    <label htmlFor="categoryTitle">
-                        <input
-                            name = "categoryTitle"
-                            type = "text"
-                            value = {formData.categoryTitle}
-                            onChange = {(e) => handleInputChange(e)}
-                        />
-                    </label>
-                    <button id="edit-category" onClick={addCategoryItem}>
-                            Add Item to {formData.categoryTitle}
-                    </button>
-
-                    {formData.categoryItems.map((item) => {
-                        return (<div className="category-item" key={item.uuid}>
+                <div className="form categories">
+                    <div className="form-inputs categories">
+                        <label htmlFor="categoryTitle">
                             <input
-                                name="personalJob"
-                                type="text"
-                                value = {item.value}
-                                onChange = {(e) => handleCategoryItemChange(e, item.uuid)}
+                                name = "categoryTitle"
+                                type = "text"
+                                value = {formData.categoryTitle}
+                                onChange = {(e) => handleInputChange(e)}
                             />
-                            <button id="delete-category-item" onClick={() => deleteCategoryItem(item.uuid)}>Delete Item</button>
-                        </div>)
-                    })}
+                        </label>
 
-                    <button id="cancel" onClick={handleCancel}>Cancel</button>
-                    <button id="save" onClick={handleSave}>Save</button>
+                        {formData.categoryItems.map((item) => {
+                            return (<div className="category-item" key={item.uuid}>
+                                <input
+                                    name="personalJob"
+                                    type="text"
+                                    value = {item.value}
+                                    onChange = {(e) => handleCategoryItemChange(e, item.uuid)}
+                                />
+                                <button id="delete-category-item" onClick={() => deleteCategoryItem(item.uuid)}>Delete Item</button>
+                            </div>)
+                        })}
+                        <button id="add-category" onClick={addCategoryItem}>
+                                Add Item
+                        </button>
+                    </div>  
+
+                    <div className="form-controls categories">
+                        <button id="cancel" onClick={handleCancel}>Cancel</button>
+                        <button id="save" onClick={handleSave}>Save</button>
+                    </div>
                 </div>
             
             : 
                 // Display Mode
-                <div>
+                <div className="list categories">
                     {categoriesList.map((entry) => {
                         return (
-                        <div key={entry.uuid}>
-                            <h1>- {entry.categoryTitle}</h1>
-                            <div className="categoryControls" >
+                        <div className="entry category" key={entry.uuid}>
+                            <div className="entry-summary category">
+                                {entry.categoryTitle}
+                            </div>
+                            <div className="entry-controls category">
                                 <button id="edit-entry" onClick={() => handleEditCategoryEntry(entry.uuid)}>
                                     Edit Category
                                 </button>
@@ -159,7 +165,7 @@ function Categories({onDataChange}) {
                         )
                     })}
                     <button id="new-entry" onClick={handleNewCategoryEntry}>
-                        New Category
+                        Add Category +
                     </button>
                 </div>
             }

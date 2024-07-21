@@ -74,51 +74,55 @@ function Education({onDataChange}) {
         <>
             {editId 
             ? 
-                <div className="educationField">
-                    <label htmlFor="educationName">School Name:
-                        <input
-                            name="educationName"
-                            type="text"
-                            value={formData.educationName}
-                            onChange = {(e) => handleInputChange(e)}
-                        />
-                    </label>
-                    <label htmlFor="educationDegree">Degree:
-                        <input
-                            name="educationDegree"
-                            type="text"
-                            value={formData.educationDegree}
-                            onChange = {(e) => handleInputChange(e)}
-                        />
-                    </label>
-                    <label htmlFor="educationStartDate">Start Date:
-                        <input
-                            name="educationStartDate"
-                            type="date"
-                            value={formData.educationStartDate}
-                            onChange = {(e) => handleInputChange(e)}
-                        />
-                    </label>
-                    <label htmlFor="educationEndDate">End Date:
-                        <input
-                            name="educationEndDate"
-                            type="date"
-                            value={formData.educationEndDate}
-                            onChange = {(e) => handleInputChange(e)}
-                        />
-                    </label>
+                <div className="form education">
+                    <div className="form-inputs education">
+                        <label htmlFor="educationName">School Name:
+                            <input
+                                name="educationName"
+                                type="text"
+                                value={formData.educationName}
+                                onChange = {(e) => handleInputChange(e)}
+                            />
+                        </label>
+                        <label htmlFor="educationDegree">Degree:
+                            <input
+                                name="educationDegree"
+                                type="text"
+                                value={formData.educationDegree}
+                                onChange = {(e) => handleInputChange(e)}
+                            />
+                        </label>
+                        <label htmlFor="educationStartDate">Start Date:
+                            <input
+                                name="educationStartDate"
+                                type="date"
+                                value={formData.educationStartDate}
+                                onChange = {(e) => handleInputChange(e)}
+                            />
+                        </label>
+                        <label htmlFor="educationEndDate">End Date:
+                            <input
+                                name="educationEndDate"
+                                type="date"
+                                value={formData.educationEndDate}
+                                onChange = {(e) => handleInputChange(e)}
+                            />
+                        </label>
+                    </div>
 
-                    <button id="cancel" onClick={handleCancel}>Cancel</button>
-                    <button id="save" onClick={handleSave}>Save</button>
+                    <div className="form-controls education">
+                        <button id="cancel" onClick={handleCancel}>Cancel</button>
+                        <button id="save" onClick={handleSave}>Save</button>
+                    </div>
                 </div> 
             : 
                 // Display Mode
-                <div>
+                <div className="list educations">
                     {educationList.map((entry) => {
                             return (
-                            <div key={entry.uuid}>
-                                <div>
-                                    - {entry.educationName}
+                            <div className="entry education" key={entry.uuid}>
+                                <div className="entry-summary education">
+                                    {entry.educationName}
                                 </div>
                                 <button id="edit-entry" onClick={() => editEducationEntry(entry.uuid)}>
                                     Edit entry

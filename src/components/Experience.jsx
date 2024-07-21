@@ -76,65 +76,70 @@ function Experience({onDataChange}) {
         <>
             {editId 
             ? 
-            <div className="experienceField">
-                <label htmlFor="expCompanyName">Company Name:
-                    <input
-                        name="expCompanyName"
-                        type="text"
-                        value={formData.expCompanyName}
-                        onChange = {(e) => handleInputChange(e)}
-                    />
-                </label>
-                <label htmlFor="expPosition">Position:
-                    <input
-                        name="expPosition"
-                        type="text"
-                        value={formData.expPosition}
-                        onChange = {(e) => handleInputChange(e)}
-                    />
-                </label>
-                <label htmlFor="expLocation">Location:
-                    <input
-                        name="expLocation"
-                        type="text"
-                        value={formData.expLocation}
-                        onChange = {(e) => handleInputChange(e)}
-                    />
-                </label>
-                <label htmlFor="expDescription">Description:
-                    <input
-                        name="expDescription"
-                        type="text"
-                        value={formData.expDescription}
-                        onChange = {(e) => handleInputChange(e)}
-                    />
-                </label>
-                <label htmlFor="expStartDate">Start Date:
-                    <input
-                        name="expStartDate"
-                        type="date"
-                        value={formData.expStartDate}
-                        onChange = {(e) => handleInputChange(e)}
-                    />
-                </label>
-                <label htmlFor="expEndDate">End Date:
-                    <input
-                        name="expEndDate"
-                        type="date"
-                        value={formData.expEndDate}
-                        onChange = {(e) => handleInputChange(e)}
-                    />
-                </label>
+            <div className="form experience">
+                <div className="form-inputs experience">
+                    <label htmlFor="expCompanyName">Company Name:
+                        <input
+                            name="expCompanyName"
+                            type="text"
+                            value={formData.expCompanyName}
+                            onChange = {(e) => handleInputChange(e)}
+                        />
+                    </label>
+                    <label htmlFor="expPosition">Position:
+                        <input
+                            name="expPosition"
+                            type="text"
+                            value={formData.expPosition}
+                            onChange = {(e) => handleInputChange(e)}
+                        />
+                    </label>
+                    <label htmlFor="expLocation">Location:
+                        <input
+                            name="expLocation"
+                            type="text"
+                            value={formData.expLocation}
+                            onChange = {(e) => handleInputChange(e)}
+                        />
+                    </label>
+                    <label htmlFor="expDescription">Description:
+                        <input
+                            name="expDescription"
+                            type="text"
+                            value={formData.expDescription}
+                            onChange = {(e) => handleInputChange(e)}
+                        />
+                    </label>
+                    <label htmlFor="expStartDate">Start Date:
+                        <input
+                            name="expStartDate"
+                            type="date"
+                            value={formData.expStartDate}
+                            onChange = {(e) => handleInputChange(e)}
+                        />
+                    </label>
+                    <label htmlFor="expEndDate">End Date:
+                        <input
+                            name="expEndDate"
+                            type="date"
+                            value={formData.expEndDate}
+                            onChange = {(e) => handleInputChange(e)}
+                        />
+                    </label>
+                </div>
+
+                <div className="form-controls">
                     <button id="cancel" onClick={handleCancel}>Cancel</button>
                     <button id="save" onClick={handleSave}>Save</button>
-                </div> 
+                </div>
+            </div> 
             : 
                 // Display Mode
-                <div>
+                <div className="list experience">
                     {experienceList.map((entry) => {
                             return (
-                            <div key={entry.uuid}>
-                                <div>
+                            <div className="entry experience" key={entry.uuid}>
+                                <div className="entry-summary experience">
                                     - {entry.expCompanyName}
                                 </div>
                                 <button id="edit-entry" onClick={() => editExperienceEntry(entry.uuid)}>
