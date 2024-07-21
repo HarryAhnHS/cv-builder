@@ -21,14 +21,7 @@ function Education({onDataChange}) {
         // Add new education item in default state
         const updatedEducationList = [
             ...educationList,
-            {
-                schoolName: '',
-                degree: '',
-                startDate: '',
-                endDate: '',
-                uuid: uuid(),
-                visible: true
-            }
+            educationEntryData
         ]
         setEducationList(updatedEducationList);
     }
@@ -36,12 +29,11 @@ function Education({onDataChange}) {
     // Update any education entry - make changes to local entry item and collective list -> then push updated list to onDataChange
     function handleInputChange(e, uuidToChange) {
         const {name, value} = e.target;
-        // local store updated entry - update UUID at each change
-        const updatedEducationEntry =  {
-            ...educationEntryData,
+        // local store updated entry - find entry with uuid to change
+        const updatedEducationEntry =  {...
+            [...educationList].find((entry) => (entry.uuid === uuidToChange)),
             [name]: value,
-            uuid: uuid(),
-        }
+        };
 
         // local store updated educationList based on updated entry
         const updatedEducationList = [...educationList].map((entry) => (entry.uuid === uuidToChange) ? updatedEducationEntry : entry)
