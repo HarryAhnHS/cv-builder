@@ -24,7 +24,7 @@ function Education({onDataChange}) {
         onDataChange("educations", updatedEducationList); // Propagate up to Content.jsx to make changes
     }
 
-    function deleteEducationEntry(e, uuidToDelete) {
+    function deleteEducationEntry(uuidToDelete) {
         const updatedEducationList = [...educationList].filter((entry) => entry.uuid !== uuidToDelete);
 
         setEducationList(updatedEducationList);
@@ -92,7 +92,7 @@ function Education({onDataChange}) {
                                 onChange = {(e) => handleInputChange(e, entry.uuid)}
                             />
                         </label>
-                        <button id="delete-entry" onClick={(e) => deleteEducationEntry(e, entry.uuid)}>
+                        <button id="delete-entry" onClick={() => deleteEducationEntry(entry.uuid)}>
                             Delete entry
                         </button>
                     </div>
