@@ -5,23 +5,19 @@ function Education({onDataChange}) {
 
     // Collective entries
     const [educationList, setEducationList] = useState([]);
-
-    // Individual entry
-    const [educationEntryData, setEducationEntryData] = useState({
-        schoolName: '',
-        degree: '',
-        startDate: '',
-        endDate: '',
-        uuid: uuid(),
-        visible: true
-    })
-
+    
     // Create new education entry - append a default education entry into list's state
     function handleNewEducationEntry() {
         // Add new education item in default state
         const updatedEducationList = [
-            ...educationList,
-            educationEntryData
+            ...educationList,{
+                schoolName: '',
+                degree: '',
+                startDate: '',
+                endDate: '',
+                uuid: uuid(),
+                visible: true
+            }
         ]
         setEducationList(updatedEducationList);
     }
@@ -38,7 +34,6 @@ function Education({onDataChange}) {
         // local store updated educationList based on updated entry
         const updatedEducationList = [...educationList].map((entry) => (entry.uuid === uuidToChange) ? updatedEducationEntry : entry)
 
-        setEducationEntryData(updatedEducationEntry);
         setEducationList(updatedEducationList);
 
         onDataChange("educations", updatedEducationList); // Propagate up to Content.jsx to make changes

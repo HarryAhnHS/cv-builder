@@ -15,7 +15,7 @@ function Output({form}) {
                         Location: {form.personal.personalLocation}
                     </div>
                     <div className="educations">
-                        {/* {form.educations.length > 0 && form.educations.map((entry) => {
+                        {form.educations.length > 0 && form.educations.map((entry) => {
                             return (
                                 <div className="educationEntry" key={entry.uuid}>
                                     School: {entry.schoolName}
@@ -24,7 +24,7 @@ function Output({form}) {
                                     End Date: {entry.endDate}
                                 </div>
                             )
-                        })} */}
+                        })}
                     </div>
                 </div>
             </div>
