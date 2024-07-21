@@ -3,10 +3,9 @@ import {useState} from "react";
 
 function Categories({onDataChange}) {
 
-    const [editId, setEditId] = useState(null);
-    const [categoriesList, setCategoriesList] = useState([]);
-    const [formData, setFormData] = useState({});
-    
+    const [editId, setEditId] = useState(null); // ID of the currently edited category
+    const [categoriesList, setCategoriesList] = useState([]); // List of all categories
+    const [formData, setFormData] = useState({}); // Temporary state for the form being edited
     
     // Create new entry - append a default entry into list's state
     function handleNewCategoryEntry() {
@@ -15,11 +14,12 @@ function Categories({onDataChange}) {
             categoryItems: [],
             uuid: uuid(),
         }
-        // Add new entry in default state
+        // // Add new entry in default state
         const updatedCategoriesList = [
             ...categoriesList,
             defaultCategory
         ]
+
         setCategoriesList(updatedCategoriesList);
         onDataChange("categories", updatedCategoriesList); // Propagate up to Content.jsx to make changes
 
@@ -93,8 +93,8 @@ function Categories({onDataChange}) {
 
     function handleSave() {
         const updatedCategoriesList = [...categoriesList].map((cat) => {
-            return cat.uuid === editId ? formData : cat
-        })
+                return cat.uuid === editId ? formData : cat
+            })
 
         setCategoriesList(updatedCategoriesList);
         onDataChange("categories", updatedCategoriesList);
