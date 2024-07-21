@@ -30,7 +30,7 @@ function Education({form, handleForm}) {
         handleForm(updatedForm);
     }
 
-    console.log(form.educations);
+    console.log(form);
 
     return (
         <>
@@ -39,7 +39,8 @@ function Education({form, handleForm}) {
 
                 {form.educations.length > 0 && 
                 form.educations.map((entry) => {
-                    return <div className="educationField" key={entry.uuid}>
+                    return (
+                    <div className="educationField" key={entry.uuid}>
                         <label htmlFor="schoolName">School Name:
                             <input
                                 name="schoolName"
@@ -73,10 +74,11 @@ function Education({form, handleForm}) {
                             />
                         </label>
                     </div>
+                    )
                 })}
 
                 <button id="new-education" onClick={handleNewEducationEntry}>
-                    Add new
+                    Add new +
                 </button>
             </div>
         </>

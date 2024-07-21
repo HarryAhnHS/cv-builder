@@ -1,22 +1,41 @@
 import '../styles/Loader.css'
 
 import Personal from './Personal';
-import Education from './Education';
+// import Education from './Education';
 import Experience from './Experience';
 import Skills from './Skills';
 import NewCategory from './NewCategory';
 
-function Loader({form, handleForm}) {
+
+function Loader({setForm}) {
+
+    // function handleFormField(section, data) {
+    //     setForm((prev) => {
+    //         return {...prev, 
+            
+    //         [section]: data,
+    //         }   
+    //     })
+    // }
+
+    const handleFormField = (setForm) => (section, data) => {
+        setForm((prev) => {
+            return {...prev, 
+            
+            [section]: data,
+            }   
+        })
+    };
 
     return (
         <>
             <div className="loader">
                 <h1>Add your information</h1>
-                <Personal form = {form} handleForm = {handleForm}/>
-                <Education form = {form} handleForm = {handleForm}/>
-                <Experience form = {form} handleForm = {handleForm}/>
-                <Skills form = {form} handleForm = {handleForm}/>
-                <NewCategory form = {form} handleForm = {handleForm}/>
+                <Personal onDataChange = {handleFormField(setForm)}/>
+                {/* <Education form = {form} setForm = {setForm}/> */}
+                <Experience onDataChange = {handleFormField(setForm)}/>
+                <Skills onDataChange = {handleFormField(setForm)}/>
+                <NewCategory onDataChange = {handleFormField(setForm)}/>
             </div>
         </>
     )

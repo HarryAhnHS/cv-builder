@@ -1,23 +1,33 @@
-function Personal({form, handleForm}) {
+import {useState} from "react"
 
-    function handlePersonalNameChange(e) {
-        handleForm({...form, personal: {...form.personal, name:e.target.value}});
-    }
+function Personal({onDataChange}) {
 
-    function handlePersonalJobChange(e) {
-        handleForm({...form, personal: {...form.personal, job:e.target.value}});
-    }
+    // State to push
+    // const [personalList, setPersonalList] = useState();
+    // State to keep track of local changes
+    const [personalData, setPersonalData] = useState({
+        personalName: '',
+        personalJob: '',
+        personalEmail: '',
+        personalPhone: '',
+        personalLocation: ''
+    })
 
-    function handlePersonalEmailChange(e) {
-        handleForm({...form, personal: {...form.personal, email:e.target.value}});
-    }
+    function handleInputChange(e) {
+        const {name, value} = e.target;
+        const updatedPersonalData = {
+            ... personalData, 
+            [name]: value
+        }
 
-    function handlePersonalPhoneChange(e) {
-        handleForm({...form, personal: {...form.personal, phone:e.target.value}});
-    }
+        setPersonalData(updatedPersonalData);
+        onDataChange("personal", updatedPersonalData);
+        // setPersonalData((prevState) => {
+        //     const newPersonalData = { ...prevState, [name]: value };
+        //     onDataChange("personal", newPersonalData);
 
-    function handlePersonalLocationChange(e) {
-        handleForm({...form, personal: {...form.personal, location:e.target.value}});
+        //     return newPersonalData;
+        // });
     }
 
     return (
@@ -26,42 +36,42 @@ function Personal({form, handleForm}) {
                 <h4>Personal</h4>
                 <label htmlFor="personalName">Name:
                     <input
-                        id="personalName"
+                        name="personalName"
                         type="text"
-                        value = {form.personal.name}
-                        onChange = {handlePersonalNameChange}
+                        value = {personalData.name}
+                        onChange = {handleInputChange}
                     />
                 </label>
                 <label htmlFor="personalJob">Job:
                     <input
-                        id="personalJob"
+                        name="personalJob"
                         type="text"
-                        value = {form.personal.job}
-                        onChange = {handlePersonalJobChange}
+                        value = {personalData.job}
+                        onChange = {handleInputChange}
                     />
                 </label>
                 <label htmlFor="personalEmail">Email:
                     <input
-                        id="personalEmail"
+                        name="personalEmail"
                         type="email"
-                        value = {form.personal.email}
-                        onChange = {handlePersonalEmailChange}
+                        value = {personalData.email}
+                        onChange = {handleInputChange}
                     />
                 </label>
                 <label htmlFor="personalPhone">Phone:
                     <input
-                        id="personalPhone"
+                        name="personalPhone"
                         type="number"
-                        value = {form.personal.phone}
-                        onChange = {handlePersonalPhoneChange}
+                        value = {personalData.phone}
+                        onChange = {handleInputChange}
                     />
                 </label>
                 <label htmlFor="personalLocation">Location:
                     <input
-                        id="personalLocation"
+                        name="personalLocation"
                         type="text"
-                        value = {form.personal.location}
-                        onChange = {handlePersonalLocationChange}
+                        value = {personalData.location}
+                        onChange = {handleInputChange}
                     />
                 </label>
             </div>

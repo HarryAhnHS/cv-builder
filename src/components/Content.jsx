@@ -8,27 +8,20 @@ function Content() {
     // Init States
     
     const [form, setForm] = useState({
-        personal: {
-            name: '',
-            job: '',
-            email: '',
-            phone: '',
-            location: ''
-        },
+        personal: {},
         educations: [],
-        experiences: [{}],
-        skills: [{}],
-        categories: [{}]
+        experiences: [],
+        skills: [],
+        categories: []
     });
 
-    function handleForm(data) {
-        setForm(data);
-    }
+    console.log(form)
+
 
     return (
         <>
             <section className="content">
-                <Loader form = {form} handleForm = {handleForm} />
+                <Loader setForm = {setForm} />
                 <Output form = {form}/>
             </section> 
         </>
