@@ -24,6 +24,14 @@ function Education({onDataChange}) {
         onDataChange("educations", updatedEducationList); // Propagate up to Content.jsx to make changes
     }
 
+    function deleteEducationEntry(e, uuidToDelete) {
+        const updatedEducationList = [...educationList].filter((entry) => entry.uuid !== uuidToDelete);
+
+        setEducationList(updatedEducationList);
+
+        onDataChange("educations", updatedEducationList);
+    }
+
     // Update any education entry - make changes to local entry item and collective list -> then push updated list to onDataChange
     function handleInputChange(e, uuidToChange) {
         const {name, value} = e.target;
@@ -84,11 +92,14 @@ function Education({onDataChange}) {
                                 onChange = {(e) => handleInputChange(e, entry.uuid)}
                             />
                         </label>
+                        <button id="delete-entry" onClick={(e) => deleteEducationEntry(e, entry.uuid)}>
+                            Delete entry
+                        </button>
                     </div>
                     )
                 })}
 
-                <button id="new-education" onClick={handleNewEducationEntry}>
+                <button id="new-entry" onClick={handleNewEducationEntry}>
                     Add new +
                 </button>
             </div>
