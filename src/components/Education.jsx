@@ -1,76 +1,97 @@
 import uuid from "react-uuid";
-// import {useState} from "react";
+import {useState} from "react";
 
-function Education({form, handleForm}) {
+function Education({onDataChange}) {
+
+    // Collective entries
+    const [educationList, setEducationList] = useState([]);
+
+    // Individual entry
+    const [educationEntryData, setEducationEntryData] = useState({
+        schoolName: '',
+        degree: '',
+        startDate: '',
+        endDate: '',
+        uuid: uuid(),
+        visible: true
+    })
+
+    // Create new education entry - append a default education entry into list's state
     function handleNewEducationEntry() {
         // Add new education item in default state
-        handleForm({...form, educations: [...form.educations, {
-            schoolName: '',
-            degree: '',
-            startDate: '',
-            endDate: '',
-            uuid: uuid(),
-            visible: true
-        }]
-        })
+        const updatedEducationList = [
+            ...educationList,
+            {
+                schoolName: '',
+                degree: '',
+                startDate: '',
+                endDate: '',
+                uuid: uuid(),
+                visible: true
+            }
+        ]
+        setEducationList(updatedEducationList);
     }
 
+    // Update any education entry - make changes to local entry item and collective list -> then push updated list to onDataChange
     function handleInputChange(e, uuidToChange) {
         const {name, value} = e.target;
-        let updatedForm;
+        // local store updated entry 
+        const updatedEducationEntry =  {
+            ...educationEntryData,
+            [name]: value,
+        }
 
-        form.educations.forEach((entry) => {
-            if (entry.uuid == uuidToChange) {
-                updatedForm = {...form, educations: [...form.educations, 
-                    {...entry, 
-                    [name] : value}
-                ]}
-            }
-        })
-        handleForm(updatedForm);
+        // local store updated educationList based on updated entry
+        const updatedEducationList = [...educationList].map((entry) => (entry.uuid === uuidToChange) ? updatedEducationEntry : entry)
+
+        setEducationEntryData(updatedEducationEntry);
+        setEducationList(updatedEducationList);
+
+        onDataChange("educations", updatedEducationList); // Propagate up to Content.jsx to make changes
     }
 
-    console.log(form);
+    console.log(educationList);
 
     return (
         <>
             <div className="input-box education">
                 <h4>Education</h4>
 
-                {form.educations.length > 0 && 
-                form.educations.map((entry) => {
+                {educationList.length > 0 && 
+                educationList.map((entry) => {
                     return (
                     <div className="educationField" key={entry.uuid}>
                         <label htmlFor="schoolName">School Name:
                             <input
                                 name="schoolName"
                                 type="text"
-                                value={form.educations.find((edu) => edu.uuid == entry.uuid).schoolName}
-                                onChange = {handleInputChange}
+                                value={entry.schoolName}
+                                onChange = {(e) => handleInputChange(e, entry.uuid)}
                             />
                         </label>
                         <label htmlFor="degree">Degree:
                             <input
                                 name="degree"
                                 type="text"
-                                value={form.educations.find((edu) => edu.uuid == entry.uuid).degree}
-                                onChange = {handleInputChange}
+                                value={entry.degree}
+                                onChange = {(e) => handleInputChange(e, entry.uuid)}
                             />
                         </label>
                         <label htmlFor="startDate">Program Start Date:
                             <input
                                 name="startDate"
                                 type="date"
-                                value={form.educations.find((edu) => edu.uuid == entry.uuid).startDate}
-                                onChange = {handleInputChange}
+                                value={entry.degree}
+                                onChange = {(e) => handleInputChange(e, entry.uuid)}
                             />
                         </label>
                         <label htmlFor="endDate">Program End Date:
                             <input
                                 name="endDate"
                                 type="date"
-                                value={form.educations.find((edu) => edu.uuid == entry.uuid).endDate}
-                                onChange = {handleInputChange}
+                                value={entry.degree}
+                                onChange = {(e) => handleInputChange(e, entry.uuid)}
                             />
                         </label>
                     </div>

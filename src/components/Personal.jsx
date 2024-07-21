@@ -22,12 +22,6 @@ function Personal({onDataChange}) {
 
         setPersonalData(updatedPersonalData);
         onDataChange("personal", updatedPersonalData);
-        // setPersonalData((prevState) => {
-        //     const newPersonalData = { ...prevState, [name]: value };
-        //     onDataChange("personal", newPersonalData);
-
-        //     return newPersonalData;
-        // });
     }
 
     return (
