@@ -14,13 +14,19 @@ function Content() {
         categories: []
     });
 
+    const [theme, setTheme] = useState({
+        font: 1,
+        layout: 1,
+        color: '#09A4FF',
+    })
+
     console.log(form)
 
     return (
         <>
             <section className="content">
-                <Loader setForm = {setForm} />
-                <Output form = {form}/>
+                <Loader setForm = {setForm} setTheme = {setTheme}/>
+                <Output form = {form} theme = {theme}/>
             </section> 
         </>
     )

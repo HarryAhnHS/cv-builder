@@ -74,6 +74,8 @@ input {
 
 }
 
+/* List Display */
+
 .entry {
     height: 50px;
     display: flex;
@@ -82,4 +84,16 @@ input {
 
 .entry-summary {
     flex: 1;
+}
+
+
+/* Styles */
+.form.styles {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    gap: 15px;
+
+    padding: 15px;
 }

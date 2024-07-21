@@ -1,7 +1,8 @@
 import '../styles/Output.css'
 
-function Output({form}) {
+function Output({form, theme}) {
     // console.log("Rendering output with form:", form);
+    console.log(theme);
     return (
         <>
             <div className="output">

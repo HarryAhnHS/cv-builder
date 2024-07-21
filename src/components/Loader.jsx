@@ -4,14 +4,14 @@ import Personal from './Personal';
 import Education from './Education';
 import Experience from './Experience';
 import Categories from './Categories';
+import Styles from './Styles';
 
 
-function Loader({setForm}) {
+function Loader({setForm, setTheme}) {
 
     const handleFormField = (setForm) => (section, data) => {
         setForm((prev) => {
             return {...prev, 
-            
             [section]: data,
             }   
         })
@@ -36,6 +36,10 @@ function Loader({setForm}) {
                 <div className="loader-box">
                     <h2 className="loader-title">More Information</h2>
                     <Categories onDataChange = {handleFormField(setForm)}/>
+                </div>
+                <div className="loader-box">
+                    <h2 className="loader-title">Customize</h2>
+                    <Styles setTheme={setTheme}/>
                 </div>
             </div>
         </>
