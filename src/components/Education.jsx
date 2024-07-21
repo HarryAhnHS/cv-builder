@@ -3,12 +3,12 @@ import {useState} from "react";
 
 function Education({onDataChange}) {
 
-    // Collective entries
+    // List of all entries
     const [educationList, setEducationList] = useState([]);
-    
+
     // Create new education entry - append a default education entry into list's state
     function handleNewEducationEntry() {
-        // Add new education item in default state
+        // Add new entry in default state
         const updatedEducationList = [
             ...educationList,{
                 schoolName: '',
@@ -20,18 +20,20 @@ function Education({onDataChange}) {
             }
         ]
         setEducationList(updatedEducationList);
+
+        onDataChange("educations", updatedEducationList); // Propagate up to Content.jsx to make changes
     }
 
     // Update any education entry - make changes to local entry item and collective list -> then push updated list to onDataChange
     function handleInputChange(e, uuidToChange) {
         const {name, value} = e.target;
-        // local store updated entry - find entry with uuid to change
-        const updatedEducationEntry =  {...
-            [...educationList].find((entry) => (entry.uuid === uuidToChange)),
+        //l Local state update entry - find entry with uuid to change
+        const updatedEducationEntry =  {
+            ...[...educationList].find((entry) => (entry.uuid === uuidToChange)),
             [name]: value,
         };
 
-        // local store updated educationList based on updated entry
+        // Local state update educationList based on updated entry
         const updatedEducationList = [...educationList].map((entry) => (entry.uuid === uuidToChange) ? updatedEducationEntry : entry)
 
         setEducationList(updatedEducationList);
@@ -70,7 +72,7 @@ function Education({onDataChange}) {
                             <input
                                 name="startDate"
                                 type="date"
-                                value={entry.degree}
+                                value={entry.startDate}
                                 onChange = {(e) => handleInputChange(e, entry.uuid)}
                             />
                         </label>
@@ -78,7 +80,7 @@ function Education({onDataChange}) {
                             <input
                                 name="endDate"
                                 type="date"
-                                value={entry.degree}
+                                value={entry.endDate}
                                 onChange = {(e) => handleInputChange(e, entry.uuid)}
                             />
                         </label>
