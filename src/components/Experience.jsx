@@ -3,120 +3,154 @@ import {useState} from "react";
 
 function Experience({onDataChange}) {
 
-    // List of all entries
+    const [editId, setEditId] = useState(null);
     const [experienceList, setExperienceList] = useState([]);
+    const [formData, setFormData] = useState({});
 
-    // Create new entry - append a default entry into list's state
+    // Create new education entry - append a default education entry into list's state
     function handleNewExperienceEntry() {
+        const defaultEntry = {
+            expCompanyName: '',
+            expPosition: '',
+            expLocation: '',
+            expDescription: '',
+            expStartDate: '',
+            expEndDate: '',
+            uuid: uuid(),
+        };
         // Add new entry in default state
         const updatedExperienceList = [
-            ...experienceList, {
-                expCompanyName: '',
-                expPosition: '',
-                expLocation: '',
-                expDescription: '',
-                expStartDate: '',
-                expEndDate: '',
-                uuid: uuid(),
-                visible: true
-            }
+            ...experienceList, defaultEntry
         ]
         setExperienceList(updatedExperienceList);
-
         onDataChange("experiences", updatedExperienceList); // Propagate up to Content.jsx to make changes
+
+        setFormData(defaultEntry);
+        setEditId(defaultEntry.uuid);
     }
 
     function deleteExperienceEntry(uuidToDelete) {
         const updatedExperienceList = [...experienceList].filter((entry) => entry.uuid !== uuidToDelete);
 
         setExperienceList(updatedExperienceList);
-
-        onDataChange("experiences", updatedExperienceList);
+        onDataChange("educations", updatedExperienceList);
     }
 
-    // Update any entry - make changes to local entry item and collective list -> then push updated list to onDataChange
-    function handleInputChange(e, uuidToChange) {
+    function editExperienceEntry(uuidToEdit) {
+        const entryToEdit = experienceList.find((entry) => entry.uuid === uuidToEdit);
+        setFormData(entryToEdit);
+        setEditId(uuidToEdit);
+    }
+
+    // FORM STUFF
+    function handleInputChange(e) {
         const {name, value} = e.target;
-        //l Local state update entry - find entry with uuid to change
+
         const updatedExperienceEntry =  {
-            ...[...experienceList].find((entry) => (entry.uuid === uuidToChange)),
+            ...formData,
             [name]: value,
         };
+        
+        setFormData(updatedExperienceEntry);
+    }
 
-        // Local state update based on updated entry
-        const updatedExperienceList = [...experienceList].map(
-            (entry) => (entry.uuid === uuidToChange) ? updatedExperienceEntry : entry
-        );
+    function handleCancel() {
+        setEditId(null);
+        setFormData({});
+    }
+
+    function handleSave() {
+        const updatedExperienceList = [...experienceList].map((exp) => {
+            return exp.uuid === editId ? formData : exp;
+        })
 
         setExperienceList(updatedExperienceList);
+        onDataChange("experiences", updatedExperienceList);
 
-        onDataChange("experiences", updatedExperienceList); // Propagate up to Content.jsx to make changes
+        setEditId(null);
+        setFormData({});
     }
 
     return (
+            // Edit Mode
         <>
-            {experienceList.length > 0 && 
-            experienceList.map((entry) => {
-                return (
-                <div className="experienceField" key={entry.uuid}>
-                    <label htmlFor="expCompanyName">Company Name:
-                        <input
-                            name="expCompanyName"
-                            type="text"
-                            value={entry.expCompanyName}
-                            onChange = {(e) => handleInputChange(e, entry.uuid)}
-                        />
-                    </label>
-                    <label htmlFor="expPosition">Position:
-                        <input
-                            name="expPosition"
-                            type="text"
-                            value={entry.expPosition}
-                            onChange = {(e) => handleInputChange(e, entry.uuid)}
-                        />
-                    </label>
-                    <label htmlFor="expLocation">Location:
-                        <input
-                            name="expLocation"
-                            type="text"
-                            value={entry.expLocation}
-                            onChange = {(e) => handleInputChange(e, entry.uuid)}
-                        />
-                    </label>
-                    <label htmlFor="expDescription">Description:
-                        <input
-                            name="expDescription"
-                            type="text"
-                            value={entry.expDescription}
-                            onChange = {(e) => handleInputChange(e, entry.uuid)}
-                        />
-                    </label>
-                    <label htmlFor="expStartDate">Start Date:
-                        <input
-                            name="expStartDate"
-                            type="date"
-                            value={entry.expStartDate}
-                            onChange = {(e) => handleInputChange(e, entry.uuid)}
-                        />
-                    </label>
-                    <label htmlFor="expEndDate">End Date:
-                        <input
-                            name="expEndDate"
-                            type="date"
-                            value={entry.expEndDate}
-                            onChange = {(e) => handleInputChange(e, entry.uuid)}
-                        />
-                    </label>
-                    <button id="delete-entry" onClick={() => deleteExperienceEntry(entry.uuid)}>
-                        Delete entry
+            {editId 
+            ? 
+            <div className="experienceField">
+                <label htmlFor="expCompanyName">Company Name:
+                    <input
+                        name="expCompanyName"
+                        type="text"
+                        value={formData.expCompanyName}
+                        onChange = {(e) => handleInputChange(e)}
+                    />
+                </label>
+                <label htmlFor="expPosition">Position:
+                    <input
+                        name="expPosition"
+                        type="text"
+                        value={formData.expPosition}
+                        onChange = {(e) => handleInputChange(e)}
+                    />
+                </label>
+                <label htmlFor="expLocation">Location:
+                    <input
+                        name="expLocation"
+                        type="text"
+                        value={formData.expLocation}
+                        onChange = {(e) => handleInputChange(e)}
+                    />
+                </label>
+                <label htmlFor="expDescription">Description:
+                    <input
+                        name="expDescription"
+                        type="text"
+                        value={formData.expDescription}
+                        onChange = {(e) => handleInputChange(e)}
+                    />
+                </label>
+                <label htmlFor="expStartDate">Start Date:
+                    <input
+                        name="expStartDate"
+                        type="date"
+                        value={formData.expStartDate}
+                        onChange = {(e) => handleInputChange(e)}
+                    />
+                </label>
+                <label htmlFor="expEndDate">End Date:
+                    <input
+                        name="expEndDate"
+                        type="date"
+                        value={formData.expEndDate}
+                        onChange = {(e) => handleInputChange(e)}
+                    />
+                </label>
+                    <button id="cancel" onClick={handleCancel}>Cancel</button>
+                    <button id="save" onClick={handleSave}>Save</button>
+                </div> 
+            : 
+                // Display Mode
+                <div>
+                    {experienceList.map((entry) => {
+                            return (
+                            <div key={entry.uuid}>
+                                <div>
+                                    - {entry.expCompanyName}
+                                </div>
+                                <button id="edit-entry" onClick={() => editExperienceEntry(entry.uuid)}>
+                                    Edit entry
+                                </button>
+                                <button id="delete-entry" onClick={() => deleteExperienceEntry(entry.uuid)}>
+                                    Delete entry
+                                </button>
+                            </div>
+                            )
+                    })}
+                    <button id="new-entry" onClick={handleNewExperienceEntry}>
+                        Add new +
                     </button>
                 </div>
-                )
-            })}
-
-            <button id="new-entry" onClick={handleNewExperienceEntry}>
-                Add new +
-            </button>
+            }
         </>
     )
 }

@@ -3,102 +3,137 @@ import {useState} from "react";
 
 function Education({onDataChange}) {
 
-    // List of all entries
+    const [editId, setEditId] = useState(null);
     const [educationList, setEducationList] = useState([]);
+    const [formData, setFormData] = useState({});
 
     // Create new education entry - append a default education entry into list's state
     function handleNewEducationEntry() {
+        const defaultEntry = {
+            educationName: '',
+            educationDegree: '',
+            educationStartDate: '',
+            educationEndDate: '',
+            uuid: uuid(),
+        };
         // Add new entry in default state
         const updatedEducationList = [
-            ...educationList,{
-                educationName: '',
-                educationDegree: '',
-                educationStartDate: '',
-                educationEndDate: '',
-                uuid: uuid(),
-                visible: true,
-                edit: true,
-            }
+            ...educationList, defaultEntry
         ]
-
         setEducationList(updatedEducationList);
-
         onDataChange("educations", updatedEducationList); // Propagate up to Content.jsx to make changes
+
+        setFormData(defaultEntry);
+        setEditId(defaultEntry.uuid);
     }
 
     function deleteEducationEntry(uuidToDelete) {
         const updatedEducationList = [...educationList].filter((entry) => entry.uuid !== uuidToDelete);
 
         setEducationList(updatedEducationList);
-
         onDataChange("educations", updatedEducationList);
     }
 
-    // Update any education entry - make changes to local entry item and collective list -> then push updated list to onDataChange
-    function handleInputChange(e, uuidToChange) {
+    function editEducationEntry(uuidToEdit) {
+        const entryToEdit = educationList.find((entry) => entry.uuid === uuidToEdit);
+        setFormData(entryToEdit);
+        setEditId(uuidToEdit);
+    }
+
+    // FORM STUFF
+    function handleInputChange(e) {
         const {name, value} = e.target;
-        //l Local state update entry - find entry with uuid to change
+
         const updatedEducationEntry =  {
-            ...[...educationList].find((entry) => (entry.uuid === uuidToChange)),
+            ...formData,
             [name]: value,
         };
+        
+        setFormData(updatedEducationEntry);
+    }
 
-        // Local state update educationList based on updated entry
-        const updatedEducationList = [...educationList].map((entry) => (entry.uuid === uuidToChange) ? updatedEducationEntry : entry)
+    function handleCancel() {
+        setEditId(null);
+        setFormData({});
+    }
+
+    function handleSave() {
+        const updatedEducationList = [...educationList].map((edu) => {
+            return edu.uuid === editId ? formData : edu;
+        })
 
         setEducationList(updatedEducationList);
+        onDataChange("educations", updatedEducationList);
 
-        onDataChange("educations", updatedEducationList); // Propagate up to Content.jsx to make changes
+        setEditId(null);
+        setFormData({});
     }
 
     return (
+            // Edit Mode
         <>
-            {educationList.length > 0 && 
-            educationList.map((entry) => {
-                return (
-                <div className="educationField" key={entry.uuid}>
+            {editId 
+            ? 
+                <div className="educationField">
                     <label htmlFor="educationName">School Name:
                         <input
                             name="educationName"
                             type="text"
-                            value={entry.educationName}
-                            onChange = {(e) => handleInputChange(e, entry.uuid)}
+                            value={formData.educationName}
+                            onChange = {(e) => handleInputChange(e)}
                         />
                     </label>
                     <label htmlFor="educationDegree">Degree:
                         <input
                             name="educationDegree"
                             type="text"
-                            value={entry.educationDegree}
-                            onChange = {(e) => handleInputChange(e, entry.uuid)}
+                            value={formData.educationDegree}
+                            onChange = {(e) => handleInputChange(e)}
                         />
                     </label>
                     <label htmlFor="educationStartDate">Start Date:
                         <input
                             name="educationStartDate"
                             type="date"
-                            value={entry.educationStartDate}
-                            onChange = {(e) => handleInputChange(e, entry.uuid)}
+                            value={formData.educationStartDate}
+                            onChange = {(e) => handleInputChange(e)}
                         />
                     </label>
                     <label htmlFor="educationEndDate">End Date:
                         <input
                             name="educationEndDate"
                             type="date"
-                            value={entry.educationEndDate}
-                            onChange = {(e) => handleInputChange(e, entry.uuid)}
+                            value={formData.educationEndDate}
+                            onChange = {(e) => handleInputChange(e)}
                         />
                     </label>
-                    <button id="delete-entry" onClick={() => deleteEducationEntry(entry.uuid)}>
-                        Delete entry
+
+                    <button id="cancel" onClick={handleCancel}>Cancel</button>
+                    <button id="save" onClick={handleSave}>Save</button>
+                </div> 
+            : 
+                // Display Mode
+                <div>
+                    {educationList.map((entry) => {
+                            return (
+                            <div key={entry.uuid}>
+                                <div>
+                                    - {entry.educationName}
+                                </div>
+                                <button id="edit-entry" onClick={() => editEducationEntry(entry.uuid)}>
+                                    Edit entry
+                                </button>
+                                <button id="delete-entry" onClick={() => deleteEducationEntry(entry.uuid)}>
+                                    Delete entry
+                                </button>
+                            </div>
+                            )
+                    })}
+                    <button id="new-entry" onClick={handleNewEducationEntry}>
+                        Add new +
                     </button>
                 </div>
-                )
-            })}
-
-            <button id="new-entry" onClick={handleNewEducationEntry}>
-                Add new +
-            </button>
+            }
         </>
     )
 }

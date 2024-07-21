@@ -1,9 +1,6 @@
 import {useState} from "react"
 
 function Personal({onDataChange}) {
-
-    // State to push
-    // const [personalList, setPersonalList] = useState();
     // State to keep track of local changes
     const [personalData, setPersonalData] = useState({
         personalName: '',

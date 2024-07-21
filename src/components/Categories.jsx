@@ -102,10 +102,10 @@ function Categories({onDataChange}) {
         setEditId(null);
         setFormData({});
     }
-    console.log("CategoriesList:")
-    console.log(categoriesList);
-    console.log("FormData:")
-    console.log(formData);
+    // console.log("CategoriesList:")
+    // console.log(categoriesList);
+    // console.log("FormData:")
+    // console.log(formData);
 
     return (
         <>
@@ -147,7 +147,7 @@ function Categories({onDataChange}) {
                         return (
                         <div key={entry.uuid}>
                             <h1>- {entry.categoryTitle}</h1>
-                            <div className="categoryEdit" >
+                            <div className="categoryControls" >
                                 <button id="edit-entry" onClick={() => handleEditCategoryEntry(entry.uuid)}>
                                     Edit Category
                                 </button>
