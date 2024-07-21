@@ -36,10 +36,11 @@ function Education({onDataChange}) {
     // Update any education entry - make changes to local entry item and collective list -> then push updated list to onDataChange
     function handleInputChange(e, uuidToChange) {
         const {name, value} = e.target;
-        // local store updated entry 
+        // local store updated entry - update UUID at each change
         const updatedEducationEntry =  {
             ...educationEntryData,
             [name]: value,
+            uuid: uuid(),
         }
 
         // local store updated educationList based on updated entry
