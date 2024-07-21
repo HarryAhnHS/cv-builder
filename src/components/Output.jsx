@@ -18,10 +18,40 @@ function Output({form}) {
                         {form.educations.length > 0 && form.educations.map((entry) => {
                             return (
                                 <div className="educationEntry" key={entry.uuid}>
-                                    School: {entry.schoolName}
-                                    Degree: {entry.degree}
-                                    Start Date: {entry.startDate}
-                                    End Date: {entry.endDate}
+                                    School: {entry.educationName}
+                                    Degree: {entry.educationDegree}
+                                    Start Date: {entry.educationStartDate}
+                                    End Date: {entry.educationEndDate}
+                                </div>
+                            )
+                        })}
+                    </div>
+                    <div className="experiences">
+                        {form.experiences.length > 0 && form.experiences.map((entry) => {
+                            return (
+                                <div className="experienceEntry" key={entry.uuid}>
+                                    Company: {entry.expCompanyName}
+                                    Position: {entry.expPosition}
+                                    Location: {entry.expLocation}
+                                    Description: {entry.expDescription}
+                                    Start Date: {entry.expStartDate}
+                                    End Date: {entry.expEndDate}
+                                </div>
+                            )
+                        })}
+                    </div>
+                    <div className="categories">
+                        {form.categories.length > 0 && form.categories.map((entry) => {
+                            return (
+                                <div className="categoryEntry" key={entry.uuid}>
+                                    Category Name: {entry.categoryTitle}
+                                    <ul>
+                                    {entry.categoryItems.map((item) => {
+                                        return (
+                                            <li key={item.uuid} className="categoryItem">{item.value}</li>
+                                        )
+                                    })}
+                                    </ul>
                                 </div>
                             )
                         })}

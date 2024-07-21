@@ -11,12 +11,10 @@ function Content() {
         personal: {},
         educations: [],
         experiences: [],
-        skills: [],
         categories: []
     });
 
     console.log(form)
-
 
     return (
         <>

@@ -11,14 +11,16 @@ function Education({onDataChange}) {
         // Add new entry in default state
         const updatedEducationList = [
             ...educationList,{
-                schoolName: '',
-                degree: '',
-                startDate: '',
-                endDate: '',
+                educationName: '',
+                educationDegree: '',
+                educationStartDate: '',
+                educationEndDate: '',
                 uuid: uuid(),
-                visible: true
+                visible: true,
+                edit: true,
             }
         ]
+
         setEducationList(updatedEducationList);
 
         onDataChange("educations", updatedEducationList); // Propagate up to Content.jsx to make changes
@@ -49,60 +51,54 @@ function Education({onDataChange}) {
         onDataChange("educations", updatedEducationList); // Propagate up to Content.jsx to make changes
     }
 
-    console.log(educationList);
-
     return (
         <>
-            <div className="input-box education">
-                <h4>Education</h4>
+            {educationList.length > 0 && 
+            educationList.map((entry) => {
+                return (
+                <div className="educationField" key={entry.uuid}>
+                    <label htmlFor="educationName">School Name:
+                        <input
+                            name="educationName"
+                            type="text"
+                            value={entry.educationName}
+                            onChange = {(e) => handleInputChange(e, entry.uuid)}
+                        />
+                    </label>
+                    <label htmlFor="educationDegree">Degree:
+                        <input
+                            name="educationDegree"
+                            type="text"
+                            value={entry.educationDegree}
+                            onChange = {(e) => handleInputChange(e, entry.uuid)}
+                        />
+                    </label>
+                    <label htmlFor="educationStartDate">Start Date:
+                        <input
+                            name="educationStartDate"
+                            type="date"
+                            value={entry.educationStartDate}
+                            onChange = {(e) => handleInputChange(e, entry.uuid)}
+                        />
+                    </label>
+                    <label htmlFor="educationEndDate">End Date:
+                        <input
+                            name="educationEndDate"
+                            type="date"
+                            value={entry.educationEndDate}
+                            onChange = {(e) => handleInputChange(e, entry.uuid)}
+                        />
+                    </label>
+                    <button id="delete-entry" onClick={() => deleteEducationEntry(entry.uuid)}>
+                        Delete entry
+                    </button>
+                </div>
+                )
+            })}
 
-                {educationList.length > 0 && 
-                educationList.map((entry) => {
-                    return (
-                    <div className="educationField" key={entry.uuid}>
-                        <label htmlFor="schoolName">School Name:
-                            <input
-                                name="schoolName"
-                                type="text"
-                                value={entry.schoolName}
-                                onChange = {(e) => handleInputChange(e, entry.uuid)}
-                            />
-                        </label>
-                        <label htmlFor="degree">Degree:
-                            <input
-                                name="degree"
-                                type="text"
-                                value={entry.degree}
-                                onChange = {(e) => handleInputChange(e, entry.uuid)}
-                            />
-                        </label>
-                        <label htmlFor="startDate">Program Start Date:
-                            <input
-                                name="startDate"
-                                type="date"
-                                value={entry.startDate}
-                                onChange = {(e) => handleInputChange(e, entry.uuid)}
-                            />
-                        </label>
-                        <label htmlFor="endDate">Program End Date:
-                            <input
-                                name="endDate"
-                                type="date"
-                                value={entry.endDate}
-                                onChange = {(e) => handleInputChange(e, entry.uuid)}
-                            />
-                        </label>
-                        <button id="delete-entry" onClick={() => deleteEducationEntry(entry.uuid)}>
-                            Delete entry
-                        </button>
-                    </div>
-                    )
-                })}
-
-                <button id="new-entry" onClick={handleNewEducationEntry}>
-                    Add new +
-                </button>
-            </div>
+            <button id="new-entry" onClick={handleNewEducationEntry}>
+                Add new +
+            </button>
         </>
     )
 }
