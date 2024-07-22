@@ -4,17 +4,53 @@ function Output({form, theme}) {
     console.log("Rendering output with form:", form);
     console.log("Rendering output with theme:", theme);
 
+    function getFont() {
+        let fontNames = ['Raleway', 'Lora', 'Quicksand']
+        return fontNames[theme.font - 1];
+    }
+
+    function getTextColorBasedOnBGColor() {
+        const color = theme.color.slice(1);
+        var r = parseInt(color.substring(0, 2), 16); // hexToR
+        var g = parseInt(color.substring(2, 4), 16); // hexToG
+        var b = parseInt(color.substring(4, 6), 16); // hexToB
+        var uicolors = [r / 255, g / 255, b / 255];
+        var c = uicolors.map((col) => {
+            if (col <= 0.03928) {
+            return col / 12.92;
+            }
+            return Math.pow((col + 0.055) / 1.055, 2.4);
+        });
+        var L = (0.2126 * c[0]) + (0.7152 * c[1]) + (0.0722 * c[2]);
+        return (L > 0.179) ? '#000000' : '#FFFFFF';
+    }
 
 
     return (
         <>
             <div className="output">
                 <button id="download">Download</button>
-                <div className="deliverable-output">
+                <div 
+                    className='deliverable-output' 
+                    style={
+                        {
+                            fontFamily: `${getFont()}, serif`
+                        }
+                    }
+                >
                     <div className="output-head">
-                        <div className={`output-head-main ${!form.personal.avatar 
+                        <div 
+                            className={`output-head-main ${!form.personal.avatar 
                                     ? 'condensed' 
-                                    : null}`}>
+                                    : null}`}
+                            style={
+                                {
+                                    backgroundColor: `${theme.color}`,
+                                    color: getTextColorBasedOnBGColor()
+                                }
+                            }
+
+                        >
                             <div className="output-head-title">
                                 <h1>{form.personal.personalName}</h1>
                                 <p>{form.personal.personalJob}</p>

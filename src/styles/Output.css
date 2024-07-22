@@ -1,3 +1,12 @@
+/* 3 Fonts */
+/* font-family: "Raleway", serif; */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+/* font-family: "Lora", serif; */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+/* font-family: "Quicksand", sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+
 h1,h2, h3, h4, h5, p {
     margin: 0;
 }
@@ -32,7 +41,7 @@ h1,h2, h3, h4, h5, p {
 
 .output-head {
     /* Custom */
-    background-color: #bed1e9;
+    /* background-color: #bed1e9; */
 
     display: flex;
 }

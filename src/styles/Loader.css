@@ -33,6 +33,14 @@ input, textarea {
     width: 100%;
 }
 
+.form-input-date {
+    width: 40%;
+}
+
+.form-input-textarea {
+    width: 90%;
+}
+
 .form-inputs {
     display: flex;
     flex-wrap: wrap;
