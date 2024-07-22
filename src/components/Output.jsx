@@ -52,14 +52,22 @@ function Output({form, theme}) {
                             {form.educations.map((entry) => {
                                 return (
                                     <div className="output-entry education" key={entry.uuid}>
+                                        {entry.educationStartDate != "" || entry.educationEndDate != "" || entry.educationLocation != ""
+                                        ?
+                                            <div className="output-entry-meta education">
+                                                {entry.educationStartDate != "" || entry.educationEndDate != ""
+                                                ? <div className="output-entry-dates education">{entry.educationStartDate}&nbsp;-&nbsp;{entry.educationEndDate}</div>
+                                                : null}
+                                                <div className="output-entry-location education">{entry.educationLocation}</div>
+                                            </div>
+                                        :
+                                            null
+                                        }
                                         <div className="output-entry-head education">
                                             <h1>{entry.educationName}</h1>
                                             <h5>{entry.educationDegree}</h5>
                                             <p>{entry.educationDescription}</p>
                                         </div>
-                                        {entry.educationStartDate != "" 
-                                        ? <div className="output-entry-date education">{entry.educationStartDate}&nbsp;-&nbsp;{entry.educationEndDate}</div>
-                                        : null}
                                     </div>
                                 )
                             })}
@@ -70,15 +78,24 @@ function Output({form, theme}) {
                             {form.experiences.map((entry) => {
                                 return (
                                     <div className="output-entry experience" key={entry.uuid}>
+                                        {entry.expStartDate != "" || entry.expEndDate != "" || entry.expLocation != ""
+                                        ?
+                                            <div className="output-entry-meta experience">
+                                                {entry.expStartDate != "" || entry.expEndDate != ""
+                                                ? <div className="output-entry-dates experience">{entry.expStartDate}&nbsp;-&nbsp;{entry.expEndDate}</div>
+                                                : null}
+                                                <div className="output-entry-location experience">{entry.expLocation}</div>
+                                            </div>
+                                        :
+                                            null
+                                        }
+                                       
                                         <div className="output-entry-head experience">
                                             <h1>{entry.expCompanyName}</h1>
                                             <p>{entry.expLocation}</p>
                                             <h5>{entry.expPosition}</h5>
                                             <p>{entry.educationDescription}</p>
                                         </div>
-                                        {entry.educationStartDate != "" 
-                                        ? <div className="output-entry-date experience">{entry.expStartDate}&nbsp;-&nbsp;{entry.expEndDate}</div>
-                                        : null}
                                     </div>
                                 )
                             })}

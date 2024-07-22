@@ -93,7 +93,7 @@ h1,h2, h3, h4, h5, p {
 /* Output - body */
 
 .output-body {
-    padding: 1em;
+    padding: 0.5em 1em;
 }
 
 .output-body-title{
@@ -120,11 +120,16 @@ h1,h2, h3, h4, h5, p {
 }
 
 .output-entry-head > p {
+    margin-top: 0.25em;
     font-size: 0.8em;
 }
 
-.output-entry-date {
+.output-entry-meta {
+    width: 25%;
     margin-top: 0.25em;
-    font-size: 0.9em;
+    font-size: 0.8em;
+}
 
+.output-entry-dates {
+    margin-right: 1.5em;
 }

@@ -14,6 +14,7 @@ function Education({onDataChange}) {
             educationDegree: '',
             educationStartDate: '',
             educationEndDate: '',
+            educationLocation: '',
             educationDescription: '',
             uuid: uuid(),
         };
@@ -106,6 +107,14 @@ function Education({onDataChange}) {
                                 name="educationEndDate"
                                 type="month"
                                 value={formData.educationEndDate}
+                                onChange = {(e) => handleInputChange(e)}
+                            />
+                        </label>
+                        <label htmlFor="educationLocation">Location:
+                            <input
+                                name="educationLocation"
+                                type="text"
+                                value={formData.educationLocation}
                                 onChange = {(e) => handleInputChange(e)}
                             />
                         </label>
