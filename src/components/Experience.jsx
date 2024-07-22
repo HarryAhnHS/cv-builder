@@ -33,7 +33,7 @@ function Experience({onDataChange}) {
         const updatedExperienceList = [...experienceList].filter((entry) => entry.uuid !== uuidToDelete);
 
         setExperienceList(updatedExperienceList);
-        onDataChange("educations", updatedExperienceList);
+        onDataChange("experiences", updatedExperienceList);
     }
 
     function editExperienceEntry(uuidToEdit) {
@@ -113,7 +113,7 @@ function Experience({onDataChange}) {
                     <label htmlFor="expStartDate">Start Date:
                         <input
                             name="expStartDate"
-                            type="date"
+                            type="month"
                             value={formData.expStartDate}
                             onChange = {(e) => handleInputChange(e)}
                         />
@@ -121,7 +121,7 @@ function Experience({onDataChange}) {
                     <label htmlFor="expEndDate">End Date:
                         <input
                             name="expEndDate"
-                            type="date"
+                            type="month"
                             value={formData.expEndDate}
                             onChange = {(e) => handleInputChange(e)}
                         />

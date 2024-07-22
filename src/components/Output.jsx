@@ -12,22 +12,25 @@ function Output({form, theme}) {
                 <button id="download">Download</button>
                 <div className="deliverable-output">
                     <div className="output-head">
-                        <div className='output-head-main'>
+                        <div className={`output-head-main ${form.personal.personalBio == "" && !form.personal.avatar 
+                                    ? 'condensed' 
+                                    : null}`}>
                             <div className="output-head-title">
                                 <h1>{form.personal.personalName}</h1>
                                 <p>{form.personal.personalJob}</p>
                             </div>
-                            <div className="output-head-details">
+                            <div className=
+                                "output-head-details">
                                 <div className="detail">
-                                    <p className="detail-label">Email:&nbsp;</p>
+                                    <p className="detail-label">E:&nbsp;</p>
                                     <p className="detail-content">{form.personal.personalEmail}</p>
                                 </div>
                                 <div className="detail">
-                                    <p className="detail-label">Phone:&nbsp;</p>
+                                    <p className="detail-label">P:&nbsp;</p>
                                     <p className="detail-content">{form.personal.personalPhone}</p>
                                 </div>
                                 <div className="detail">
-                                    <p className="detail-label">Location:&nbsp;</p>
+                                    <p className="detail-label">L:&nbsp;</p>
                                     <p className="detail-content">{form.personal.personalLocation}</p>
                                 </div>
                             </div>
@@ -41,37 +44,50 @@ function Output({form, theme}) {
                             : 
                                 null
                             }
-                        
-            
+                    </div>
 
+                    <div className='output-body'>
+                        <div className="output-body-section educations">
+                            {form.educations.length > 0 ? <h1 className="output-body-title">Education:</h1> : null}
+                            {form.educations.map((entry) => {
+                                return (
+                                    <div className="output-entry education" key={entry.uuid}>
+                                        <div className="output-entry-head education">
+                                            <h1>{entry.educationName}</h1>
+                                            <h5>{entry.educationDegree}</h5>
+                                            <p>{entry.educationDescription}</p>
+                                        </div>
+                                        {entry.educationStartDate != "" 
+                                        ? <div className="output-entry-date education">{entry.educationStartDate}&nbsp;-&nbsp;{entry.educationEndDate}</div>
+                                        : null}
+                                    </div>
+                                )
+                            })}
+                        </div>
+
+                        <div className="output-body-section experiences">
+                        {form.experiences.length > 0 ? <h1 className="output-body-title">Experience:</h1> : null}
+                            {form.experiences.map((entry) => {
+                                return (
+                                    <div className="output-entry experience" key={entry.uuid}>
+                                        <div className="output-entry-head experience">
+                                            <h1>{entry.expCompanyName}</h1>
+                                            <p>{entry.expLocation}</p>
+                                            <h5>{entry.expPosition}</h5>
+                                            <p>{entry.educationDescription}</p>
+                                        </div>
+                                        {entry.educationStartDate != "" 
+                                        ? <div className="output-entry-date experience">{entry.expStartDate}&nbsp;-&nbsp;{entry.expEndDate}</div>
+                                        : null}
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </div>
-                    <div className="educations">
-                        {form.educations.length > 0 && form.educations.map((entry) => {
-                            return (
-                                <div className="educationEntry" key={entry.uuid}>
-                                    School: {entry.educationName}
-                                    Degree: {entry.educationDegree}
-                                    Start Date: {entry.educationStartDate}
-                                    End Date: {entry.educationEndDate}
-                                </div>
-                            )
-                        })}
-                    </div>
-                    <div className="experiences">
-                        {form.experiences.length > 0 && form.experiences.map((entry) => {
-                            return (
-                                <div className="experienceEntry" key={entry.uuid}>
-                                    Company: {entry.expCompanyName}
-                                    Position: {entry.expPosition}
-                                    Location: {entry.expLocation}
-                                    Description: {entry.expDescription}
-                                    Start Date: {entry.expStartDate}
-                                    End Date: {entry.expEndDate}
-                                </div>
-                            )
-                        })}
-                    </div>
-                    <div className="categories">
+
+
+                    
+                    <div className="output-body-section categories">
                         {form.categories.length > 0 && form.categories.map((entry) => {
                             return (
                                 <div className="categoryEntry" key={entry.uuid}>

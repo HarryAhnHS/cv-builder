@@ -1,4 +1,4 @@
-h1, p {
+h1,h2, h3, h4, h5, p {
     margin: 0;
 }
 
@@ -45,6 +45,18 @@ h1, p {
     justify-content: center;
 }
 
+.output-head-main.condensed {
+    align-items: center;
+}
+
+.output-head-main.condensed > .output-head-details {
+    display: flex;
+}
+
+.output-head-main.condensed > .output-head-details > .detail {
+    margin-right: 1em;
+}
+
 .output-head-title {
     
 }
@@ -57,7 +69,7 @@ h1, p {
 .detail {
     display: flex;
     align-items: center;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.15em;
 }
 
 .detail-label {
@@ -76,4 +88,43 @@ h1, p {
     height: 100%;
 
     object-fit: cover;
+}
+
+/* Output - body */
+
+.output-body {
+    padding: 1em;
+}
+
+.output-body-title{
+    border-bottom: 1px solid black;
+    margin-bottom: 0.25em;
+}
+
+.output-entry {
+    display: flex;
+    
+    margin-bottom: 1em;
+}
+
+.output-entry-head {
+    flex: 1;
+}
+
+.output-entry-head > h1 {
+    font-size: 1.2em;
+}
+
+.output-entry-head > h5 {
+    font-size: 0.8em;
+}
+
+.output-entry-head > p {
+    font-size: 0.8em;
+}
+
+.output-entry-date {
+    margin-top: 0.25em;
+    font-size: 0.9em;
+
 }

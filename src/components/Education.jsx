@@ -14,6 +14,7 @@ function Education({onDataChange}) {
             educationDegree: '',
             educationStartDate: '',
             educationEndDate: '',
+            educationDescription: '',
             uuid: uuid(),
         };
         // Add new entry in default state
@@ -95,7 +96,7 @@ function Education({onDataChange}) {
                         <label htmlFor="educationStartDate">Start Date:
                             <input
                                 name="educationStartDate"
-                                type="date"
+                                type="month"
                                 value={formData.educationStartDate}
                                 onChange = {(e) => handleInputChange(e)}
                             />
@@ -103,8 +104,16 @@ function Education({onDataChange}) {
                         <label htmlFor="educationEndDate">End Date:
                             <input
                                 name="educationEndDate"
-                                type="date"
+                                type="month"
                                 value={formData.educationEndDate}
+                                onChange = {(e) => handleInputChange(e)}
+                            />
+                        </label>
+                        <label htmlFor="educationDescription">Description:
+                            <input
+                                name="educationDescription"
+                                type="text"
+                                value={formData.educationDescription}
                                 onChange = {(e) => handleInputChange(e)}
                             />
                         </label>
