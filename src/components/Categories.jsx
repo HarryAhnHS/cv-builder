@@ -7,17 +7,19 @@ function Categories({onDataChange}) {
     const [categoriesList, setCategoriesList] = useState([]); // List of all categories
     const [formData, setFormData] = useState({}); // Temporary state for the form being edited
     
+
+    // Categories 
+
     // Create new entry - append a default entry into list's state
     function handleNewCategoryEntry() {
         const defaultCategory = {
             categoryTitle: '',
             categoryItems: [],
             categoryInputTypes: {
-                name: false,
+                name: true,
                 location: true,
                 description: true,
-                startDate: true,
-                endDate: true,
+                dates: true,
             },
             uuid: uuid(),
         }
@@ -68,47 +70,61 @@ function Categories({onDataChange}) {
         })
     }
 
-    function addCategoryItem() {
-        const updatedCategoryItems = [...formData.categoryItems, {
-            value: "",
-            description: "",
-            startDate: "",
-            endDate: "",
-            uuid: uuid()
-        }];
+    // Category Items
 
-        setFormData({
-            ...formData,
-            categoryItems: updatedCategoryItems,
-        })   
-    }
-
-    function handleCategoryItemChange(e, uuidItemToChange) {
-        const {name, value} = e.target;
-        const updatedCategoryItems = [...formData.categoryItems].map((item) => {
-            if (item.uuid === uuidItemToChange) {
-                item = {
-                    ...item, 
-                    [name]: value
-                };
+    function addCategoryItem(e, uuidToAddTo) {
+        const selectedCategory = categoriesList.find((category) => category.uuid === uuidToAddTo);
+        
+        // Create default category item with attributes based on selected category's configuration 
+        let defaultCategoryItem = {
+            uuid: uuid(),
+        };
+        Object.keys(selectedCategory.categoryInputTypes).forEach((type) => {
+            if (selectedCategory.categoryInputTypes[type]) {
+                defaultCategoryItem[type] =  "";
             }
-            return item;
         })
 
-        setFormData({
-            ...formData,
-            categoryItems: updatedCategoryItems,
-        }) 
+        // Update state
+        const updatedCategoriesList = [...categoriesList].map((category) => {
+            return category.uuid === uuidToAddTo 
+            ? {
+                ...category, 
+                categoryItems: [...category.categoryItems, defaultCategoryItem]
+            }
+            : category
+        })
+
+        setCategoriesList(updatedCategoriesList);
+        onDataChange("categories", updatedCategoriesList);
     }
 
-    function deleteCategoryItem(uuidItemToDelete) {
-        const updatedCategoryItems = [...formData.categoryItems].filter((item) => item.uuid !== uuidItemToDelete);
+    // function handleCategoryItemChange(e, uuidItemToChange) {
+    //     const {name, value} = e.target;
+    //     const updatedCategoryItems = [...formData.categoryItems].map((item) => {
+    //         if (item.uuid === uuidItemToChange) {
+    //             item = {
+    //                 ...item, 
+    //                 [name]: value
+    //             };
+    //         }
+    //         return item;
+    //     })
 
-        setFormData({
-            ...formData,
-            categoryItems: updatedCategoryItems,
-        }) 
-    }
+    //     setFormData({
+    //         ...formData,
+    //         categoryItems: updatedCategoryItems,
+    //     }) 
+    // }
+
+    // function deleteCategoryItem(uuidItemToDelete) {
+    //     const updatedCategoryItems = [...formData.categoryItems].filter((item) => item.uuid !== uuidItemToDelete);
+
+    //     setFormData({
+    //         ...formData,
+    //         categoryItems: updatedCategoryItems,
+    //     }) 
+    // }
 
     function handleCancel() {
         setEditId(null);
@@ -191,13 +207,13 @@ function Categories({onDataChange}) {
                                         {item.value}
                                     </div>
                                     <div className="entry-controls categoryItem">
-                                        <button id="item-edit" onClick={(e) => handleEditCategoryItem(e, item.uuid)}>Edit</button>
-                                        <button id="item-delete" onClick={(e) => handleDeleteCategoryItem(e, item.uuid)}>Delete</button>
+                                        {/* <button id="item-edit" onClick={(e) => handleEditCategoryItem(e, item.uuid)}>Edit</button>
+                                        <button id="item-delete" onClick={(e) => handleDeleteCategoryItem(e, item.uuid)}>Delete</button> */}
                                     </div>
                                 </div>
                                 )
                             })}
-                            <button id="add-category-item" onClick={addCategoryItem}>
+                            <button id="add-category-item" onClick={(e) => addCategoryItem(e, entry.uuid)}>
                                     Add Item
                             </button>
                         </div>
