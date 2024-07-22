@@ -38,7 +38,7 @@ h1,h2, h3, h4, h5, p {
 .output-head-main {
     flex: 1;
 
-    padding: 0.5em 1.5em;
+    padding: 1em 1.5em;
 
     display: flex;
     flex-direction: column;
@@ -46,11 +46,12 @@ h1,h2, h3, h4, h5, p {
 }
 
 .output-head-main.condensed {
-    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .output-head-main.condensed > .output-head-details {
-    display: flex;
+    margin-top: 0;
 }
 
 .output-head-main.condensed > .output-head-details > .detail {
@@ -101,6 +102,10 @@ h1,h2, h3, h4, h5, p {
     margin-bottom: 0.25em;
 }
 
+.output-bio {
+    font-size: 0.8em;
+}
+
 .output-entry {
     display: flex;
     
@@ -126,8 +131,9 @@ h1,h2, h3, h4, h5, p {
 
 .output-entry-meta {
     width: 25%;
-    margin-top: 0.25em;
     font-size: 0.8em;
+
+    margin: auto 0;
 }
 
 .output-entry-dates {

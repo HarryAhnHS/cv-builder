@@ -8,7 +8,6 @@ function Personal({onDataChange}) {
         personalEmail: '',
         personalPhone: '',
         personalLocation: '',
-        personalBio: '',
         avatar:'',
     })
 
@@ -87,14 +86,6 @@ function Personal({onDataChange}) {
                         name="personalLocation"
                         type="text"
                         value = {personalData.location}
-                        onChange = {handleInputChange}
-                    />
-                </label>
-                <label htmlFor="personalBio">Profile bio:
-                    <input
-                        name="personalBio"
-                        type="text"
-                        value = {personalData.bio}
                         onChange = {handleInputChange}
                     />
                 </label>

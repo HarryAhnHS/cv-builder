@@ -8,6 +8,7 @@ function Content() {
     // Init States
     
     const [form, setForm] = useState({
+        bio: "",
         personal: {},
         educations: [],
         experiences: [],

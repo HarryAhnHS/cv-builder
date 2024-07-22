@@ -12,7 +12,7 @@ function Output({form, theme}) {
                 <button id="download">Download</button>
                 <div className="deliverable-output">
                     <div className="output-head">
-                        <div className={`output-head-main ${form.personal.personalBio == "" && !form.personal.avatar 
+                        <div className={`output-head-main ${!form.personal.avatar 
                                     ? 'condensed' 
                                     : null}`}>
                             <div className="output-head-title">
@@ -22,15 +22,15 @@ function Output({form, theme}) {
                             <div className=
                                 "output-head-details">
                                 <div className="detail">
-                                    <p className="detail-label">E:&nbsp;</p>
+                                    <p className="detail-label">Email:&nbsp;</p>
                                     <p className="detail-content">{form.personal.personalEmail}</p>
                                 </div>
                                 <div className="detail">
-                                    <p className="detail-label">P:&nbsp;</p>
+                                    <p className="detail-label">Phone:&nbsp;</p>
                                     <p className="detail-content">{form.personal.personalPhone}</p>
                                 </div>
                                 <div className="detail">
-                                    <p className="detail-label">L:&nbsp;</p>
+                                    <p className="detail-label">Location:&nbsp;</p>
                                     <p className="detail-content">{form.personal.personalLocation}</p>
                                 </div>
                             </div>
@@ -47,6 +47,18 @@ function Output({form, theme}) {
                     </div>
 
                     <div className='output-body'>
+                        
+                        {form.bio != "" 
+                        ?
+                            <div className="output-body-section bio">
+                                <h1 className="output-body-title">About me:</h1> 
+                                <p className="output-bio">
+                                    {form.bio}
+                                </p>
+                            </div>
+                        : 
+                        null}
+                        
                         <div className="output-body-section educations">
                             {form.educations.length > 0 ? <h1 className="output-body-title">Education:</h1> : null}
                             {form.educations.map((entry) => {
@@ -94,7 +106,7 @@ function Output({form, theme}) {
                                             <h1>{entry.expCompanyName}</h1>
                                             <p>{entry.expLocation}</p>
                                             <h5>{entry.expPosition}</h5>
-                                            <p>{entry.educationDescription}</p>
+                                            <p>{entry.expDescription}</p>
                                         </div>
                                     </div>
                                 )
@@ -102,8 +114,6 @@ function Output({form, theme}) {
                         </div>
                     </div>
 
-
-                    
                     <div className="output-body-section categories">
                         {form.categories.length > 0 && form.categories.map((entry) => {
                             return (
@@ -120,6 +130,7 @@ function Output({form, theme}) {
                             )
                         })}
                     </div>
+
                 </div>
             </div>
         </>

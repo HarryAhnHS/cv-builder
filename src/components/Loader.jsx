@@ -1,9 +1,11 @@
 import '../styles/Loader.css'
 
+import Bio from './Bio';
 import Personal from './Personal';
 import Education from './Education';
 import Experience from './Experience';
 import Categories from './Categories';
+
 import Styles from './Styles';
 
 
@@ -24,6 +26,10 @@ function Loader({setForm, setTheme}) {
                 <div className="loader-box">
                     <h2 className="loader-title">Personal Information</h2>
                     <Personal onDataChange = {handleFormField(setForm)}/>
+                </div>
+                <div className="loader-box">
+                    <h2 className="loader-title">Personal Bio</h2>
+                    <Bio onDataChange = {handleFormField(setForm)}/>
                 </div>
                 <div className="loader-box">
                     <h2 className="loader-title">Education</h2>
