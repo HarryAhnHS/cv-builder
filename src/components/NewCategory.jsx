@@ -141,7 +141,7 @@ function NewCategory({entry, categoriesList, setCategoriesList, onDataChange}) {
                         return (
                                 <div className="entry category-item" key={item.uuid}>
                                     <div className="entry-summary category-item">
-                                        {item.Name}
+                                        {item.Title}
                                     </div>
                                     <div className="entry-controls category-item">
                                         <button id="item-edit" onClick={(e) => handleEditCategoryItem(e, item.uuid)}>Edit</button>

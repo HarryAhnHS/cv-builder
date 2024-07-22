@@ -64,11 +64,16 @@ function Output({form, theme}) {
                             {form.educations.map((entry) => {
                                 return (
                                     <div className="output-entry education" key={entry.uuid}>
-                                        {entry.educationStartDate != "" || entry.educationEndDate != ""
+                                        {(entry.educationStartDate != "" && entry.educationStartDate) || (entry.educationEndDate != "" && entry.educationEndDate)
                                         ?
                                             <div className="output-entry-head education">
                                                 <div className="output-entry-dates start education">{entry.educationStartDate}</div>
-                                                <div className="output-entry-dates end education">-&nbsp;{entry.educationEndDate}</div>
+                                                <div className="output-entry-dates end education">
+                                                    {entry.educationStartDate != "" && entry.educationEndDate != "" && entry.educationStartDate && entry.educationEndDate
+                                                    ? <p>-&nbsp;</p>
+                                                    : null}
+                                                    {entry.educationEndDate}
+                                                </div>
                                             </div>
                                         :
                                             null
@@ -91,11 +96,16 @@ function Output({form, theme}) {
                             {form.experiences.map((entry) => {
                                 return (
                                     <div className="output-entry experience" key={entry.uuid}>
-                                        {entry.expStartDate != "" || entry.expEndDate != ""
+                                        {(entry.expStartDate != "" && entry.expStartDate) || (entry.expEndDate != "" && entry.expEndDate)
                                         ?
                                             <div className="output-entry-head experience">
                                                 <div className="output-entry-dates start experience">{entry.expStartDate}</div>
-                                                <div className="output-entry-dates end experience">-&nbsp;{entry.expEndDate}</div>
+                                                <div className="output-entry-dates end experience">
+                                                    {entry.expStartDate != "" && entry.expEndDate != "" && entry.expStartDate && entry.expEndDate  
+                                                    ? <p>-&nbsp;</p>
+                                                    : null}
+                                                    {entry.expEndDate}
+                                                </div>
                                             </div>
                                         :
                                             null
@@ -112,37 +122,40 @@ function Output({form, theme}) {
                                 )
                             })}
                         </div>
-                    </div>
 
-                    {form.categories.map((category) => {
-                        return (<div className="output-body-section category" key={category.uuid}>
-                            {category.categoryItems.length > 0 ? <h1 className="output-body-title">{category.categoryTitle}</h1> : null}
-                            {category.categoryItems.map((item) => {
-                                return (
-                                    <div className="output-entry category-item" key={item.uuid}>
-                                        {item.StartDate != "" || item.EndDate != ""
-                                        ?
-                                            <div className="output-entry-head category-item">
-                                                <div className="output-entry-dates start category-item">{item.StartDate}</div>
-                                                <div className="output-entry-dates end category-item">-&nbsp;{item.EndDate}</div>
+                        {form.categories.map((category) => {
+                            return (<div className="output-body-section category" key={category.uuid}>
+                                {category.categoryItems.length > 0 ? <h1 className="output-body-title">{category.categoryTitle}</h1> : null}
+                                {category.categoryItems.map((item) => {
+                                    return (
+                                        <div className="output-entry category-item" key={item.uuid}>
+                                            {(item.StartDate != "" && item.StartDate) || (item.EndDate != "" && item.EndDate)
+                                            ?
+                                                <div className="output-entry-head category-item">
+                                                    <div className="output-entry-dates start category-item">{item.StartDate}</div>
+                                                    <div className="output-entry-dates end category-item">
+                                                        {item.StartDate != "" && item.EndDate != "" && item.StartDate && item.EndDate 
+                                                        ? <p>-&nbsp;</p>
+                                                        : null}
+                                                        {item.EndDate}
+                                                    </div>
+                                                </div>
+                                            :
+                                                null
+                                            }
+                                            <div className="output-entry-mid category-item">
+                                                <div className="output-entry-title">
+                                                    <h1>{item.Title}</h1>
+                                                    <p>{item.Location}</p>
+                                                </div>
+                                                <p>{item.Description}</p>
                                             </div>
-                                        :
-                                            null
-                                        }
-                                        <div className="output-entry-mid category-item">
-                                            <div className="output-entry-title">
-                                                <h1>{item.Title}</h1>
-                                                <p>{item.Location}</p>
-                                            </div>
-                                            <p>{item.Description}</p>
                                         </div>
-                                    </div>
-                                )
-                            })}
-                        </div>)
-                    })}
-                    
-
+                                    )
+                                })}
+                            </div>)
+                        })}
+                    </div>
                 </div>
             </div>
         </>

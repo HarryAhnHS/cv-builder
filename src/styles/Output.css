@@ -13,12 +13,14 @@ h1,h2, h3, h4, h5, p {
 .deliverable-output {
     aspect-ratio: 1/ 1.41;
 
-    width: 90%;
+    max-width: 90%;
 
     background-color: white;
     color: black;
 
     margin: 15px auto;
+
+    overflow-y: scroll;
 }
 
 #download {
@@ -58,9 +60,6 @@ h1,h2, h3, h4, h5, p {
     margin-right: 1em;
 }
 
-.output-head-title {
-    
-}
 .output-head-details {
     font-size: 0.8em;
 
@@ -117,7 +116,7 @@ h1,h2, h3, h4, h5, p {
 }
 
 .output-entry-head {
-    width: 13%;
+    min-width: 13%;
     font-size: 0.8em;
     margin-right: 0.5em;
 
@@ -128,6 +127,7 @@ h1,h2, h3, h4, h5, p {
 
 .output-entry-dates.end {
     margin-left: 0.5em;
+    display: flex;
 }
 
 .output-entry-mid {
