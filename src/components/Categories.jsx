@@ -98,9 +98,24 @@ function Categories({onDataChange}) {
     }
 
     function handleSave() {
+        
         const updatedCategoriesList = [...categoriesList].map((cat) => {
-                return cat.uuid === editId ? formData : cat
-            })
+                console.log(editId)
+                console.log(cat)
+                if (cat.uuid === editId) {
+                    if (JSON.stringify(cat.categoryInputTypes) != JSON.stringify(formData.categoryInputTypes)) {
+                        // If submitted changes changed input types, reset all entries
+                        return {
+                            ...formData,
+                            categoryItems: [],
+                        };
+                    }
+                    return formData
+                }
+                return cat;
+        })
+
+        
 
         setCategoriesList(updatedCategoriesList);
         onDataChange("categories", updatedCategoriesList);
@@ -128,7 +143,8 @@ function Categories({onDataChange}) {
                         </label>
 
                         <fieldset>
-                            <legend>Choose your new category features:</legend>
+                            <legend>Choose your category features:</legend>
+                            <p>Careful as this will reset entries</p>
                             {Object.keys(formData.categoryInputTypes).map((data, index) => {
                                 return (
                                     <div key={index}>
