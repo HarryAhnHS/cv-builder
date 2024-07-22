@@ -29,7 +29,7 @@ function Personal({onDataChange}) {
         if (e.target.files &&  e.target.files.length) {
             const updatedPersonalData = {
                 ...personalData,
-                avatar: e.target.files[0],
+                avatar: URL.createObjectURL(e.target.files[0]),
             }
             setPersonalData(updatedPersonalData);
             onDataChange("personal", updatedPersonalData);
@@ -41,7 +41,7 @@ function Personal({onDataChange}) {
 
         const updatedPersonalData = {
             ...personalData,
-            avatar: '',
+            avatar: null,
         }
         setPersonalData(updatedPersonalData);
         onDataChange("personal", updatedPersonalData);
@@ -77,7 +77,7 @@ function Personal({onDataChange}) {
                 <label htmlFor="personalPhone">Phone:
                     <input
                         name="personalPhone"
-                        type="number"
+                        type="tel"
                         value = {personalData.phone}
                         onChange = {handleInputChange}
                     />

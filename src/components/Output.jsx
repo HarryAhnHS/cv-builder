@@ -12,11 +12,38 @@ function Output({form, theme}) {
                 <button id="download">Download</button>
                 <div className="deliverable-output">
                     <div className="output-head">
-                        <h1>{form.personal.personalName}</h1>
-                        Job: {form.personal.personalJob}
-                        Email: {form.personal.personalEmail}
-                        Phone: {form.personal.personalPhone}
-                        Location: {form.personal.personalLocation}
+                        <div className='output-head-main'>
+                            <div className="output-head-title">
+                                <h1>{form.personal.personalName}</h1>
+                                <p>{form.personal.personalJob}</p>
+                            </div>
+                            <div className="output-head-details">
+                                <div className="detail">
+                                    <p className="detail-label">Email:&nbsp;</p>
+                                    <p className="detail-content">{form.personal.personalEmail}</p>
+                                </div>
+                                <div className="detail">
+                                    <p className="detail-label">Phone:&nbsp;</p>
+                                    <p className="detail-content">{form.personal.personalPhone}</p>
+                                </div>
+                                <div className="detail">
+                                    <p className="detail-label">Location:&nbsp;</p>
+                                    <p className="detail-content">{form.personal.personalLocation}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                            {form.personal.avatar 
+                            ? 
+                                <div className="output-head-avatar">
+                                    <img src={form.personal.avatar}/>
+                                </div> 
+                            : 
+                                null
+                            }
+                        
+            
+
                     </div>
                     <div className="educations">
                         {form.educations.length > 0 && form.educations.map((entry) => {

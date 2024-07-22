@@ -122,13 +122,8 @@ input {
     display: flex;
 }
 
-.form-inputs-avatar > label {
-    display: block;
-}
-
 input#avatar {
     display: flex;
-    flex-direction: column;
 }
 
 
