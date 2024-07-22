@@ -7,7 +7,7 @@ function NewCategory({entry, categoriesList, setCategoriesList, onDataChange}) {
     const [formData, setFormData] = useState({});
 
     // Category Items
-    function addCategoryItem(e) {
+    function addCategoryItem() {
         // Create default category item with attributes based on selected category's configuration 
         let defaultCategoryItem = {
             uuid: uuid(),
@@ -31,14 +31,26 @@ function NewCategory({entry, categoriesList, setCategoriesList, onDataChange}) {
         setCategoriesList(updatedCategoriesList);
         onDataChange("categories", updatedCategoriesList);
 
-        setEditId(defaultCategoryItem.uuid);
         setFormData(defaultCategoryItem);
+        setEditId(defaultCategoryItem.uuid);
     }
 
-    function handleEditCategoryItem()
+    function handleEditCategoryItem(uuidItemToEdit) {
+        const itemToEdit = entry.categoryItems.find((item) => item.uuid === uuidItemToEdit);
+
+        setFormData(itemToEdit);
+        setEditId(uuidItemToEdit);
+    }
 
     function handleDeleteCategoryItem(uuidItemToDelete) {
+        const updatedCategory = [...entry.categoryItems].filter((item) => item.uuid !== uuidItemToDelete);
 
+        const updatedCategoriesList = [...categoriesList].map((category) => {
+            return category.uuid === entry.uuid ? updatedCategory : category;
+        })
+
+        setCategoriesList(updatedCategoriesList);
+        onDataChange("categories", updatedCategoriesList);
     }
 
 
