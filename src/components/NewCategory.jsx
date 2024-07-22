@@ -13,7 +13,7 @@ function NewCategory({entry, categoriesList, setCategoriesList, onDataChange}) {
             uuid: uuid(),
         };
         Object.keys(entry.categoryInputTypes).forEach((type) => {
-            if (entry.categoryInputTypes[type]) {
+            if (entry.categoryInputTypes[type].exists) {
                 defaultCategoryItem[type] =  "";
             }
         })
@@ -35,15 +35,20 @@ function NewCategory({entry, categoriesList, setCategoriesList, onDataChange}) {
         setEditId(defaultCategoryItem.uuid);
     }
 
-    function handleEditCategoryItem(uuidItemToEdit) {
+    function handleEditCategoryItem(e,uuidItemToEdit) {
         const itemToEdit = entry.categoryItems.find((item) => item.uuid === uuidItemToEdit);
 
+        console.log(itemToEdit);
+        console.log(uuidItemToEdit);
         setFormData(itemToEdit);
         setEditId(uuidItemToEdit);
     }
 
-    function handleDeleteCategoryItem(uuidItemToDelete) {
-        const updatedCategory = [...entry.categoryItems].filter((item) => item.uuid !== uuidItemToDelete);
+    function handleDeleteCategoryItem(e, uuidItemToDelete) {
+        const updatedCategory = {
+            ...entry,
+            categoryItems: [...entry.categoryItems].filter((item) => item.uuid !== uuidItemToDelete)
+        }
 
         const updatedCategoriesList = [...categoriesList].map((category) => {
             return category.uuid === entry.uuid ? updatedCategory : category;
@@ -54,63 +59,102 @@ function NewCategory({entry, categoriesList, setCategoriesList, onDataChange}) {
     }
 
 
-    // function handleCategoryItemChange(e, uuidItemToChange) {
-    //     const {name, value} = e.target;
-    //     const updatedCategoryItems = [...formData.categoryItems].map((item) => {
-    //         if (item.uuid === uuidItemToChange) {
-    //             item = {
-    //                 ...item, 
-    //                 [name]: value
-    //             };
-    //         }
-    //         return item;
-    //     })
+    // Form Stuff
+    function handleCategoryItemChange(e) {
+        const {name, value} = e.target;
+        const updatedCategoryItem = {
+            ...formData,
+            [name]: value
 
-    //     setFormData({
-    //         ...formData,
-    //         categoryItems: updatedCategoryItems,
-    //     }) 
-    // }
+        }
 
-    // function handleCancel() {
-    //     setEditId(null);
-    //     setFormData({});
-    // }
+        setFormData(updatedCategoryItem) 
+    }
 
-    // function handleSave() {
-    //     const updatedCategoriesList = [...categoriesList].map((cat) => {
-    //             return cat.uuid === editId ? formData : cat
-    //         })
+    function handleCancel() {
+        setEditId(null);
+        setFormData({});
+    }
 
-    //     setCategoriesList(updatedCategoriesList);
-    //     onDataChange("categories", updatedCategoriesList);
+    function handleSave() {
+        const updatedCategoryItems = 
+            [...categoriesList.find((category) => category.uuid === entry.uuid).categoryItems].map((item) => {
+                return item.uuid === editId ? formData : item;
+        })
+
+        const updatedCategoriesList = categoriesList.map((category) => {
+            return category.uuid === entry.uuid 
+            ? {
+                ...category,
+                categoryItems: updatedCategoryItems
+            }
+            : category;
+        })
+
+        setCategoriesList(updatedCategoriesList);
+        onDataChange("categories", updatedCategoriesList);
         
-    //     setEditId(null);
-    //     setFormData({});
-    // }
+        setEditId(null);
+        setFormData({});
+    }
+
+    console.log("NewCategory formData", formData);
 
 
-    return (<>
-                <h2 className="loader-title">
-                {entry.categoryTitle != "" ? entry.categoryTitle : "Unnamed Category"}
-                </h2>
-
-                {entry.categoryItems.map((item) => {
-                return (
-                        <div className="entry category-item" key={item.uuid}>
-                            <div className="entry-summary category-item">
-                                {item.value}
-                            </div>
-                            <div className="entry-controls category-item">
-                                <button id="item-edit" onClick={(e) => handleEditCategoryItem(e, item.uuid)}>Edit</button>
-                                <button id="item-delete" onClick={(e) => handleDeleteCategoryItem(e, item.uuid)}>Delete</button>
-                            </div>
+    return(
+            <>
+                {editId 
+                ?
+                    // Edit Mode
+                    <div className="form new-category">
+                        <div className="form-inputs new-category">
+                            {Object.keys(entry.categoryInputTypes).map((key, index) => {
+                                return entry.categoryInputTypes[key].exists 
+                                ?
+                                    <label key={index} htmlFor={key}>{key}
+                                        <input
+                                            name={key}
+                                            type={entry.categoryInputTypes[key].inputType}
+                                            value={formData[key]}
+                                            onChange = {(e) => handleCategoryItemChange(e)}
+                                        />
+                                    </label>
+                                :
+                                    null
+                                })
+                            }
                         </div>
-                )
-                })}
-                <button id="add-category-item" onClick={addCategoryItem}>
-                    Add Item
-                </button>
+
+                        <div className="form-controls new-category">
+                            <button id="cancel" onClick={handleCancel}>Cancel</button>
+                            <button id="save" onClick={handleSave}>Save</button>
+                        </div>
+                    </div>
+                :
+                    // Display Mode
+                    <div className="list new-category">
+                        <h2 className="loader-title">
+                        {entry.categoryTitle != "" ? entry.categoryTitle : "Unnamed Category"}
+                        </h2>
+
+                        {entry.categoryItems.map((item) => {
+                        return (
+                                <div className="entry category-item" key={item.uuid}>
+                                    <div className="entry-summary category-item">
+                                        {item.Name}
+                                    </div>
+                                    <div className="entry-controls category-item">
+                                        <button id="item-edit" onClick={(e) => handleEditCategoryItem(e, item.uuid)}>Edit</button>
+                                        <button id="item-delete" onClick={(e) => handleDeleteCategoryItem(e, item.uuid)}>Delete</button>
+                                    </div>
+                                </div>
+                        )
+                        })}
+                        <button id="add-category-item" onClick={addCategoryItem}>
+                            Add Item
+                        </button>
+                    </div>
+                }
             </>
         )
 }

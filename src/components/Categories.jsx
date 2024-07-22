@@ -18,10 +18,26 @@ function Categories({onDataChange}) {
             categoryTitle: '',
             categoryItems: [],
             categoryInputTypes: {
-                name: true,
-                location: true,
-                description: true,
-                dates: true,
+                Name: {
+                    exists: true, 
+                    inputType: 'text',
+                },
+                Location: {
+                    exists: true, 
+                    inputType: 'text'
+                },
+                Description: {
+                    exists: true, 
+                    inputType: 'text'
+                },
+                StartDate: {
+                    exists: true, 
+                    inputType: 'month'
+                },
+                EndDate: {
+                    exists: true, 
+                    inputType: 'month'
+                },
             },
             uuid: uuid(),
         }
@@ -68,7 +84,10 @@ function Categories({onDataChange}) {
             ...formData,
             categoryInputTypes: {
                 ...formData.categoryInputTypes,
-                [name]: checked,
+                [name]: {
+                    ...formData.categoryInputTypes[name],
+                    exists: checked,
+                }
             },
         })
     }
@@ -110,14 +129,14 @@ function Categories({onDataChange}) {
 
                         <fieldset>
                             <legend>Choose your new category features:</legend>
-                            {Object.keys(formData.categoryInputTypes).map((type, index) => {
+                            {Object.keys(formData.categoryInputTypes).map((data, index) => {
                                 return (
                                     <div key={index}>
-                                        <input type="checkbox" name={type} 
-                                            checked={formData.categoryInputTypes[type]}
+                                        <input type="checkbox" name={data} 
+                                            checked={formData.categoryInputTypes[data].exists}
                                             onChange={(e) => handleCategoryInputTypesChange(e)}
                                         />
-                                        <label htmlFor="type">{type}</label>
+                                        <label htmlFor="type">{data}</label>
                                     </div>
                                 )
                             })}
@@ -138,7 +157,7 @@ function Categories({onDataChange}) {
                         <div className="loader-box"  key={entry.uuid}>
                             <NewCategory 
                                 entry={entry} 
-                                categoryList={categoriesList} 
+                                categoriesList={categoriesList} 
                                 setCategoriesList={setCategoriesList} 
                                 onDataChange={onDataChange} 
                             />
