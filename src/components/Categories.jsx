@@ -12,6 +12,13 @@ function Categories({onDataChange}) {
         const defaultCategory = {
             categoryTitle: '',
             categoryItems: [],
+            categoryInputTypes: {
+                name: false,
+                location: true,
+                description: true,
+                startDate: true,
+                endDate: true,
+            },
             uuid: uuid(),
         }
         // // Add new entry in default state
@@ -43,17 +50,30 @@ function Categories({onDataChange}) {
 
     // FORM STUFF
     // Change formData state based on input -> don't push changes to List or above until 'saved'
-    function handleInputChange(e) {
-        const {name, value} = e.target;
+    function handleCategoryTitleChange(e) {
         setFormData({
             ...formData,
-            [name]: value,
+            categoryTitle: e.target.value,
+        })
+    }
+
+    function handleCategoryInputTypesChange(e) {
+        const {name, checked} = e.target;
+        setFormData({
+            ...formData,
+            categoryInputTypes: {
+                ...formData.categoryInputTypes,
+                [name]: checked,
+            },
         })
     }
 
     function addCategoryItem() {
         const updatedCategoryItems = [...formData.categoryItems, {
             value: "",
+            description: "",
+            startDate: "",
+            endDate: "",
             uuid: uuid()
         }];
 
@@ -64,9 +84,13 @@ function Categories({onDataChange}) {
     }
 
     function handleCategoryItemChange(e, uuidItemToChange) {
+        const {name, value} = e.target;
         const updatedCategoryItems = [...formData.categoryItems].map((item) => {
             if (item.uuid === uuidItemToChange) {
-                item = {...item, value : e.target.value};
+                item = {
+                    ...item, 
+                    [name]: value
+                };
             }
             return item;
         })
@@ -104,8 +128,8 @@ function Categories({onDataChange}) {
     }
     // console.log("CategoriesList:")
     // console.log(categoriesList);
-    // console.log("FormData:")
-    // console.log(formData);
+    console.log("FormData:")
+    console.log(formData);
 
     return (
         <>
@@ -118,24 +142,24 @@ function Categories({onDataChange}) {
                                 name = "categoryTitle"
                                 type = "text"
                                 value = {formData.categoryTitle}
-                                onChange = {(e) => handleInputChange(e)}
+                                onChange = {(e) => handleCategoryTitleChange(e)}
                             />
                         </label>
 
-                        {formData.categoryItems.map((item) => {
-                            return (<div className="category-item" key={item.uuid}>
-                                <input
-                                    name="personalJob"
-                                    type="text"
-                                    value = {item.value}
-                                    onChange = {(e) => handleCategoryItemChange(e, item.uuid)}
-                                />
-                                <button id="delete-category-item" onClick={() => deleteCategoryItem(item.uuid)}>Delete Item</button>
-                            </div>)
-                        })}
-                        <button id="add-category-item" onClick={addCategoryItem}>
-                                Add Item
-                        </button>
+                        <fieldset>
+                            <legend>Choose your new category features:</legend>
+                            {Object.keys(formData.categoryInputTypes).map((type, index) => {
+                                return (
+                                    <div key={index}>
+                                        <input type="checkbox" name={type} 
+                                            checked={formData.categoryInputTypes[type]}
+                                            onChange={(e) => handleCategoryInputTypesChange(e)}
+                                        />
+                                        <label htmlFor="type">{type}</label>
+                                    </div>
+                                )
+                            })}
+                        </fieldset>
                     </div>  
 
                     <div className="form-controls categories">
@@ -145,22 +169,37 @@ function Categories({onDataChange}) {
                 </div>
             
             : 
-                // Display Mode
+                // Display Mode -  display each new category as own loader-box
                 <div className="list categories">
                     {categoriesList.map((entry) => {
                         return (
-                        <div className="entry category" key={entry.uuid}>
-                            <div className="entry-summary category">
-                                {entry.categoryTitle}
-                            </div>
-                            <div className="entry-controls category">
-                                <button id="edit-entry" onClick={() => handleEditCategoryEntry(entry.uuid)}>
-                                    Edit Category
-                                </button>
-                                <button id="delete-entry" onClick={() => deleteCategoryEntry(entry.uuid)}>
-                                    Delete category
-                                </button>
-                            </div>
+                        <div className="loader-box"  key={entry.uuid}>
+                            <button id="edit-entry" onClick={() => handleEditCategoryEntry(entry.uuid)}>
+                                Edit Category
+                            </button>
+                            <button id="delete-entry" onClick={() => deleteCategoryEntry(entry.uuid)}>
+                                Delete category
+                            </button>
+                            <h2 className="loader-title">
+                                {entry.categoryTitle != "" ? entry.categoryTitle : "Unnamed Category"}
+                            </h2>
+
+                            {entry.categoryItems.map((item) => {
+                                return (
+                                <div className="entry categoryItem" key={item.uuid}>
+                                    <div className="entry-summary categoryItem">
+                                        {item.value}
+                                    </div>
+                                    <div className="entry-controls categoryItem">
+                                        <button id="item-edit" onClick={(e) => handleEditCategoryItem(e, item.uuid)}>Edit</button>
+                                        <button id="item-delete" onClick={(e) => handleDeleteCategoryItem(e, item.uuid)}>Delete</button>
+                                    </div>
+                                </div>
+                                )
+                            })}
+                            <button id="add-category-item" onClick={addCategoryItem}>
+                                    Add Item
+                            </button>
                         </div>
                         )
                     })}

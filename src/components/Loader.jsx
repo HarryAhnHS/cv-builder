@@ -39,10 +39,9 @@ function Loader({setForm, setTheme}) {
                     <h2 className="loader-title">Experience</h2>
                     <Experience onDataChange = {handleFormField(setForm)}/>
                 </div>
-                <div className="loader-box">
-                    <h2 className="loader-title">More Information</h2>
-                    <Categories onDataChange = {handleFormField(setForm)}/>
-                </div>
+                
+                <Categories onDataChange = {handleFormField(setForm)}/>
+                
                 <div className="loader-box">
                     <h2 className="loader-title">Customize</h2>
                     <Styles setTheme={setTheme}/>
