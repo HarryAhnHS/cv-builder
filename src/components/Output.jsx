@@ -1,15 +1,18 @@
 import '../styles/Output.css'
 
 function Output({form, theme}) {
-    // console.log("Rendering output with form:", form);
-    console.log(theme);
+    console.log("Rendering output with form:", form);
+    console.log("Rendering output with theme:", theme);
+
+
+
     return (
         <>
             <div className="output">
                 <button id="download">Download</button>
                 <div className="deliverable-output">
-                    <div className="personal">
-                        Name: {form.personal.personalName}
+                    <div className="output-head">
+                        <h1>{form.personal.personalName}</h1>
                         Job: {form.personal.personalJob}
                         Email: {form.personal.personalEmail}
                         Phone: {form.personal.personalPhone}

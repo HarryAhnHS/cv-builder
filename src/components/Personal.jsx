@@ -1,4 +1,4 @@
-import {useState} from "react"
+import {useState, useRef} from "react"
 
 function Personal({onDataChange}) {
     // State to keep track of local changes
@@ -7,8 +7,12 @@ function Personal({onDataChange}) {
         personalJob: '',
         personalEmail: '',
         personalPhone: '',
-        personalLocation: ''
+        personalLocation: '',
+        personalBio: '',
+        avatar:'',
     })
+
+    const fileRef = useRef()
 
     function handleInputChange(e) {
         const {name, value} = e.target;
@@ -17,6 +21,28 @@ function Personal({onDataChange}) {
             [name]: value
         }
 
+        setPersonalData(updatedPersonalData);
+        onDataChange("personal", updatedPersonalData);
+    }
+
+    function handleProfilePhoto(e) {
+        if (e.target.files &&  e.target.files.length) {
+            const updatedPersonalData = {
+                ...personalData,
+                avatar: e.target.files[0],
+            }
+            setPersonalData(updatedPersonalData);
+            onDataChange("personal", updatedPersonalData);
+        }
+    }
+
+    function resetProfilePhoto() {
+        fileRef.current.value = "";
+
+        const updatedPersonalData = {
+            ...personalData,
+            avatar: '',
+        }
         setPersonalData(updatedPersonalData);
         onDataChange("personal", updatedPersonalData);
     }
@@ -64,6 +90,20 @@ function Personal({onDataChange}) {
                         onChange = {handleInputChange}
                     />
                 </label>
+                <label htmlFor="personalBio">Profile bio:
+                    <input
+                        name="personalBio"
+                        type="text"
+                        value = {personalData.bio}
+                        onChange = {handleInputChange}
+                    />
+                </label>
+                <div className="form-inputs-avatar">
+                    <label htmlFor="avatar">Upload a profile picture:
+                        <input ref={fileRef} onChange={(e) => handleProfilePhoto(e)} type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
+                    </label>
+                    <button id="remove-avatar" onClick= {resetProfilePhoto}>Reset Avatar</button>
+                </div>
             </div>
         </>
     )
