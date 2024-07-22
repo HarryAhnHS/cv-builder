@@ -15,9 +15,9 @@ function Bio({onDataChange}) {
     return (
         <>
             <div className="form-inputs bio">
-                <label htmlFor="bio">Introduce yourself:
-                    <input
-                        type="text"
+                <label className="form-input-textarea" htmlFor="bio">Introduce yourself:
+                    <textarea
+                        type="textarea"
                         value = {bioData}
                         onChange = {handleInputChange}
                     />

@@ -94,7 +94,7 @@ function Education({onDataChange}) {
                                 onChange = {(e) => handleInputChange(e)}
                             />
                         </label>
-                        <label htmlFor="educationStartDate">Start Date:
+                        <label htmlFor="educationStartDate" className="form-input-date">Start Date:
                             <input
                                 name="educationStartDate"
                                 type="month"
@@ -102,7 +102,7 @@ function Education({onDataChange}) {
                                 onChange = {(e) => handleInputChange(e)}
                             />
                         </label>
-                        <label htmlFor="educationEndDate">End Date:
+                        <label htmlFor="educationEndDate" className="form-input-date">End Date:
                             <input
                                 name="educationEndDate"
                                 type="month"
@@ -118,8 +118,8 @@ function Education({onDataChange}) {
                                 onChange = {(e) => handleInputChange(e)}
                             />
                         </label>
-                        <label htmlFor="educationDescription">Description:
-                            <input
+                        <label htmlFor="educationDescription" className="form-input-textarea">Description:
+                            <textarea
                                 name="educationDescription"
                                 type="text"
                                 value={formData.educationDescription}

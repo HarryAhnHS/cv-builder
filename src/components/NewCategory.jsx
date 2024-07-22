@@ -111,13 +111,27 @@ function NewCategory({entry, categoriesList, setCategoriesList, onDataChange}) {
                             {Object.keys(entry.categoryInputTypes).map((key, index) => {
                                 return entry.categoryInputTypes[key].exists 
                                 ?
-                                    <label key={index} htmlFor={key}>{key}
-                                        <input
+                                    <label 
+                                        key={index} htmlFor={key} 
+                                        className={"form-input-" + entry.categoryInputTypes[key].element}
+                                    >
+                                        {key}
+                                        {entry.categoryInputTypes[key].element == 'textarea' 
+                                        ? 
+                                            <textarea
                                             name={key}
                                             type={entry.categoryInputTypes[key].inputType}
                                             value={formData[key]}
                                             onChange = {(e) => handleCategoryItemChange(e)}
-                                        />
+                                            />
+                                        :
+                                            <input
+                                                name={key}
+                                                type={entry.categoryInputTypes[key].inputType}
+                                                value={formData[key]}
+                                                onChange = {(e) => handleCategoryItemChange(e)}
+                                            />
+                                        }
                                     </label>
                                 :
                                     null
@@ -133,10 +147,6 @@ function NewCategory({entry, categoriesList, setCategoriesList, onDataChange}) {
                 :
                     // Display Mode
                     <div className="list new-category">
-                        <h2 className="loader-title">
-                        {entry.categoryTitle != "" ? entry.categoryTitle : "Unnamed Category"}
-                        </h2>
-
                         {entry.categoryItems.map((item) => {
                         return (
                                 <div className="entry category-item" key={item.uuid}>

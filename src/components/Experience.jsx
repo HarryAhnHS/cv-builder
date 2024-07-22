@@ -94,6 +94,22 @@ function Experience({onDataChange}) {
                             onChange = {(e) => handleInputChange(e)}
                         />
                     </label>
+                    <label htmlFor="expStartDate" className="form-input-date">Start Date:
+                        <input
+                            name="expStartDate"
+                            type="month"
+                            value={formData.expStartDate}
+                            onChange = {(e) => handleInputChange(e)}
+                        />
+                    </label>
+                    <label htmlFor="expEndDate" className="form-input-date">End Date:
+                        <input
+                            name="expEndDate"
+                            type="month"
+                            value={formData.expEndDate}
+                            onChange = {(e) => handleInputChange(e)}
+                        />
+                    </label>
                     <label htmlFor="expLocation">Location:
                         <input
                             name="expLocation"
@@ -102,27 +118,11 @@ function Experience({onDataChange}) {
                             onChange = {(e) => handleInputChange(e)}
                         />
                     </label>
-                    <label htmlFor="expDescription">Description:
-                        <input
+                    <label htmlFor="expDescription" className="form-input-textarea">Description:
+                        <textarea
                             name="expDescription"
                             type="text"
                             value={formData.expDescription}
-                            onChange = {(e) => handleInputChange(e)}
-                        />
-                    </label>
-                    <label htmlFor="expStartDate">Start Date:
-                        <input
-                            name="expStartDate"
-                            type="month"
-                            value={formData.expStartDate}
-                            onChange = {(e) => handleInputChange(e)}
-                        />
-                    </label>
-                    <label htmlFor="expEndDate">End Date:
-                        <input
-                            name="expEndDate"
-                            type="month"
-                            value={formData.expEndDate}
                             onChange = {(e) => handleInputChange(e)}
                         />
                     </label>

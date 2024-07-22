@@ -23,10 +23,14 @@
 label {
     display: flex;
     flex-direction: column;
+
+    width: 80%;
+
+    margin: 0 auto;
 }
 
-input {
-    width: 200px;
+input, textarea {
+    width: 100%;
 }
 
 .form-inputs {

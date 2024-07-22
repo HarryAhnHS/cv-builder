@@ -21,22 +21,27 @@ function Categories({onDataChange}) {
                 Title: {
                     exists: true, 
                     inputType: 'text',
+                    element: 'input',
                 },
                 Location: {
                     exists: true, 
-                    inputType: 'text'
+                    inputType: 'text',
+                    element: 'input',
                 },
                 Description: {
                     exists: true, 
-                    inputType: 'text'
+                    inputType: 'text',
+                    element: 'textarea',
                 },
                 StartDate: {
                     exists: true, 
-                    inputType: 'month'
+                    inputType: 'month',
+                    element: 'input',
                 },
                 EndDate: {
                     exists: true, 
-                    inputType: 'month'
+                    inputType: 'month',
+                    element: 'input',
                 },
             },
             uuid: uuid(),
@@ -171,6 +176,9 @@ function Categories({onDataChange}) {
                     {categoriesList.map((entry) => {
                         return (
                         <div className="loader-box"  key={entry.uuid}>
+                            <h2 className="loader-title">
+                                {entry.categoryTitle != "" ? entry.categoryTitle : "Unnamed Category"}
+                            </h2>
                             <NewCategory 
                                 entry={entry} 
                                 categoriesList={categoriesList} 
