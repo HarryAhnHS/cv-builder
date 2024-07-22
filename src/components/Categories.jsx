@@ -1,6 +1,8 @@
 import uuid from "react-uuid";
 import {useState} from "react";
 
+import NewCategory from './NewCategory';
+
 function Categories({onDataChange}) {
 
     const [editId, setEditId] = useState(null); // ID of the currently edited category
@@ -11,7 +13,7 @@ function Categories({onDataChange}) {
     // Categories 
 
     // Create new entry - append a default entry into list's state
-    function handleNewCategoryEntry() {
+    function handleNewCategory() {
         const defaultCategory = {
             categoryTitle: '',
             categoryItems: [],
@@ -36,18 +38,19 @@ function Categories({onDataChange}) {
         setFormData(defaultCategory);
     }
 
-    function deleteCategoryEntry(uuidToDelete) {
-        const updatedCategoriesList = [...categoriesList].filter((entry) => entry.uuid !== uuidToDelete);
-
-        setCategoriesList(updatedCategoriesList);
-        onDataChange("categories", updatedCategoriesList);
-    }
-
-    function handleEditCategoryEntry(uuidCategoryToEdit) {
+    function handleEditCategory(uuidCategoryToEdit) {
         const categoryToEdit = categoriesList.find((entry) => entry.uuid === uuidCategoryToEdit);
 
         setFormData(categoryToEdit);
         setEditId(uuidCategoryToEdit);
+    }
+
+
+    function handleDeleteCategory(uuidToDelete) {
+        const updatedCategoriesList = [...categoriesList].filter((entry) => entry.uuid !== uuidToDelete);
+
+        setCategoriesList(updatedCategoriesList);
+        onDataChange("categories", updatedCategoriesList);
     }
 
     // FORM STUFF
@@ -70,62 +73,6 @@ function Categories({onDataChange}) {
         })
     }
 
-    // Category Items
-
-    function addCategoryItem(e, uuidToAddTo) {
-        const selectedCategory = categoriesList.find((category) => category.uuid === uuidToAddTo);
-        
-        // Create default category item with attributes based on selected category's configuration 
-        let defaultCategoryItem = {
-            uuid: uuid(),
-        };
-        Object.keys(selectedCategory.categoryInputTypes).forEach((type) => {
-            if (selectedCategory.categoryInputTypes[type]) {
-                defaultCategoryItem[type] =  "";
-            }
-        })
-
-        // Update state
-        const updatedCategoriesList = [...categoriesList].map((category) => {
-            return category.uuid === uuidToAddTo 
-            ? {
-                ...category, 
-                categoryItems: [...category.categoryItems, defaultCategoryItem]
-            }
-            : category
-        })
-
-        setCategoriesList(updatedCategoriesList);
-        onDataChange("categories", updatedCategoriesList);
-    }
-
-    // function handleCategoryItemChange(e, uuidItemToChange) {
-    //     const {name, value} = e.target;
-    //     const updatedCategoryItems = [...formData.categoryItems].map((item) => {
-    //         if (item.uuid === uuidItemToChange) {
-    //             item = {
-    //                 ...item, 
-    //                 [name]: value
-    //             };
-    //         }
-    //         return item;
-    //     })
-
-    //     setFormData({
-    //         ...formData,
-    //         categoryItems: updatedCategoryItems,
-    //     }) 
-    // }
-
-    // function deleteCategoryItem(uuidItemToDelete) {
-    //     const updatedCategoryItems = [...formData.categoryItems].filter((item) => item.uuid !== uuidItemToDelete);
-
-    //     setFormData({
-    //         ...formData,
-    //         categoryItems: updatedCategoryItems,
-    //     }) 
-    // }
-
     function handleCancel() {
         setEditId(null);
         setFormData({});
@@ -142,8 +89,7 @@ function Categories({onDataChange}) {
         setEditId(null);
         setFormData({});
     }
-    // console.log("CategoriesList:")
-    // console.log(categoriesList);
+
     console.log("FormData:")
     console.log(formData);
 
@@ -190,37 +136,25 @@ function Categories({onDataChange}) {
                     {categoriesList.map((entry) => {
                         return (
                         <div className="loader-box"  key={entry.uuid}>
-                            <button id="edit-entry" onClick={() => handleEditCategoryEntry(entry.uuid)}>
+                            <NewCategory 
+                                entry={entry} 
+                                categoryList={categoriesList} 
+                                setCategoriesList={setCategoriesList} 
+                                onDataChange={onDataChange} 
+                            />
+                            <div className="category-entry-controls">
+                                <button id="edit-entry" onClick={() => handleEditCategory(entry.uuid)}>
                                 Edit Category
-                            </button>
-                            <button id="delete-entry" onClick={() => deleteCategoryEntry(entry.uuid)}>
+                                </button>
+                                <button id="delete-entry" onClick={() => handleDeleteCategory(entry.uuid)}>
                                 Delete category
-                            </button>
-                            <h2 className="loader-title">
-                                {entry.categoryTitle != "" ? entry.categoryTitle : "Unnamed Category"}
-                            </h2>
-
-                            {entry.categoryItems.map((item) => {
-                                return (
-                                <div className="entry categoryItem" key={item.uuid}>
-                                    <div className="entry-summary categoryItem">
-                                        {item.value}
-                                    </div>
-                                    <div className="entry-controls categoryItem">
-                                        {/* <button id="item-edit" onClick={(e) => handleEditCategoryItem(e, item.uuid)}>Edit</button>
-                                        <button id="item-delete" onClick={(e) => handleDeleteCategoryItem(e, item.uuid)}>Delete</button> */}
-                                    </div>
-                                </div>
-                                )
-                            })}
-                            <button id="add-category-item" onClick={(e) => addCategoryItem(e, entry.uuid)}>
-                                    Add Item
-                            </button>
+                                </button>
+                            </div>
                         </div>
                         )
                     })}
-                    <button id="new-entry" onClick={handleNewCategoryEntry}>
-                        Add Category +
+                    <button id="new-entry" onClick={handleNewCategory}>
+                        Add New Category +
                     </button>
                 </div>
             }
