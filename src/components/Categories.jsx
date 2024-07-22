@@ -18,7 +18,7 @@ function Categories({onDataChange}) {
             categoryTitle: '',
             categoryItems: [],
             categoryInputTypes: {
-                Name: {
+                Title: {
                     exists: true, 
                     inputType: 'text',
                 },

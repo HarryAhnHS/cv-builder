@@ -29,24 +29,6 @@ function Styles({setTheme}) {
     } 
     return (
         <div className="form styles">
-            <div className="layouts">
-                <div className="style-label layout">Choose your layout</div>
-                <div className='style-inputs layout'>
-                    <button 
-                        onClick={(e)=>handleStyleChange(e)} 
-                        id="layout-1" name="layout" 
-                        className={selectedTheme.layout == 1 ? 'active' : null}>1</button>
-                    <button 
-                        onClick={(e)=>handleStyleChange(e)} 
-                        id="layout-2" name="layout" 
-                        className={selectedTheme.layout == 2 ? 'active' : null}>2</button>
-                    <button 
-                        onClick={(e)=>handleStyleChange(e)} 
-                        id="layout-3" name="layout" 
-                        className={selectedTheme.layout == 3 ? 'active' : null}>3</button>
-                </div>
-   
-            </div>
             <div className="fonts">
                 <div className="style-label font">Choose your font</div>
                 <div className='style-inputs font'>

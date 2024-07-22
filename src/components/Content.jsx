@@ -17,7 +17,6 @@ function Content() {
 
     const [theme, setTheme] = useState({
         font: 1,
-        layout: 1,
         color: '#09A4FF',
     })
 

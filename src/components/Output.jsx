@@ -64,19 +64,20 @@ function Output({form, theme}) {
                             {form.educations.map((entry) => {
                                 return (
                                     <div className="output-entry education" key={entry.uuid}>
-                                        {entry.educationStartDate != "" || entry.educationEndDate != "" || entry.educationLocation != ""
+                                        {entry.educationStartDate != "" || entry.educationEndDate != ""
                                         ?
-                                            <div className="output-entry-meta education">
-                                                {entry.educationStartDate != "" || entry.educationEndDate != ""
-                                                ? <div className="output-entry-dates education">{entry.educationStartDate}&nbsp;-&nbsp;{entry.educationEndDate}</div>
-                                                : null}
-                                                <div className="output-entry-location education">{entry.educationLocation}</div>
+                                            <div className="output-entry-head education">
+                                                <div className="output-entry-dates start education">{entry.educationStartDate}</div>
+                                                <div className="output-entry-dates end education">-&nbsp;{entry.educationEndDate}</div>
                                             </div>
                                         :
                                             null
                                         }
-                                        <div className="output-entry-head education">
-                                            <h1>{entry.educationName}</h1>
+                                        <div className="output-entry-mid education">
+                                            <div className="output-entry-title">
+                                                <h1>{entry.educationName}</h1>
+                                                <p>{entry.educationLocation}</p>
+                                            </div>
                                             <h5>{entry.educationDegree}</h5>
                                             <p>{entry.educationDescription}</p>
                                         </div>
@@ -90,21 +91,20 @@ function Output({form, theme}) {
                             {form.experiences.map((entry) => {
                                 return (
                                     <div className="output-entry experience" key={entry.uuid}>
-                                        {entry.expStartDate != "" || entry.expEndDate != "" || entry.expLocation != ""
+                                        {entry.expStartDate != "" || entry.expEndDate != ""
                                         ?
-                                            <div className="output-entry-meta experience">
-                                                {entry.expStartDate != "" || entry.expEndDate != ""
-                                                ? <div className="output-entry-dates experience">{entry.expStartDate}&nbsp;-&nbsp;{entry.expEndDate}</div>
-                                                : null}
-                                                <div className="output-entry-location experience">{entry.expLocation}</div>
+                                            <div className="output-entry-head experience">
+                                                <div className="output-entry-dates start experience">{entry.expStartDate}</div>
+                                                <div className="output-entry-dates end experience">-&nbsp;{entry.expEndDate}</div>
                                             </div>
                                         :
                                             null
                                         }
-                                       
-                                        <div className="output-entry-head experience">
-                                            <h1>{entry.expCompanyName}</h1>
-                                            <p>{entry.expLocation}</p>
+                                        <div className="output-entry-mid experience">
+                                            <div className="output-entry-title">
+                                                <h1>{entry.expCompanyName}</h1>
+                                                <p>{entry.expLocation}</p>
+                                            </div>
                                             <h5>{entry.expPosition}</h5>
                                             <p>{entry.expDescription}</p>
                                         </div>
@@ -114,22 +114,34 @@ function Output({form, theme}) {
                         </div>
                     </div>
 
-                    <div className="output-body-section categories">
-                        {form.categories.length > 0 && form.categories.map((entry) => {
-                            return (
-                                <div className="categoryEntry" key={entry.uuid}>
-                                    Category Name: {entry.categoryTitle}
-                                    <ul>
-                                    {entry.categoryItems.map((item) => {
-                                        return (
-                                            <li key={item.uuid} className="categoryItem">{item.value}</li>
-                                        )
-                                    })}
-                                    </ul>
-                                </div>
-                            )
-                        })}
-                    </div>
+                    {form.categories.map((category) => {
+                        return (<div className="output-body-section category" key={category.uuid}>
+                            {category.categoryItems.length > 0 ? <h1 className="output-body-title">{category.categoryTitle}</h1> : null}
+                            {category.categoryItems.map((item) => {
+                                return (
+                                    <div className="output-entry category-item" key={item.uuid}>
+                                        {item.StartDate != "" || item.EndDate != ""
+                                        ?
+                                            <div className="output-entry-head category-item">
+                                                <div className="output-entry-dates start category-item">{item.StartDate}</div>
+                                                <div className="output-entry-dates end category-item">-&nbsp;{item.EndDate}</div>
+                                            </div>
+                                        :
+                                            null
+                                        }
+                                        <div className="output-entry-mid category-item">
+                                            <div className="output-entry-title">
+                                                <h1>{item.Title}</h1>
+                                                <p>{item.Location}</p>
+                                            </div>
+                                            <p>{item.Description}</p>
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </div>)
+                    })}
+                    
 
                 </div>
             </div>

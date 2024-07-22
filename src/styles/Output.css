@@ -102,6 +102,10 @@ h1,h2, h3, h4, h5, p {
     margin-bottom: 0.25em;
 }
 
+.output-body-section {
+    margin-bottom: 0.5em;
+}
+
 .output-bio {
     font-size: 0.8em;
 }
@@ -113,29 +117,46 @@ h1,h2, h3, h4, h5, p {
 }
 
 .output-entry-head {
+    width: 13%;
+    font-size: 0.8em;
+    margin-right: 0.5em;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.output-entry-dates.end {
+    margin-left: 0.5em;
+}
+
+.output-entry-mid {
     flex: 1;
 }
 
-.output-entry-head > h1 {
+.output-entry-mid > h1 {
     font-size: 1.2em;
 }
 
-.output-entry-head > h5 {
+.output-entry-mid > h5 {
     font-size: 0.8em;
 }
 
-.output-entry-head > p {
+.output-entry-mid > p {
     margin-top: 0.25em;
     font-size: 0.8em;
 }
 
-.output-entry-meta {
-    width: 25%;
-    font-size: 0.8em;
-
-    margin: auto 0;
+.output-entry-title {
+    display: flex;
 }
 
-.output-entry-dates {
-    margin-right: 1.5em;
+.output-entry-title > h1 {
+    flex: 1;
+    font-size: 1em;
+}
+
+.output-entry-title > p {
+    margin-top: 0.5em;
+    font-size: 0.8em;
 }
