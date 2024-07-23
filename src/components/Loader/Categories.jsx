@@ -175,12 +175,14 @@ function Categories({onDataChange}) {
             
             : 
                 // Display Mode -  display each new category as own loader-box
-                <div className="list categories">
+                <div className="">
                     {categoriesList.map((entry) => {
                         return (
                         <Accordion.Item eventKey={entry.uuid} key={entry.uuid}>
                             <Accordion.Header>
+                            <div className="fs-4 fw-light">
                                 {entry.categoryTitle != "" ? entry.categoryTitle : "Unnamed Category"}
+                            </div>
                             </Accordion.Header>
                             <Accordion.Body>
                                 <NewCategory 
@@ -201,8 +203,8 @@ function Categories({onDataChange}) {
                         </Accordion.Item>
                         )
                     })}
-                    <div className="d-grid">
-                        <Button variant="light" onClick={handleNewCategory}>
+                    <div className="d-flex my-4 rounded">
+                        <Button variant="primary" className="flex-fill" onClick={handleNewCategory}>
                             Add new category
                         </Button>
                     </div>

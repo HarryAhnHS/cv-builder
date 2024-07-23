@@ -13,7 +13,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import Modal from  'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-function Loader({setForm, setTheme}) {
+function Loader({setForm, theme, setTheme}) {
 
     const [showModal, setShowModal] = useState(false);
     const handleClose = () => setShowModal(false);
@@ -27,41 +27,38 @@ function Loader({setForm, setTheme}) {
         })
     };
 
-    return (
-        <>
-            
-            <div className="loader">
-                <h1>Add your information</h1>
-                <Button variant="primary" onClick={handleShow}>
-                    Customize styling
-                </Button>
+    return (            
+            <div className="loader col-sm-12 col-md-6" style={{backgroundColor: '#FFFFFF'}}>
+                    <div className='d-flex mb-2'>
+                        <div className="fs-3 fw-normal p-2 flex-grow-1">Fill content</div>
+                        <div className="d-flex align-items-center justify-content-center">
+                            <Button variant="primary" size="sm" className='align-middle' onClick={handleShow}>
+                                Customize
+                            </Button>
+                        </div>
+                        
+                    </div>
 
                 <Modal show={showModal} onHide={handleClose}>
                     <Modal.Header closeButton>
                     <Modal.Title>Customize your resume</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body><Styles setTheme={setTheme}/></Modal.Body>
-                    <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
-                    </Button>
-                    </Modal.Footer>
+                    <Modal.Body><Styles theme={theme} setTheme={setTheme}/></Modal.Body>
                 </Modal>
 
 
                 <Accordion defaultActiveKey="0">
-                    <Accordion.Item eventKey="0">
-                            <Accordion.Header>Personal Information
+                    <Accordion.Item style={{borderRadius: 0}} eventKey="0">
+                            <Accordion.Header>
+                                <div className="fs-4 fw-light">Personal Information</div>
                             </Accordion.Header>
                             <Accordion.Body>
                                 <Personal onDataChange = {handleFormField(setForm)}/>
                             </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey="1">
-                        <Accordion.Header>Personal Bio
+                        <Accordion.Header>
+                            <div className="fs-4 fw-light">Biography</div>
                         </Accordion.Header>
                         <Accordion.Body>
                             <Bio onDataChange = {handleFormField(setForm)}/>
@@ -69,7 +66,8 @@ function Loader({setForm, setTheme}) {
                     </Accordion.Item>
 
                     <Accordion.Item eventKey="2">
-                        <Accordion.Header>Education
+                        <Accordion.Header>
+                            <div className="fs-4 fw-light">Education</div>
                         </Accordion.Header>
                         <Accordion.Body>
                             <Education onDataChange = {handleFormField(setForm)}/> 
@@ -77,7 +75,8 @@ function Loader({setForm, setTheme}) {
                     </Accordion.Item>
 
                     <Accordion.Item eventKey="3"> 
-                        <Accordion.Header>Experience
+                        <Accordion.Header>
+                            <div className="fs-4 fw-light">Experience</div>
                         </Accordion.Header>
                         <Accordion.Body>
                             <Experience onDataChange = {handleFormField(setForm)}/>
@@ -87,7 +86,6 @@ function Loader({setForm, setTheme}) {
                     <Categories onDataChange = {handleFormField(setForm)}/>
                 </Accordion>
             </div>
-        </>
     )
 }
 

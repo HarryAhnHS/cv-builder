@@ -152,10 +152,10 @@ function Education({onDataChange}) {
                                     {entry.educationName}
                                 </div>
                                 <div className="entry-controls education">
-                                    <button id="edit-entry" onClick={() => editEducationEntry(entry.uuid)}>
+                                    <button className="btn sm btn-danger" id="edit-entry" onClick={() => editEducationEntry(entry.uuid)}>
                                         Edit
                                     </button>
-                                    <button id="delete-entry" onClick={() => deleteEducationEntry(entry.uuid)}>
+                                    <button className="btn sm btn-danger" id="delete-entry" onClick={() => deleteEducationEntry(entry.uuid)}>
                                         Delete
                                     </button>
                                 </div>

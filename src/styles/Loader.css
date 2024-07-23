@@ -1,10 +1,23 @@
 
+/* Customize Bootstrap Accordion Component */
+.accordion-item, .accordion-button {
+    border-radius: 0 !important;
+}
+
+.accordion-item {
+    margin-bottom: 0.5rem;
+    border-top: var(--bs-accordion-border-width) solid var(--bs-accordion-border-color) !important;
+}
 
 input, button {
     font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
-.loader {
+.form-label {
+    margin-bottom: 0;
+}
+
+/* .loader {
     width: 50%;
 
     background-color: #bbb9b9;
@@ -27,7 +40,7 @@ input, button {
 
 /* Form */
 
-label {
+/* label {
     display: flex;
     flex-direction: column;
 
@@ -102,7 +115,7 @@ input, textarea {
 }
 
 /* List Display */
-.list {
+/* .list {
     display: flex;
     flex-direction: column;
 }
@@ -137,7 +150,7 @@ input, textarea {
 }
 
 /* Personal avatar form input */
-.form-inputs-avatar {
+/* .form-inputs-avatar {
     display: flex;
 }
 
@@ -147,7 +160,7 @@ input#avatar {
 
 
 /* Styles */
-.form.styles {
+/* .form.styles {
     display: flex;
     flex-direction: column;
 
@@ -177,4 +190,4 @@ input#avatar {
 
 .style-label {
     margin-bottom: 5px;
-}
+} */

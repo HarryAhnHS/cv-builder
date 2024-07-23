@@ -1,64 +1,94 @@
 import {useState} from 'react';
 
-function Styles({setTheme}) {
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+
+function Styles({theme, setTheme}) {
     const [selectedTheme, setSelectedTheme] = useState({
-        font: 1,
-        color: '#C5D6D8',
+        ...theme
     })
+    let fontNames = ['Raleway', 'Lora', 'Quicksand']
 
     function handleStyleChange(e) {
-        const {name, id, value} = e.target;
+        const {name, value} = e.target;
         let updatedTheme;
 
         if (name === "color") {
             updatedTheme = {
                 ...selectedTheme,
-                [name]: value,
+                'color': value,
             }
         }
         else {
             updatedTheme = {
             ...selectedTheme,
-            [name]: id.slice(-1),
+            'font': parseInt(value),
             }
         }
 
         setSelectedTheme(updatedTheme);
         setTheme(updatedTheme);
     } 
+    console.log(selectedTheme);
     return (
-        <div className="form styles">
-            <div className="fonts">
-                <div className="style-label font">Choose your font</div>
-                <div className='style-inputs font'>
-                    <button 
-                        onClick={(e)=>handleStyleChange(e)} 
-                        id="font-1" name="font" 
-                        className={selectedTheme.font == 1 ? 'active' : null}>A</button>
-                    <button 
-                        onClick={(e)=>handleStyleChange(e)} 
-                        id="font-2" name="font" 
-                        className={selectedTheme.font == 2 ? 'active' : null}>B</button>
-                    <button 
-                        onClick={(e)=>handleStyleChange(e)} 
-                        id="font-3" name="font" 
-                        className={selectedTheme.font == 3 ? 'active' : null}>C</button>
-                </div>
-                
-            </div>
+        <>
+            <div className="style-label font">Choose your font</div>
+            <ButtonGroup>
+                <ToggleButton
+                    id='font-1'
+                    type="radio"
+                    variant='outline-primary'
+                    name="font"
+                    value={1}
+                    checked={selectedTheme.font === 1}
+                    onChange={(e) => handleStyleChange(e)}
+                    style={{
+                            fontFamily: `${fontNames[0]}, serif`
+                        }}>
+                        Abc
+                </ToggleButton>
+                <ToggleButton
+                    id='font-2'
+                    type="radio"
+                    variant='outline-primary'
+                    name="font"
+                    value={2}
+                    checked={selectedTheme.font === 2}
+                    onChange={(e) => handleStyleChange(e)}
+                    style={{
+                        fontFamily: `${fontNames[1]}, serif`
+                    }}>
+                        Abc
+                </ToggleButton>
+                <ToggleButton
+                    id='font-3'
+                    type="radio"
+                    variant='outline-primary'
+                    name="font"
+                    value={3}
+                    checked={selectedTheme.font === 3}
+                    onChange={(e) => handleStyleChange(e)}
+                    style={{
+                        fontFamily: `${fontNames[2]}, serif`
+                    }}>
+                        Abc
+                </ToggleButton>
+            </ButtonGroup>
 
             <div className="accent-color">
-                <div className="style-label color">Choose your accent color</div>
-                <div className='style-inputs color'>
+                <label htmlFor='color-input' className='form-label'>Pick your accent color</label>
                     <input 
+                        id="color-input"
                         type="color"
                         name="color"
                         value={selectedTheme.color}
                         onChange={(e)=>handleStyleChange(e)} 
+
+                        className="form-control form-control-color"
+                        title="Choose your color"
                     />
-                </div>
             </div>
-        </div>
+        </>
     )
 }
 

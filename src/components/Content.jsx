@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import '../styles/Content.css';
+// import '../styles/Content.css';
 
 import Loader from './Loader';
 import Output from './Output';
@@ -24,9 +24,11 @@ function Content() {
 
     return (
         <>
-            <section className="content">
-                <Loader setForm = {setForm} setTheme = {setTheme}/>
-                <Output form = {form} theme = {theme}/>
+            <section className="container-fluid">
+                <div className='row'>
+                    <Loader setForm = {setForm} theme = {theme} setTheme = {setTheme}/>
+                    <Output form = {form} theme = {theme}/>
+                </div>
             </section> 
         </>
     )

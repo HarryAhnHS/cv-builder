@@ -27,8 +27,7 @@ function Output({form, theme}) {
 
 
     return (
-        <>
-            <div className="output">
+            <div className="output col-sm-12 col-md-6">
                 <button id="download">Download</button>
                 <div 
                     className='deliverable-output' 
@@ -194,7 +193,6 @@ function Output({form, theme}) {
                     </div>
                 </div>
             </div>
-        </>
     )
 }
 
