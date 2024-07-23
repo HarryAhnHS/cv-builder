@@ -162,7 +162,7 @@ function Experience({onDataChange}) {
                             </div>
                             )
                     })}
-                    <div className="d-grid gap-2">
+                    <div className="d-grid">
                         <Button variant="outline-primary" onClick={handleNewExperienceEntry}>
                             Add new experience
                         </Button>

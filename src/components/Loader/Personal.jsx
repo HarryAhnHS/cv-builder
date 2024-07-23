@@ -105,18 +105,10 @@ function Personal({onDataChange}) {
                     name="avatar" 
                     accept="image/png, image/jpeg"
                 />
-                <Button as="input" size="sm" type="reset" value="Reset" onClick= {resetProfilePhoto}/>
+                <Button as="input" size="sm" variant="outline-secondary" type="reset" value="Reset Photo" onClick= {resetProfilePhoto}/>
             </Form.Group> 
 
-        </Form>     
-{/*         
-                <div className="form-inputs-avatar">
-                    <label htmlFor="avatar">Upload a profile picture:
-                        <input ref={fileRef} onChange={(e) => handleProfilePhoto(e)} type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
-                    </label>
-                    <button id="remove-avatar" onClick= {resetProfilePhoto}>Reset Avatar</button>
-                </div>
-            </div> */}
+        </Form>            
         </>
     )
 }

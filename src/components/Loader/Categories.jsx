@@ -4,6 +4,8 @@ import {useState} from "react";
 import NewCategory from './NewCategory';
 
 import Accordion from 'react-bootstrap/Accordion';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 function Categories({onDataChange}) {
 
@@ -133,39 +135,43 @@ function Categories({onDataChange}) {
         <>
             {editId ? 
                 // Edit Mode
-                <div className="form categories">
-                    <div className="form-inputs categories">
-                        <label htmlFor="categoryTitle">Name your category
-                            <input
-                                name = "categoryTitle"
-                                type = "text"
-                                value = {formData.categoryTitle}
-                                onChange = {(e) => handleCategoryTitleChange(e)}
-                            />
-                        </label>
-
-                        <fieldset>
-                            <legend>Choose your category features:</legend>
-                            <p>Careful as this will reset entries</p>
-                            {Object.keys(formData.categoryInputTypes).map((data, index) => {
+                <Form className="bg-light mt-3 p-3">
+                    <Form.Group className="mb-3" controlId="categoryTitle">
+                        <Form.Label>Name your category</Form.Label>
+                        <Form.Control type="text" placeholder="Skills" 
+                            name="categoryTitle"
+                            value = {formData.categoryTitle}
+                            onChange = {(e) => handleCategoryTitleChange(e)}
+                        />
+                    </Form.Group>
+        
+                    <Form.Group className="mb-3" controlId="categoryInputTypes">
+                        <Form.Label>Choose your category features:</Form.Label>
+                        {Object.keys(formData.categoryInputTypes).map((data, index) => {
                                 return (
-                                    <div key={index}>
-                                        <input type="checkbox" name={data} 
+                                    <>
+                                        <Form.Check 
+                                            key={index} // prettier-ignore
+                                            type="switch"
+                                            id="custom-switch"
+                                            label={data}
                                             checked={formData.categoryInputTypes[data].exists}
                                             onChange={(e) => handleCategoryInputTypesChange(e)}
+                                            name={data} 
                                         />
-                                        <label htmlFor="type">{data}</label>
-                                    </div>
+                                    </>
                                 )
                             })}
-                        </fieldset>
-                    </div>  
-
-                    <div className="form-controls categories">
-                        <button id="cancel" onClick={handleCancel}>Cancel</button>
-                        <button id="save" onClick={handleSave}>Save</button>
+                    </Form.Group>
+                    <div className="form-controls category">
+                        <Button variant="primary" onClick={handleSave} active>
+                            Save
+                        </Button>{' '}
+                        <Button variant="secondary" onClick={handleCancel} active>
+                            Cancel
+                        </Button>
                     </div>
-                </div>
+                </Form>
             
             : 
                 // Display Mode -  display each new category as own loader-box
@@ -195,9 +201,11 @@ function Categories({onDataChange}) {
                         </Accordion.Item>
                         )
                     })}
-                    <button id="new-entry" onClick={handleNewCategory}>
-                        Add New Category +
-                    </button>
+                    <div className="d-grid">
+                        <Button variant="light" onClick={handleNewCategory}>
+                            Add new category
+                        </Button>
+                    </div>
                 </div>
             }
         </>

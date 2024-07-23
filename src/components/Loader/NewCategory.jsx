@@ -1,6 +1,9 @@
 import uuid from "react-uuid";
 import {useState} from "react";
 
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+
 function NewCategory({entry, categoriesList, setCategoriesList, onDataChange}) {
 
     const [editId, setEditId] = useState(null);
@@ -106,44 +109,43 @@ function NewCategory({entry, categoriesList, setCategoriesList, onDataChange}) {
                 {editId 
                 ?
                     // Edit Mode
-                    <div className="form new-category">
-                        <div className="form-inputs new-category">
-                            {Object.keys(entry.categoryInputTypes).map((key, index) => {
-                                return entry.categoryInputTypes[key].exists 
+                    <Form>
+                        {Object.keys(entry.categoryInputTypes).map((key) => {
+                            return entry.categoryInputTypes[key].exists 
+                            ?
+                                (entry.categoryInputTypes[key].element == 'textarea')
                                 ?
-                                    <label 
-                                        key={index} htmlFor={key} 
-                                        className={"form-input-" + entry.categoryInputTypes[key].element}
-                                    >
-                                        {key}
-                                        {entry.categoryInputTypes[key].element == 'textarea' 
-                                        ? 
-                                            <textarea
+                                    <Form.Group className="mb-3" controlId="categoryItemDescription">
+                                        <Form.Label>Add a description</Form.Label>
+                                        <Form.Control as="textarea" rows={3} 
+                                            type="textarea" 
                                             name={key}
-                                            type={entry.categoryInputTypes[key].inputType}
                                             value={formData[key]}
                                             onChange = {(e) => handleCategoryItemChange(e)}
-                                            />
-                                        :
-                                            <input
-                                                name={key}
-                                                type={entry.categoryInputTypes[key].inputType}
-                                                value={formData[key]}
-                                                onChange = {(e) => handleCategoryItemChange(e)}
-                                            />
-                                        }
-                                    </label>
+                                        />
+                                    </Form.Group>
                                 :
-                                    null
-                                })
-                            }
+                                    <Form.Group className="mb-3" controlId={key}>
+                                        <Form.Label>{key == 'StartDate' ? 'Start Date': (key == 'EndDate' ? 'End Date' : key)}</Form.Label>
+                                        <Form.Control 
+                                            type= {entry.categoryInputTypes[key].inputType}
+                                            name={key}
+                                            value={formData[key]}
+                                            onChange = {(e) => handleCategoryItemChange(e)}
+                                        />
+                                    </Form.Group>
+                            :
+                                null
+                        })}
+                        <div className="form-controls category-item">
+                            <Button variant="primary" onClick={handleSave} active>
+                                Save
+                            </Button>{' '}
+                            <Button variant="secondary" onClick={handleCancel} active>
+                                Cancel
+                            </Button>
                         </div>
-
-                        <div className="form-controls new-category">
-                            <button id="cancel" onClick={handleCancel}>Cancel</button>
-                            <button id="save" onClick={handleSave}>Save</button>
-                        </div>
-                    </div>
+                    </Form>
                 :
                     // Display Mode
                     <div className="list new-category">
@@ -160,9 +162,11 @@ function NewCategory({entry, categoriesList, setCategoriesList, onDataChange}) {
                                 </div>
                         )
                         })}
-                        <button id="add-category-item" onClick={addCategoryItem}>
-                            Add Item
-                        </button>
+                        <div className="d-grid">
+                            <Button variant="outline-primary" onClick={addCategoryItem}>
+                                Add item to {entry.categoryTitle}
+                            </Button>
+                        </div>
                     </div>
                 }
             </>

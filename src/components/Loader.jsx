@@ -1,5 +1,7 @@
 import '../styles/Loader.css'
 
+import {useState} from 'react';
+
 import Bio from './Loader/Bio';
 import Personal from './Loader/Personal';
 import Education from './Loader/Education';
@@ -8,9 +10,14 @@ import Categories from './Loader/Categories';
 import Styles from './Loader/Styles';
 
 import Accordion from 'react-bootstrap/Accordion';
-
+import Modal from  'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 function Loader({setForm, setTheme}) {
+
+    const [showModal, setShowModal] = useState(false);
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
 
     const handleFormField = (setForm) => (section, data) => {
         setForm((prev) => {
@@ -25,6 +32,26 @@ function Loader({setForm, setTheme}) {
             
             <div className="loader">
                 <h1>Add your information</h1>
+                <Button variant="primary" onClick={handleShow}>
+                    Customize styling
+                </Button>
+
+                <Modal show={showModal} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                    <Modal.Title>Customize your resume</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body><Styles setTheme={setTheme}/></Modal.Body>
+                    <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleClose}>
+                        Save Changes
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
+
+
                 <Accordion defaultActiveKey="0">
                     <Accordion.Item eventKey="0">
                             <Accordion.Header>Personal Information
@@ -58,13 +85,7 @@ function Loader({setForm, setTheme}) {
                     </Accordion.Item>
 
                     <Categories onDataChange = {handleFormField(setForm)}/>
-
                 </Accordion>
-                    
-                <div className="loader-box">
-                    <h2 className="loader-title">Customize</h2>
-                    <Styles setTheme={setTheme}/>
-                </div>
             </div>
         </>
     )
