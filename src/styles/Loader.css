@@ -14,7 +14,7 @@ input, button {
 }
 
 .form-label {
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
 }
 
 /* .loader {

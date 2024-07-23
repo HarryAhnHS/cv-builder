@@ -98,22 +98,24 @@ function Experience({onDataChange}) {
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="expStartDate">
-                    <Form.Label>Start Date</Form.Label>
-                    <Form.Control type="month" placeholder="" 
-                        name="expStartDate"
-                        value = {formData.expStartDate}
-                        onChange = {(e) => handleInputChange(e)}
-                    />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="expEndDate">
-                    <Form.Label>End Date</Form.Label>
-                    <Form.Control type="month" placeholder="" 
-                        name="expEndDate"
-                        value = {formData.expEndDate}
-                        onChange = {(e) => handleInputChange(e)}
-                    />
-                </Form.Group>
+                <div className="row">
+                    <Form.Group className="mb-3 col-md-6" controlId="expStartDate">
+                        <Form.Label>Start Date</Form.Label>
+                        <Form.Control type="month" placeholder="" 
+                            name="expStartDate"
+                            value = {formData.expStartDate}
+                            onChange = {(e) => handleInputChange(e)}
+                        />
+                    </Form.Group>
+                    <Form.Group className="mb-3 col-md-6" controlId="expEndDate">
+                        <Form.Label>End Date</Form.Label>
+                        <Form.Control type="month" placeholder="" 
+                            name="expEndDate"
+                            value = {formData.expEndDate}
+                            onChange = {(e) => handleInputChange(e)}
+                        />
+                    </Form.Group>
+                </div>
 
                 <Form.Group className="mb-3" controlId="expLocation">
                     <Form.Label>Location</Form.Label>
@@ -145,24 +147,24 @@ function Experience({onDataChange}) {
             : 
                 // Display Mode
                 <div className="list experience">
+                    <div className="rounded border px-2" style={{borderColor: 'lightgray'}}>
                     {experienceList.map((entry) => {
                             return (
-                            <div className="entry experience" key={entry.uuid}>
-                                <div className="entry-summary experience">
-                                    - {entry.expCompanyName}
+                                <div className="d-flex py-2 px-1" key={entry.uuid}>
+                                <div className="flex-fill d-flex align-items-center">
+                                    {entry.expCompanyName}
                                 </div>
-                                <div className="entry-controls experience">
-                                    <button id="edit-entry" onClick={() => editExperienceEntry(entry.uuid)}>
-                                        Edit entry
-                                    </button>
-                                    <button id="delete-entry" onClick={() => deleteExperienceEntry(entry.uuid)}>
-                                        Delete entry
-                                    </button>
-                                </div>
+                                <button className="btn btn-sm btn-outline-danger fs-6 m-1" id="edit-entry" onClick={() => editExperienceEntry(entry.uuid)}>
+                                    Edit
+                                </button>
+                                <button className="btn btn-sm btn-outline-danger fs-6 m-1" id="delete-entry" onClick={() => deleteExperienceEntry(entry.uuid)}>
+                                    Delete
+                                </button>
                             </div>
                             )
                     })}
-                    <div className="d-grid">
+                    </div>
+                    <div className="d-grid mt-3">
                         <Button variant="outline-primary" onClick={handleNewExperienceEntry}>
                             Add new experience
                         </Button>

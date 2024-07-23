@@ -99,13 +99,17 @@ function Personal({onDataChange}) {
 
             <Form.Group controlId="avatar" className="mb-3">
                 <Form.Label>Upload a profile photo</Form.Label>
-                <Form.Control type="file" 
-                    ref={fileRef} 
-                    onChange={(e) => handleProfilePhoto(e)} 
-                    name="avatar" 
-                    accept="image/png, image/jpeg"
-                />
-                <Button as="input" size="sm" variant="outline-secondary" type="reset" value="Reset Photo" onClick= {resetProfilePhoto}/>
+                <div className="d-flex justify-content-center">
+                    <Form.Control type="file" 
+                        ref={fileRef} 
+                        onChange={(e) => handleProfilePhoto(e)} 
+                        name="avatar" 
+                        accept="image/png, image/jpeg"
+                        className="flex-fill"
+                    />
+                    <Button as="input" size="sm" variant="outline-secondary" type="reset" value="Reset Photo" onClick= {resetProfilePhoto}/>
+                </div>
+                
             </Form.Group> 
 
         </Form>            

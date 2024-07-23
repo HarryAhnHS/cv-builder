@@ -98,22 +98,26 @@ function Education({onDataChange}) {
                         />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="educationStartDate">
-                        <Form.Label>Start Date</Form.Label>
-                        <Form.Control type="month" placeholder="" 
-                            name="educationStartDate"
-                            value = {formData.educationStartDate}
-                            onChange = {(e) => handleInputChange(e)}
-                        />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="educationEndDate">
-                        <Form.Label>End Date</Form.Label>
-                        <Form.Control type="month" placeholder="" 
-                            name="educationEndDate"
-                            value = {formData.educationEndDate}
-                            onChange = {(e) => handleInputChange(e)}
-                        />
-                    </Form.Group>
+                    <div className="row">
+                        <Form.Group className="mb-3 col-md-6" controlId="educationStartDate">
+                            <Form.Label>Start Date</Form.Label>
+                            <Form.Control type="month" placeholder="" 
+                                name="educationStartDate"
+                                value = {formData.educationStartDate}
+                                onChange = {(e) => handleInputChange(e)}
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3 col-md-6" controlId="educationEndDate">
+                            <Form.Label>End Date</Form.Label>
+                            <Form.Control type="month" placeholder="" 
+                                name="educationEndDate"
+                                value = {formData.educationEndDate}
+                                onChange = {(e) => handleInputChange(e)}
+                            />
+                        </Form.Group>
+                    </div>
+                    
 
                     <Form.Group className="mb-3" controlId="educationLocation">
                         <Form.Label>Location</Form.Label>
@@ -145,24 +149,24 @@ function Education({onDataChange}) {
             : 
                 // Display Mode
                 <div className="list educations">
-                    {educationList.map((entry) => {
-                            return (
-                            <div className="entry education" key={entry.uuid}>
-                                <div className="entry-summary education">
-                                    {entry.educationName}
-                                </div>
-                                <div className="entry-controls education">
-                                    <button className="btn sm btn-danger" id="edit-entry" onClick={() => editEducationEntry(entry.uuid)}>
+                    <div className="rounded border px-2" style={{borderColor: 'lightgray'}}>
+                        {educationList.map((entry) => {
+                                return (
+                                <div className="d-flex py-2 px-1" key={entry.uuid}>
+                                    <div className="flex-fill d-flex align-items-center">
+                                        {entry.educationName}
+                                    </div>
+                                    <button className="btn btn-sm btn-outline-danger fs-6 m-1" id="edit-entry" onClick={() => editEducationEntry(entry.uuid)}>
                                         Edit
                                     </button>
-                                    <button className="btn sm btn-danger" id="delete-entry" onClick={() => deleteEducationEntry(entry.uuid)}>
+                                    <button className="btn btn-sm btn-outline-danger fs-6 m-1" id="delete-entry" onClick={() => deleteEducationEntry(entry.uuid)}>
                                         Delete
                                     </button>
                                 </div>
-                            </div>
-                            )
-                    })}
-                    <div className="d-grid">
+                                )
+                        })}
+                    </div>
+                    <div className="d-grid mt-3">
                         <Button variant="outline-primary" onClick={handleNewEducationEntry}>
                             Add new education
                         </Button>
