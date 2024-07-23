@@ -24,28 +24,23 @@ function Categories({onDataChange}) {
             categoryInputTypes: {
                 Title: {
                     exists: true, 
-                    inputType: 'text',
-                    element: 'input',
+                    inputType: 'text'
                 },
                 Location: {
                     exists: true, 
-                    inputType: 'text',
-                    element: 'input',
+                    inputType: 'text'
                 },
                 Description: {
                     exists: true, 
-                    inputType: 'text',
-                    element: 'textarea',
+                    inputType: 'text'
                 },
                 StartDate: {
                     exists: true, 
-                    inputType: 'month',
-                    element: 'input',
+                    inputType: 'month'
                 },
                 EndDate: {
                     exists: true, 
-                    inputType: 'month',
-                    element: 'input',
+                    inputType: 'month'
                 },
             },
             uuid: uuid(),
@@ -107,7 +102,6 @@ function Categories({onDataChange}) {
     }
 
     function handleSave() {
-        
         const updatedCategoriesList = [...categoriesList].map((cat) => {
                 console.log(editId)
                 console.log(cat)
@@ -137,11 +131,12 @@ function Categories({onDataChange}) {
                 // Edit Mode
                 <Form className="bg-light mt-3 p-3">
                     <Form.Group className="mb-3" controlId="categoryTitle">
-                        <Form.Label>Name your category</Form.Label>
+                        <Form.Label>Name your new category</Form.Label>
                         <Form.Control type="text" placeholder="Skills" 
                             name="categoryTitle"
                             value = {formData.categoryTitle}
                             onChange = {(e) => handleCategoryTitleChange(e)}
+                            required
                         />
                     </Form.Group>
         
@@ -181,7 +176,7 @@ function Categories({onDataChange}) {
                         <Accordion.Item eventKey={entry.uuid} key={entry.uuid}>
                             <Accordion.Header>
                             <div className="fs-4 fw-light">
-                                {entry.categoryTitle != "" ? entry.categoryTitle : "Unnamed Category"}
+                                {entry.categoryTitle}
                             </div>
                             </Accordion.Header>
                             <Accordion.Body>
@@ -190,15 +185,9 @@ function Categories({onDataChange}) {
                                     categoriesList={categoriesList} 
                                     setCategoriesList={setCategoriesList} 
                                     onDataChange={onDataChange} 
+                                    handleEditCategory = {handleEditCategory}
+                                    handleDeleteCategory = {handleDeleteCategory}
                                 />
-                                <div className="category-entry-controls">
-                                    <button id="edit-entry" onClick={() => handleEditCategory(entry.uuid)}>
-                                    Edit Category
-                                    </button>
-                                    <button id="delete-entry" onClick={() => handleDeleteCategory(entry.uuid)}>
-                                    Delete category
-                                    </button>
-                                </div>
                             </Accordion.Body>
                         </Accordion.Item>
                         )

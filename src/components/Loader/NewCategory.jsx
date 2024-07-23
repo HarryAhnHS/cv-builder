@@ -4,7 +4,7 @@ import {useState} from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-function NewCategory({entry, categoriesList, setCategoriesList, onDataChange}) {
+function NewCategory({entry, categoriesList, setCategoriesList, onDataChange, handleEditCategory, handleDeleteCategory}) {
 
     const [editId, setEditId] = useState(null);
     const [formData, setFormData] = useState({});
@@ -113,7 +113,7 @@ function NewCategory({entry, categoriesList, setCategoriesList, onDataChange}) {
                         {Object.keys(entry.categoryInputTypes).map((key) => {
                             return entry.categoryInputTypes[key].exists 
                             ?
-                                (entry.categoryInputTypes[key].element == 'textarea')
+                                (entry.categoryInputTypes[key] == 'Description')
                                 ?
                                     <Form.Group className="mb-3" controlId="categoryItemDescription">
                                         <Form.Label>Add a description</Form.Label>
@@ -125,11 +125,11 @@ function NewCategory({entry, categoriesList, setCategoriesList, onDataChange}) {
                                         />
                                     </Form.Group>
                                 :
-                                    <Form.Group className="mb-3" controlId={key}>
+                                    <Form.Group className='mb-3' controlId={key}>
                                         <Form.Label>{key == 'StartDate' ? 'Start Date': (key == 'EndDate' ? 'End Date' : key)}</Form.Label>
                                         <Form.Control 
                                             type= {entry.categoryInputTypes[key].inputType}
-                                            name={key}
+                                            name=   {key}
                                             value={formData[key]}
                                             onChange = {(e) => handleCategoryItemChange(e)}
                                         />
@@ -149,22 +149,35 @@ function NewCategory({entry, categoriesList, setCategoriesList, onDataChange}) {
                 :
                     // Display Mode
                     <div className="list new-category">
+                        <div className="d-flex justify-content-end mb-3">
+                            <button className="btn btn-sm btn-primary fs-6 mx-1" onClick={() => handleEditCategory(entry.uuid)}>
+                                Edit category
+                            </button>
+                            <button className="btn btn-sm btn-danger fs-6 mx-1" onClick={() => handleDeleteCategory(entry.uuid)}>
+                                Delete category
+                            </button>
+                        </div>
+
+                        <div className="rounded border px-2" style={{borderColor: 'lightgray'}}>
                         {entry.categoryItems.map((item) => {
                         return (
-                                <div className="entry category-item" key={item.uuid}>
-                                    <div className="entry-summary category-item">
+                                <div className="d-flex py-2 px-1" key={item.uuid}>
+                                    <div className="flex-fill d-flex align-items-center">
                                         {item.Title}
                                     </div>
-                                    <div className="entry-controls category-item">
-                                        <button id="item-edit" onClick={(e) => handleEditCategoryItem(e, item.uuid)}>Edit</button>
-                                        <button id="item-delete" onClick={(e) => handleDeleteCategoryItem(e, item.uuid)}>Delete</button>
-                                    </div>
+                                    <button className="btn btn-sm btn-outline-danger fs-6 m-1" id="edit-entry" onClick={(e) => handleEditCategoryItem(e, item.uuid)}>
+                                        Edit
+                                    </button>
+                                    <button className="btn btn-sm btn-outline-danger fs-6 m-1" id="delete-entry" onClick={(e) => handleDeleteCategoryItem(e, item.uuid)}>
+                                        Delete
+                                    </button>
                                 </div>
                         )
                         })}
-                        <div className="d-grid">
+                        </div>
+                        <div className="d-grid mt-3">
                             <Button variant="outline-primary" onClick={addCategoryItem}>
-                                Add item to {entry.categoryTitle}
+                                Add new item to {entry.categoryTitle}
                             </Button>
                         </div>
                     </div>

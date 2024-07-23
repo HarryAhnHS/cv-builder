@@ -151,16 +151,16 @@ function Experience({onDataChange}) {
                     {experienceList.map((entry) => {
                             return (
                                 <div className="d-flex py-2 px-1" key={entry.uuid}>
-                                <div className="flex-fill d-flex align-items-center">
-                                    {entry.expCompanyName}
+                                    <div className="flex-fill d-flex align-items-center">
+                                        {entry.expCompanyName}
+                                    </div>
+                                    <button className="btn btn-sm btn-outline-danger fs-6 m-1" id="edit-entry" onClick={() => editExperienceEntry(entry.uuid)}>
+                                        Edit
+                                    </button>
+                                    <button className="btn btn-sm btn-outline-danger fs-6 m-1" id="delete-entry" onClick={() => deleteExperienceEntry(entry.uuid)}>
+                                        Delete
+                                    </button>
                                 </div>
-                                <button className="btn btn-sm btn-outline-danger fs-6 m-1" id="edit-entry" onClick={() => editExperienceEntry(entry.uuid)}>
-                                    Edit
-                                </button>
-                                <button className="btn btn-sm btn-outline-danger fs-6 m-1" id="delete-entry" onClick={() => deleteExperienceEntry(entry.uuid)}>
-                                    Delete
-                                </button>
-                            </div>
                             )
                     })}
                     </div>
