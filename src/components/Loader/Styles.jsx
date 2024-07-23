@@ -2,9 +2,8 @@ import {useState} from 'react';
 
 function Styles({setTheme}) {
     const [selectedTheme, setSelectedTheme] = useState({
-        layout: 1,
         font: 1,
-        color: '#09A4FF',
+        color: '#C5D6D8',
     })
 
     function handleStyleChange(e) {

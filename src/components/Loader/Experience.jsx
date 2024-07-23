@@ -1,6 +1,9 @@
 import uuid from "react-uuid";
 import {useState} from "react";
 
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+
 function Experience({onDataChange}) {
 
     const [editId, setEditId] = useState(null);
@@ -76,63 +79,69 @@ function Experience({onDataChange}) {
         <>
             {editId 
             ? 
-            <div className="form experience">
-                <div className="form-inputs experience">
-                    <label htmlFor="expCompanyName">Company Name:
-                        <input
-                            name="expCompanyName"
-                            type="text"
-                            value={formData.expCompanyName}
-                            onChange = {(e) => handleInputChange(e)}
-                        />
-                    </label>
-                    <label htmlFor="expPosition">Position:
-                        <input
-                            name="expPosition"
-                            type="text"
-                            value={formData.expPosition}
-                            onChange = {(e) => handleInputChange(e)}
-                        />
-                    </label>
-                    <label htmlFor="expStartDate" className="form-input-date">Start Date:
-                        <input
-                            name="expStartDate"
-                            type="month"
-                            value={formData.expStartDate}
-                            onChange = {(e) => handleInputChange(e)}
-                        />
-                    </label>
-                    <label htmlFor="expEndDate" className="form-input-date">End Date:
-                        <input
-                            name="expEndDate"
-                            type="month"
-                            value={formData.expEndDate}
-                            onChange = {(e) => handleInputChange(e)}
-                        />
-                    </label>
-                    <label htmlFor="expLocation">Location:
-                        <input
-                            name="expLocation"
-                            type="text"
-                            value={formData.expLocation}
-                            onChange = {(e) => handleInputChange(e)}
-                        />
-                    </label>
-                    <label htmlFor="expDescription" className="form-input-textarea">Description:
-                        <textarea
-                            name="expDescription"
-                            type="text"
-                            value={formData.expDescription}
-                            onChange = {(e) => handleInputChange(e)}
-                        />
-                    </label>
-                </div>
+            <Form>
+                <Form.Group className="mb-3" controlId="expCompanyName">
+                    <Form.Label>Company</Form.Label>
+                    <Form.Control type="text" placeholder="Google" 
+                        name="expCompanyName"
+                        value = {formData.expCompanyName}
+                        onChange = {(e) => handleInputChange(e)}
+                    />
+                </Form.Group>
 
-                <div className="form-controls">
-                    <button id="cancel" onClick={handleCancel}>Cancel</button>
-                    <button id="save" onClick={handleSave}>Save</button>
+                <Form.Group className="mb-3" controlId="expPosition">
+                    <Form.Label>Position</Form.Label>
+                    <Form.Control type="text" placeholder="Software Engineer Intern" 
+                        name="expPosition"
+                        value = {formData.expPosition}
+                        onChange = {(e) => handleInputChange(e)}
+                    />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="expStartDate">
+                    <Form.Label>Start Date</Form.Label>
+                    <Form.Control type="month" placeholder="" 
+                        name="expStartDate"
+                        value = {formData.expStartDate}
+                        onChange = {(e) => handleInputChange(e)}
+                    />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="expEndDate">
+                    <Form.Label>End Date</Form.Label>
+                    <Form.Control type="month" placeholder="" 
+                        name="expEndDate"
+                        value = {formData.expEndDate}
+                        onChange = {(e) => handleInputChange(e)}
+                    />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="expLocation">
+                    <Form.Label>Location</Form.Label>
+                    <Form.Control type="text" placeholder="Mountain View, California" 
+                        name="expLocation"
+                        value = {formData.expLocation}
+                        onChange = {(e) => handleInputChange(e)}
+                    />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="expDescription">
+                    <Form.Label>Add a description</Form.Label>
+                    <Form.Control as="textarea" rows={3} 
+                        name="expDescription"
+                        type="textarea" 
+                        value={formData.expDescription} 
+                        onChange={handleInputChange}
+                    />
+                </Form.Group>
+                <div className="form-controls experience">
+                    <Button variant="primary" onClick={handleSave} active>
+                        Save
+                    </Button>{' '}
+                    <Button variant="secondary" onClick={handleCancel} active>
+                        Cancel
+                    </Button>
                 </div>
-            </div> 
+            </Form>
             : 
                 // Display Mode
                 <div className="list experience">
@@ -153,9 +162,11 @@ function Experience({onDataChange}) {
                             </div>
                             )
                     })}
-                    <button id="new-entry" onClick={handleNewExperienceEntry}>
-                        Add new +
-                    </button>
+                    <div className="d-grid gap-2">
+                        <Button variant="outline-primary" onClick={handleNewExperienceEntry}>
+                            Add new experience
+                        </Button>
+                    </div>
                 </div>
             }
         </>

@@ -38,18 +38,18 @@ function Output({form, theme}) {
                         }
                     }
                 >
-                    <div className="output-head">
+                    <div className="output-head"
+                        style={
+                            {
+                                backgroundColor: `${theme.color}`,
+                                color: getTextColorBasedOnBGColor()
+                            }
+                        }
+                    >
                         <div 
                             className={`output-head-main ${!form.personal.avatar 
                                     ? 'condensed' 
                                     : null}`}
-                            style={
-                                {
-                                    backgroundColor: `${theme.color}`,
-                                    color: getTextColorBasedOnBGColor()
-                                }
-                            }
-
                         >
                             <div className="output-head-title">
                                 <h1>{form.personal.personalName}</h1>

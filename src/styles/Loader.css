@@ -1,11 +1,18 @@
+
+
+input, button {
+    font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
 .loader {
     width: 50%;
 
-    background-color: #787878;
+    background-color: #bbb9b9;
+    color: black;
 }
 
 .loader-box {
-    background-color: white;
+    background-color: #FFFFFF;
     color: black;
 
     margin: 15px 0px;

@@ -3,6 +3,8 @@ import {useState} from "react";
 
 import NewCategory from './NewCategory';
 
+import Accordion from 'react-bootstrap/Accordion';
+
 function Categories({onDataChange}) {
 
     const [editId, setEditId] = useState(null); // ID of the currently edited category
@@ -120,17 +122,12 @@ function Categories({onDataChange}) {
                 return cat;
         })
 
-        
-
         setCategoriesList(updatedCategoriesList);
         onDataChange("categories", updatedCategoriesList);
         
         setEditId(null);
         setFormData({});
     }
-
-    console.log("FormData:")
-    console.log(formData);
 
     return (
         <>
@@ -175,25 +172,27 @@ function Categories({onDataChange}) {
                 <div className="list categories">
                     {categoriesList.map((entry) => {
                         return (
-                        <div className="loader-box"  key={entry.uuid}>
-                            <h2 className="loader-title">
+                        <Accordion.Item eventKey={entry.uuid} key={entry.uuid}>
+                            <Accordion.Header>
                                 {entry.categoryTitle != "" ? entry.categoryTitle : "Unnamed Category"}
-                            </h2>
-                            <NewCategory 
-                                entry={entry} 
-                                categoriesList={categoriesList} 
-                                setCategoriesList={setCategoriesList} 
-                                onDataChange={onDataChange} 
-                            />
-                            <div className="category-entry-controls">
-                                <button id="edit-entry" onClick={() => handleEditCategory(entry.uuid)}>
-                                Edit Category
-                                </button>
-                                <button id="delete-entry" onClick={() => handleDeleteCategory(entry.uuid)}>
-                                Delete category
-                                </button>
-                            </div>
-                        </div>
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <NewCategory 
+                                    entry={entry} 
+                                    categoriesList={categoriesList} 
+                                    setCategoriesList={setCategoriesList} 
+                                    onDataChange={onDataChange} 
+                                />
+                                <div className="category-entry-controls">
+                                    <button id="edit-entry" onClick={() => handleEditCategory(entry.uuid)}>
+                                    Edit Category
+                                    </button>
+                                    <button id="delete-entry" onClick={() => handleDeleteCategory(entry.uuid)}>
+                                    Delete category
+                                    </button>
+                                </div>
+                            </Accordion.Body>
+                        </Accordion.Item>
                         )
                     })}
                     <button id="new-entry" onClick={handleNewCategory}>
