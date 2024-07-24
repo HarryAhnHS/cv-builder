@@ -163,10 +163,10 @@ function NewCategory({entry, categoriesList, setCategoriesList, onDataChange, ha
                     // Display Mode
                     <div className="list new-category">
                         <div className="d-flex justify-content-end mb-3">
-                            <button className="btn btn-sm btn-primary fs-6 mx-1" onClick={() => handleEditCategory(entry.uuid)}>
+                            <button className="btn btn-sm btn-primary fs-6 mx-1 fw-lighter" onClick={() => handleEditCategory(entry.uuid)}>
                                 Edit Category
                             </button>
-                            <button className="btn btn-sm btn-danger fs-6 mx-1" onClick={() => handleDeleteCategory(entry.uuid)}>
+                            <button className="btn btn-sm btn-danger fs-6 mx-1 fw-lighter" onClick={() => handleDeleteCategory(entry.uuid)}>
                                 Delete Category
                             </button>
                         </div>

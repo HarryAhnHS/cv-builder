@@ -17,7 +17,7 @@ function Content() {
 
     const [theme, setTheme] = useState({
         font: 1,
-        color: '#C5D6D8',
+        color: '#007bff',
     })
 
     console.log(form)

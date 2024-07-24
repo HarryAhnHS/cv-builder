@@ -22,7 +22,7 @@ function Loader({setForm}) {
     return (            
             <div className="loader col-sm-12 col-md-6 order-2 order-md-1" style={{backgroundColor: '#FFFFFF'}}>
                 <div className='mx-3'>
-                    <div className="fs-5 fw-light py-4 flex-grow-1">Fill in your information</div>
+                    <div className="fs-5 fw-light py-4 flex-grow-1">Tailor to yourself. <span className='fw-bold text-primary'>Everything</span> is optional</div>
                 </div>
 
 

@@ -1,15 +1,23 @@
 import '../styles/Output.css'
 
-import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope, faPhone, faLocationCrosshairs } from '@fortawesome/free-solid-svg-icons';
+
+
+import { useState, useRef } from 'react';
 
 import Modal from  'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Styles from './Loader/Styles';
 
+import generatePDF from 'react-to-pdf';
+
 
 function Output({form, theme, setTheme}) {
     console.log("Rendering output with form:", form);
     console.log("Rendering output with theme:", theme);
+
+    const deliverable = useRef();
 
     const [showModal, setShowModal] = useState(false);
     const handleClose = () => setShowModal(false);
@@ -33,10 +41,12 @@ function Output({form, theme, setTheme}) {
             return Math.pow((col + 0.055) / 1.055, 2.4);
         });
         var L = (0.2126 * c[0]) + (0.7152 * c[1]) + (0.0722 * c[2]);
-        return (L > 0.179) ? '#000000' : '#FFFFFF';
+        return (L > 0.250) ? '#000000' : '#FFFFFF';
     }
 
-    // function downloadPDF(){}
+    function isPersonalEmpty() {
+        return Object.keys(form.personal).every((key) => !form.personal[key] || form.personal[key] == "")
+    }
 
 
     return (
@@ -48,7 +58,8 @@ function Output({form, theme, setTheme}) {
                     <Button variant="secondary" size="sm" className='align-middle mx-1' onClick={handleShow}>
                         Customize
                     </Button>
-                    <Button variant="primary" size="sm" className='align-middle mx-1' onClick={handleShow}>
+                    <Button variant="primary" size="sm" className='align-middle mx-1' 
+                        onClick={() => generatePDF(deliverable, {filename: 'resume.pdf'})}>
                         Download
                     </Button>
                 </div>  
@@ -61,9 +72,11 @@ function Output({form, theme, setTheme}) {
                         <Styles theme={theme} setTheme={setTheme}/>
                     </Modal.Body>
                 </Modal>
+
                 <div className='mb-5 d-flex justify-content-center'>
                     <div 
-                        className='deliverable-output g-0 p-0 flex-fill' 
+                        className='deliverable-output g-0 p-0 flex-fill'
+                        ref = {deliverable} 
                         style={
                             {
                                 fontFamily: `${getFont()}, serif`
@@ -74,31 +87,56 @@ function Output({form, theme, setTheme}) {
                                 {
                                     backgroundColor: `${theme.color}`,
                                     color: getTextColorBasedOnBGColor(),
-                                    padding: '1cqh 3cqw',
                                 }
                             }>
                             <div 
                                 className={`flex-fill ${!form.personal.avatar 
                                         ? 'd-flex justify-content-between' 
-                                        : 'd-flex flex-column'}`}>
-                                <div className="output-head-title">
+                                        : 'd-flex flex-column'}`}
+                                        style={isPersonalEmpty() ? null : {margin: '2cqh 4cqw'}}>
+                                <div className="d-flex flex-column justify-content-center">
                                     <h1 className="m-0 fw-bolder" style={{fontSize: '4cqw'}}>{form.personal.personalName}</h1>
                                     <p className="m-0 fw-normal"  style={{fontSize: '2.5cqw'}}>{form.personal.personalJob}</p>
                                 </div>
                                 <div className=
                                     "output-head-details fw-light" style={{fontSize: '2cqw'}}>
-                                    <div className="d-flex">
-                                        <p className="detail-label mt-1 mb-0">Email:&nbsp;</p>
-                                        <p className="detail-content mt-1 mb-0">{form.personal.personalEmail}</p>
-                                    </div>
-                                    <div className="d-flex">
-                                        <p className="detail-label mt-1 mb-0">Phone:&nbsp;</p>
-                                        <p className="detail-content mt-1 mb-0">{form.personal.personalPhone}</p>
-                                    </div>
-                                    <div className="d-flex">
-                                        <p className="detail-label mt-1 mb-0">Location:&nbsp;</p>
-                                        <p className="detail-content mt-1 mb-0">{form.personal.personalLocation}</p>
-                                    </div>
+                                    {form.personal.personalEmail != "" && form.personal.personalEmail
+                                    ?
+                                        <div className="d-flex">
+                                            <div className="detail-label mt-1 mb-0 mx-2">
+                                                <FontAwesomeIcon icon={faEnvelope} />
+                                            </div>
+                                            <p className="detail-content mt-1 mb-0">{form.personal.personalEmail}</p>
+                                        </div>
+                                    :   
+                                        null
+                                    } 
+                                    
+                                    {form.personal.personalPhone != ""  && form.personal.personalPhone
+                                    ? 
+                                        <div className="d-flex">
+                                            <div className="detail-label mt-1 mb-0 mx-2">
+                                            <FontAwesomeIcon icon={faPhone} />
+                                            </div>
+                                            <p className="detail-content mt-1 mb-0">{form.personal.personalPhone}</p>
+                                        </div>
+                                    :
+                                        null
+                                    }
+                                    
+                                    
+                                    {form.personal.personalLocation != "" && form.personal.personalLocation
+                                    ?
+                                        <div className="d-flex">
+                                            <div className="detail-label mt-1 mb-0 mx-2">
+                                                <FontAwesomeIcon icon={faLocationCrosshairs} />
+                                            </div>
+                                            <p className="detail-content mt-1 mb-0">{form.personal.personalLocation}</p>
+                                        </div>
+                                    :
+                                        null
+                                    }
+                                    
                                 </div>
                             </div>
                             
