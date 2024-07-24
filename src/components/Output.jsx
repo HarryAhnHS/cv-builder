@@ -1,4 +1,4 @@
-import '../styles/Output.css'
+import '../index.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faPhone, faLocationCrosshairs } from '@fortawesome/free-solid-svg-icons';

@@ -12,3 +12,45 @@
 body {
   margin: 0px;
 }
+
+
+/* Loader overrides */
+.accordion-item, .accordion-button {
+  border-radius: 0 !important;
+}
+
+.accordion-item {
+  margin-bottom: 0.5rem;
+  border-top: var(--bs-accordion-border-width) solid var(--bs-accordion-border-color) !important;
+}
+
+.form-label {
+  margin-bottom: 0 !important;
+}
+
+input, button {
+  font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+/* Output overrides */
+
+/* font-family: "Raleway", serif; */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+/* font-family: "Lora", serif; */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+/* font-family: "Quicksand", sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+.deliverable-output {
+    aspect-ratio: 1/ 1.41;
+
+    max-width: 90%;
+
+    background-color: white;
+    color: black;
+
+    overflow-y: scroll;
+
+    container-type: size;
+}

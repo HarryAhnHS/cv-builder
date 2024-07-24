@@ -1,4 +1,4 @@
-import '../styles/Loader.css'
+import '../index.css'
 
 import Bio from './Loader/Bio';
 import Personal from './Loader/Personal';
