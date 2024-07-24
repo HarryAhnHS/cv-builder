@@ -27,7 +27,7 @@ function Output({form, theme}) {
 
 
     return (
-            <div className="output col-sm-12 col-md-6 d-flex flex-column">
+            <div className="output col-sm-12 col-md-6 order-1 order-md-2 d-flex flex-column">
                 <div className='m-2 align-self-end'>
                     <button className='btn btn-primary'>Download</button>
                 </div>

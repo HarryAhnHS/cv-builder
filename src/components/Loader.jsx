@@ -28,7 +28,7 @@ function Loader({setForm, theme, setTheme}) {
     };
 
     return (            
-            <div className="loader col-sm-12 col-md-6" style={{backgroundColor: '#FFFFFF'}}>
+            <div className="loader col-sm-12 col-md-6 order-2 order-md-1" style={{backgroundColor: '#FFFFFF'}}>
                     <div className='d-flex mb-2 mx-3'>
                         <div className="fs-5 fw-bold py-3 flex-grow-1">Fill in your information below</div>
                         <div className="d-flex align-items-center justify-content-center">
