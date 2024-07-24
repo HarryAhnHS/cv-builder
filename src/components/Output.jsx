@@ -40,44 +40,49 @@ function Output({form, theme}) {
                             }
                         }
                     >
-                        <div className="row m-0"
+                        <div className="d-flex"
                             style={
                                 {
                                     backgroundColor: `${theme.color}`,
-                                    color: getTextColorBasedOnBGColor()
+                                    color: getTextColorBasedOnBGColor(),
+                                    padding: '3cqw',
                                 }
                             }
                         >
                             <div 
-                                className={`output-head-main ${!form.personal.avatar 
-                                        ? 'condensed' 
-                                        : null}`}
+                                className={`flex-fill ${!form.personal.avatar 
+                                        ? 'd-flex justify-content-between' 
+                                        : 'd-flex flex-column'}`}
                             >
                                 <div className="output-head-title">
-                                    <h1>{form.personal.personalName}</h1>
-                                    <p>{form.personal.personalJob}</p>
+                                    <h1 className="m-0" style={{fontSize: '6cqw'}}>{form.personal.personalName}</h1>
+                                    <p className="m-0"  style={{fontSize: '3cqw'}}>{form.personal.personalJob}</p>
                                 </div>
                                 <div className=
-                                    "output-head-details">
-                                    <div className="detail">
-                                        <p className="detail-label">Email:&nbsp;</p>
-                                        <p className="detail-content">{form.personal.personalEmail}</p>
+                                    "output-head-details" style={{fontSize: '2cqw'}}>
+                                    <div className="d-flex">
+                                        <p className="detail-label my-1">Email:&nbsp;</p>
+                                        <p className="detail-content my-1">{form.personal.personalEmail}</p>
                                     </div>
-                                    <div className="detail">
-                                        <p className="detail-label">Phone:&nbsp;</p>
-                                        <p className="detail-content">{form.personal.personalPhone}</p>
+                                    <div className="d-flex">
+                                        <p className="detail-label my-1">Phone:&nbsp;</p>
+                                        <p className="detail-content my-1">{form.personal.personalPhone}</p>
                                     </div>
-                                    <div className="detail">
-                                        <p className="detail-label">Location:&nbsp;</p>
-                                        <p className="detail-content">{form.personal.personalLocation}</p>
+                                    <div className="d-flex">
+                                        <p className="detail-label my-1">Location:&nbsp;</p>
+                                        <p className="detail-content my-1">{form.personal.personalLocation}</p>
                                     </div>
                                 </div>
                             </div>
                             
                                 {form.personal.avatar 
                                 ? 
-                                    <div className="output-head-avatar">
-                                        <img src={form.personal.avatar}/>
+                                    <div className="col-md-4 w-25">
+                                        <img src={form.personal.avatar} style={{
+                                            width: '100%',
+                                            aspectRatio: '1/1.1',
+                                            objectFit: 'cover',
+                                        }}/>
                                     </div> 
                                 : 
                                     null

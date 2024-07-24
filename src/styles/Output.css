@@ -23,4 +23,8 @@
     color: black;
 
     overflow-y: scroll;
+
+    container-type: size;
 }
+
+/* Custom classes */
