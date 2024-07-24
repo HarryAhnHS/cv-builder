@@ -24,7 +24,7 @@ function Content() {
 
     return (
         <>
-            <section className="container-fluid">
+            <section className="container-fluid flex-fill">
                 <div className='row'>
                     <Loader setForm = {setForm}/>
                     <Output form = {form} theme = {theme} setTheme = {setTheme}/>
