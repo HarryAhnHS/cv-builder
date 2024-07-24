@@ -31,52 +31,55 @@ function Styles({theme, setTheme}) {
     } 
     console.log(selectedTheme);
     return (
-        <>
-            <div className="style-label font">Choose your font</div>
-            <ButtonGroup>
-                <ToggleButton
-                    id='font-1'
-                    type="radio"
-                    variant='outline-primary'
-                    name="font"
-                    value={1}
-                    checked={selectedTheme.font === 1}
-                    onChange={(e) => handleStyleChange(e)}
-                    style={{
-                            fontFamily: `${fontNames[0]}, serif`
+        <div className="d-flex justify-content-center pb-3">
+            <div className="d-flex flex-column align-items-center m-2">
+                <div className="mb-1">Choose your font</div>
+                <ButtonGroup>
+                    <ToggleButton
+                        id='font-1'
+                        type="radio"
+                        variant='outline-primary'
+                        name="font"
+                        value={1}
+                        checked={selectedTheme.font === 1}
+                        onChange={(e) => handleStyleChange(e)}
+                        style={{
+                                fontFamily: `${fontNames[0]}, serif`
+                            }}>
+                            Abc
+                    </ToggleButton>
+                    <ToggleButton
+                        id='font-2'
+                        type="radio"
+                        variant='outline-primary'
+                        name="font"
+                        value={2}
+                        checked={selectedTheme.font === 2}
+                        onChange={(e) => handleStyleChange(e)}
+                        style={{
+                            fontFamily: `${fontNames[1]}, serif`
                         }}>
-                        Abc
-                </ToggleButton>
-                <ToggleButton
-                    id='font-2'
-                    type="radio"
-                    variant='outline-primary'
-                    name="font"
-                    value={2}
-                    checked={selectedTheme.font === 2}
-                    onChange={(e) => handleStyleChange(e)}
-                    style={{
-                        fontFamily: `${fontNames[1]}, serif`
-                    }}>
-                        Abc
-                </ToggleButton>
-                <ToggleButton
-                    id='font-3'
-                    type="radio"
-                    variant='outline-primary'
-                    name="font"
-                    value={3}
-                    checked={selectedTheme.font === 3}
-                    onChange={(e) => handleStyleChange(e)}
-                    style={{
-                        fontFamily: `${fontNames[2]}, serif`
-                    }}>
-                        Abc
-                </ToggleButton>
-            </ButtonGroup>
+                            Abc
+                    </ToggleButton>
+                    <ToggleButton
+                        id='font-3'
+                        type="radio"
+                        variant='outline-primary'
+                        name="font"
+                        value={3}
+                        checked={selectedTheme.font === 3}
+                        onChange={(e) => handleStyleChange(e)}
+                        style={{
+                            fontFamily: `${fontNames[2]}, serif`
+                        }}>
+                            Abc
+                    </ToggleButton>
+                </ButtonGroup>
+            </div>
+            
 
-            <div className="accent-color">
-                <label htmlFor='color-input' className='form-label'>Pick your accent color</label>
+            <div className="d-flex flex-column align-items-center m-2">
+                <label htmlFor='color-input' className='mb-1'>Pick your accent color</label>
                     <input 
                         id="color-input"
                         type="color"
@@ -88,7 +91,7 @@ function Styles({theme, setTheme}) {
                         title="Choose your color"
                     />
             </div>
-        </>
+        </div>
     )
 }
 

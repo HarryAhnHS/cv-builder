@@ -32,7 +32,7 @@ function Loader({setForm, theme, setTheme}) {
                     <div className='d-flex mb-2 mx-3'>
                         <div className="fs-5 fw-bold py-3 flex-grow-1">Fill in your information below</div>
                         <div className="d-flex align-items-center justify-content-center">
-                            <Button variant="primary" size="sm" className='align-middle' onClick={handleShow}>
+                            <Button variant="outline-dark" size="sm" className='align-middle' onClick={handleShow}>
                                 Customize
                             </Button>
                         </div>
@@ -43,7 +43,9 @@ function Loader({setForm, theme, setTheme}) {
                     <Modal.Header closeButton>
                     <Modal.Title>Customize your resume</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body><Styles theme={theme} setTheme={setTheme}/></Modal.Body>
+                    <Modal.Body>
+                        <Styles theme={theme} setTheme={setTheme}/>
+                    </Modal.Body>
                 </Modal>
 
 
