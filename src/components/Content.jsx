@@ -26,8 +26,8 @@ function Content() {
         <>
             <section className="container-fluid">
                 <div className='row'>
-                    <Loader setForm = {setForm} theme = {theme} setTheme = {setTheme}/>
-                    <Output form = {form} theme = {theme}/>
+                    <Loader setForm = {setForm}/>
+                    <Output form = {form} theme = {theme} setTheme = {setTheme}/>
                 </div>
             </section> 
         </>

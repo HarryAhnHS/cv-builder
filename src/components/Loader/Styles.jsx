@@ -32,8 +32,8 @@ function Styles({theme, setTheme}) {
     console.log(selectedTheme);
     return (
         <div className="d-flex justify-content-center pb-3">
-            <div className="d-flex flex-column align-items-center m-2">
-                <div className="mb-1">Choose your font</div>
+            <div className="d-flex flex-column align-items-center mx-4">
+                <div className="mb-1">Font</div>
                 <ButtonGroup>
                     <ToggleButton
                         id='font-1'
@@ -78,8 +78,8 @@ function Styles({theme, setTheme}) {
             </div>
             
 
-            <div className="d-flex flex-column align-items-center m-2">
-                <label htmlFor='color-input' className='mb-1'>Pick your accent color</label>
+            <div className="d-flex flex-column align-items-center mx-4">
+                <label htmlFor='color-input' className='mb-1'>Accent Color</label>
                     <input 
                         id="color-input"
                         type="color"

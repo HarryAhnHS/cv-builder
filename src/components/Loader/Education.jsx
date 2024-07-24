@@ -64,7 +64,12 @@ function Education({onDataChange}) {
 
     function handleSave() {
         const updatedEducationList = [...educationList].map((edu) => {
-            return edu.uuid === editId ? formData : edu;
+            return (edu.uuid === editId)
+            ? {
+                ...formData,
+                educationEndDate: formData.educationEndDate === "" ? "Present" : formData.educationEndDate
+            }
+            : edu;
         })
 
         setEducationList(updatedEducationList);
@@ -109,7 +114,7 @@ function Education({onDataChange}) {
                         </Form.Group>
 
                         <Form.Group className="mb-3 col-md-6" controlId="educationEndDate">
-                            <Form.Label>End Date</Form.Label>
+                            <Form.Label>End Date <span className="text-muted fw-light justify-self-end mx-1" style={{fontSize:'0.8rem'}}>Leave empty if still present</span></Form.Label>
                             <Form.Control type="month" placeholder="" 
                                 name="educationEndDate"
                                 value = {formData.educationEndDate}

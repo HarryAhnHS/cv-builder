@@ -1,8 +1,19 @@
 import '../styles/Output.css'
 
-function Output({form, theme}) {
+import { useState } from 'react';
+
+import Modal from  'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Styles from './Loader/Styles';
+
+
+function Output({form, theme, setTheme}) {
     console.log("Rendering output with form:", form);
     console.log("Rendering output with theme:", theme);
+
+    const [showModal, setShowModal] = useState(false);
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
 
     function getFont() {
         let fontNames = ['Raleway', 'Lora', 'Quicksand']
@@ -25,13 +36,32 @@ function Output({form, theme}) {
         return (L > 0.179) ? '#000000' : '#FFFFFF';
     }
 
+    // function downloadPDF(){}
+
 
     return (
-            <div className="output col-sm-12 col-md-6 order-1 order-md-2 d-flex flex-column">
-                <div className='m-2 align-self-end'>
-                    <button className='btn btn-primary'>Download</button>
-                </div>
-                <div className='m-2 d-flex justify-content-center'>
+            <div className="output col-sm-12 col-md-6 order-1 order-md-2 d-flex flex-column" style={{
+                backgroundColor: '#e1e1e1'
+            }}>
+                
+                <div className="d-flex align-items-center justify-content-end m-4">
+                    <Button variant="secondary" size="sm" className='align-middle mx-1' onClick={handleShow}>
+                        Customize
+                    </Button>
+                    <Button variant="primary" size="sm" className='align-middle mx-1' onClick={handleShow}>
+                        Download
+                    </Button>
+                </div>  
+
+                <Modal show={showModal} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                    <Modal.Title>Customize your resume</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Styles theme={theme} setTheme={setTheme}/>
+                    </Modal.Body>
+                </Modal>
+                <div className='mb-5 d-flex justify-content-center'>
                     <div 
                         className='deliverable-output g-0 p-0 flex-fill' 
                         style={

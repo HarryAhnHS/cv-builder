@@ -64,7 +64,12 @@ function Experience({onDataChange}) {
 
     function handleSave() {
         const updatedExperienceList = [...experienceList].map((exp) => {
-            return exp.uuid === editId ? formData : exp;
+            return (exp.uuid === editId)
+            ? {
+                ...formData,
+                expEndDate: formData.expEndDate === "" ? "Present" : formData.expEndDate
+            }
+            : exp;
         })
 
         setExperienceList(updatedExperienceList);
@@ -108,7 +113,7 @@ function Experience({onDataChange}) {
                         />
                     </Form.Group>
                     <Form.Group className="mb-3 col-md-6" controlId="expEndDate">
-                        <Form.Label>End Date</Form.Label>
+                    <Form.Label>End Date <span className="text-muted fw-light justify-self-end mx-1" style={{fontSize:'0.8rem'}}>Leave empty if still present</span></Form.Label>
                         <Form.Control type="month" placeholder="" 
                             name="expEndDate"
                             value = {formData.expEndDate}

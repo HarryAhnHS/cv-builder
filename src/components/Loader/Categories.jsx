@@ -177,9 +177,7 @@ function Categories({onDataChange}) {
                         return (
                         <Accordion.Item eventKey={entry.uuid} key={entry.uuid}>
                             <Accordion.Header>
-                            <div className="fs-4 fw-light">
-                                {entry.categoryTitle}
-                            </div>
+                            <div className="fs-4 fw-lighter">{entry.categoryTitle}</div>
                             </Accordion.Header>
                             <Accordion.Body>
                                 <NewCategory 

@@ -82,14 +82,21 @@ function NewCategory({entry, categoriesList, setCategoriesList, onDataChange, ha
     function handleSave() {
         const updatedCategoryItems = 
             [...categoriesList.find((category) => category.uuid === entry.uuid).categoryItems].map((item) => {
-                return item.uuid === editId ? formData : item;
+                return (item.uuid === editId)
+                ? {
+                    ...formData,
+                    EndDate: formData.EndDate === "" ? "Present" : formData.EndDate
+                }
+                : item;
         })
+
+        
 
         const updatedCategoriesList = categoriesList.map((category) => {
             return category.uuid === entry.uuid 
             ? {
                 ...category,
-                categoryItems: updatedCategoryItems
+                categoryItems: updatedCategoryItems,
             }
             : category;
         })
@@ -126,7 +133,13 @@ function NewCategory({entry, categoriesList, setCategoriesList, onDataChange, ha
                                     </Form.Group>
                                 :
                                     <Form.Group className='mb-3' controlId={key}>
-                                        <Form.Label>{key == 'StartDate' ? 'Start Date': (key == 'EndDate' ? 'End Date' : key)}</Form.Label>
+                                        {(key == 'EndDate'
+                                        ?
+                                        <Form.Label>End Date<span className="text-muted fw-light justify-self-end mx-1" style={{fontSize:'0.8rem'}}>Leave empty if still present</span></Form.Label>
+                                        :
+                                        <Form.Label>{key == 'StartDate' ? 'Start Date' : key}</Form.Label>
+                                        )}
+                                        
                                         <Form.Control 
                                             type= {entry.categoryInputTypes[key].inputType}
                                             name=   {key}

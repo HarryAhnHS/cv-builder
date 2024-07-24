@@ -6,14 +6,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 
-.output {
-    width: 50%;
-
-    background-color: #bbb9b9;
-
-    box-sizing: border-box;
-}
-
 .deliverable-output {
     aspect-ratio: 1/ 1.41;
 
@@ -26,5 +18,3 @@
 
     container-type: size;
 }
-
-/* Custom classes */
