@@ -145,7 +145,7 @@ function Output({form, theme, setTheme}) {
                             
                             {form.personal.avatar 
                             ? 
-                                <div className="col-md-4 d-flex align-items-center" style={{width: '18%'}}>
+                                <div className="col-md-4 d-flex align-items-center" style={{width: '18%', margin:'2cqh 4cqw 2cqh 0'}}>
                                     <img src={form.personal.avatar} style={{
                                         width: '100%',
                                         aspectRatio: '1/1.1',
