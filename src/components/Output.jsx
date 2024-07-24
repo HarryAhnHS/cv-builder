@@ -10,14 +10,16 @@ import Modal from  'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Styles from './Loader/Styles';
 
-import generatePDF from 'react-to-pdf';
+import { useReactToPrint } from 'react-to-print'
 
 
 function Output({form, theme, setTheme}) {
     console.log("Rendering output with form:", form);
     console.log("Rendering output with theme:", theme);
 
-    const deliverable = useRef();
+    const componentRef = useRef(null);
+    const handlePrint = useReactToPrint({content: () => componentRef.current,})
+
 
     const [showModal, setShowModal] = useState(false);
     const handleClose = () => setShowModal(false);
@@ -59,7 +61,7 @@ function Output({form, theme, setTheme}) {
                         Customize
                     </Button>
                     <Button variant="primary" size="sm" className='align-middle mx-1' 
-                        onClick={() => generatePDF(deliverable, {filename: 'resume.pdf'})}>
+                        onClick={handlePrint}>
                         Download
                     </Button>
                 </div>  
@@ -75,8 +77,8 @@ function Output({form, theme, setTheme}) {
 
                 <div className='mb-5 d-flex justify-content-center'>
                     <div 
+                        ref={componentRef}
                         className='deliverable-output g-0 p-0 flex-fill'
-                        ref = {deliverable} 
                         style={
                             {
                                 fontFamily: `${getFont()}, serif`
