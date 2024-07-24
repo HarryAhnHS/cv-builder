@@ -81,7 +81,8 @@ function Output({form, theme, setTheme}) {
                         className='deliverable-output g-0 p-0 flex-fill'
                         style={
                             {
-                                fontFamily: `${getFont()}, serif`
+                                fontFamily: `${getFont()}, serif`,
+                                overflow: 'hidden'
                             }
                         }>
                         <div className="d-flex"
