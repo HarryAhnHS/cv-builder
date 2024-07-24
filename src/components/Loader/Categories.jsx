@@ -140,29 +140,31 @@ function Categories({onDataChange}) {
                         />
                     </Form.Group>
         
-                    <Form.Group className="mb-3" controlId="categoryInputTypes">
-                        <Form.Label>Choose your category features:</Form.Label>
-                        {Object.keys(formData.categoryInputTypes).map((data, index) => {
-                                return (
-                                    <>
-                                        <Form.Check 
-                                            key={index} // prettier-ignore
-                                            type="switch"
-                                            id="custom-switch"
-                                            label={data}
-                                            checked={formData.categoryInputTypes[data].exists}
-                                            onChange={(e) => handleCategoryInputTypesChange(e)}
-                                            name={data} 
-                                        />
-                                    </>
-                                )
-                            })}
+                    <Form.Group className="mb-3 d-flex flex-column align-items-center" controlId="categoryInputTypes">
+                        <Form.Label className="mb-1">Select your category&#39;s features:</Form.Label>
+                        <div>
+                            {Object.keys(formData.categoryInputTypes).map((data, index) => {
+                                    return (
+                                        <>
+                                            <Form.Check 
+                                                key={index} // prettier-ignore
+                                                type="switch"
+                                                id="custom-switch"
+                                                label={data == "StartDate" ? 'Start Date' : (data == "EndDate" ? 'End Date' : data)}
+                                                checked={formData.categoryInputTypes[data].exists}
+                                                onChange={(e) => handleCategoryInputTypesChange(e)}
+                                                name={data} 
+                                            />
+                                        </>
+                                    )
+                                })}
+                            </div>
                     </Form.Group>
-                    <div className="form-controls category">
-                        <Button variant="primary" onClick={handleSave} active>
+                    <div className="form-controls category w-100 d-flex justify-content-end">
+                        <Button className="mx-1" variant="primary" onClick={handleSave} active>
                             Save
                         </Button>{' '}
-                        <Button variant="secondary" onClick={handleCancel} active>
+                        <Button className="mx-1" variant="secondary" onClick={handleCancel} active>
                             Cancel
                         </Button>
                     </div>
@@ -192,9 +194,9 @@ function Categories({onDataChange}) {
                         </Accordion.Item>
                         )
                     })}
-                    <div className="d-flex my-4 rounded">
+                    <div className="d-flex rounded" style={{marginTop: '4rem', marginBottom: '2rem'}}>
                         <Button variant="primary" className="flex-fill" onClick={handleNewCategory}>
-                            Add new category
+                            Create a new category
                         </Button>
                     </div>
                 </div>

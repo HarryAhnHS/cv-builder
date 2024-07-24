@@ -135,11 +135,11 @@ function Experience({onDataChange}) {
                         onChange={handleInputChange}
                     />
                 </Form.Group>
-                <div className="form-controls experience">
-                    <Button variant="primary" onClick={handleSave} active>
+                 <div className="form-controls category w-100 d-flex justify-content-end">
+                    <Button className="mx-1" variant="primary" onClick={handleSave} active>
                         Save
                     </Button>{' '}
-                    <Button variant="secondary" onClick={handleCancel} active>
+                    <Button className="mx-1" variant="secondary" onClick={handleCancel} active>
                         Cancel
                     </Button>
                 </div>

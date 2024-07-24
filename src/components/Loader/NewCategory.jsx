@@ -137,11 +137,11 @@ function NewCategory({entry, categoriesList, setCategoriesList, onDataChange, ha
                             :
                                 null
                         })}
-                        <div className="form-controls category-item">
-                            <Button variant="primary" onClick={handleSave} active>
+                        <div className="form-controls category w-100 d-flex justify-content-end">
+                            <Button className="mx-1" variant="primary" onClick={handleSave} active>
                                 Save
                             </Button>{' '}
-                            <Button variant="secondary" onClick={handleCancel} active>
+                            <Button className="mx-1"variant="secondary" onClick={handleCancel} active>
                                 Cancel
                             </Button>
                         </div>
@@ -151,10 +151,10 @@ function NewCategory({entry, categoriesList, setCategoriesList, onDataChange, ha
                     <div className="list new-category">
                         <div className="d-flex justify-content-end mb-3">
                             <button className="btn btn-sm btn-primary fs-6 mx-1" onClick={() => handleEditCategory(entry.uuid)}>
-                                Edit category
+                                Edit Category
                             </button>
                             <button className="btn btn-sm btn-danger fs-6 mx-1" onClick={() => handleDeleteCategory(entry.uuid)}>
-                                Delete category
+                                Delete Category
                             </button>
                         </div>
 

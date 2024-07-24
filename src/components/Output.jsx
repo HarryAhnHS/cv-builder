@@ -38,169 +38,204 @@ function Output({form, theme}) {
                             {
                                 fontFamily: `${getFont()}, serif`
                             }
-                        }
-                    >
+                        }>
                         <div className="d-flex"
                             style={
                                 {
                                     backgroundColor: `${theme.color}`,
                                     color: getTextColorBasedOnBGColor(),
-                                    padding: '3cqw',
+                                    padding: '1cqh 3cqw',
                                 }
-                            }
-                        >
+                            }>
                             <div 
                                 className={`flex-fill ${!form.personal.avatar 
                                         ? 'd-flex justify-content-between' 
-                                        : 'd-flex flex-column'}`}
-                            >
+                                        : 'd-flex flex-column'}`}>
                                 <div className="output-head-title">
-                                    <h1 className="m-0" style={{fontSize: '6cqw'}}>{form.personal.personalName}</h1>
-                                    <p className="m-0"  style={{fontSize: '3cqw'}}>{form.personal.personalJob}</p>
+                                    <h1 className="m-0 fw-bolder" style={{fontSize: '4cqw'}}>{form.personal.personalName}</h1>
+                                    <p className="m-0 fw-normal"  style={{fontSize: '2.5cqw'}}>{form.personal.personalJob}</p>
                                 </div>
                                 <div className=
-                                    "output-head-details" style={{fontSize: '2cqw'}}>
+                                    "output-head-details fw-light" style={{fontSize: '2cqw'}}>
                                     <div className="d-flex">
-                                        <p className="detail-label my-1">Email:&nbsp;</p>
-                                        <p className="detail-content my-1">{form.personal.personalEmail}</p>
+                                        <p className="detail-label mt-1 mb-0">Email:&nbsp;</p>
+                                        <p className="detail-content mt-1 mb-0">{form.personal.personalEmail}</p>
                                     </div>
                                     <div className="d-flex">
-                                        <p className="detail-label my-1">Phone:&nbsp;</p>
-                                        <p className="detail-content my-1">{form.personal.personalPhone}</p>
+                                        <p className="detail-label mt-1 mb-0">Phone:&nbsp;</p>
+                                        <p className="detail-content mt-1 mb-0">{form.personal.personalPhone}</p>
                                     </div>
                                     <div className="d-flex">
-                                        <p className="detail-label my-1">Location:&nbsp;</p>
-                                        <p className="detail-content my-1">{form.personal.personalLocation}</p>
+                                        <p className="detail-label mt-1 mb-0">Location:&nbsp;</p>
+                                        <p className="detail-content mt-1 mb-0">{form.personal.personalLocation}</p>
                                     </div>
                                 </div>
                             </div>
                             
-                                {form.personal.avatar 
-                                ? 
-                                    <div className="col-md-4 w-25">
-                                        <img src={form.personal.avatar} style={{
-                                            width: '100%',
-                                            aspectRatio: '1/1.1',
-                                            objectFit: 'cover',
-                                        }}/>
-                                    </div> 
-                                : 
-                                    null
-                                }
+                            {form.personal.avatar 
+                            ? 
+                                <div className="col-md-4 d-flex align-items-center" style={{width: '18%'}}>
+                                    <img src={form.personal.avatar} style={{
+                                        width: '100%',
+                                        aspectRatio: '1/1.1',
+                                        objectFit: 'cover',
+                                    }}/>
+                                </div> 
+                            : 
+                                null
+                            }
                         </div>
 
-                        <div className='output-body'>
+                        <div className='output-body' style={{padding: '1cqh 3cqw'}}>
                             
                             {form.bio != "" 
                             ?
-                                <div className="output-body-section bio">
-                                    <h1 className="output-body-title">About me:</h1> 
-                                    <p className="output-bio">
+                                <div>
+                                    <h1 className="border-bottom" style={{fontSize: '3cqw', marginBottom: '1cqh'}}>About me:</h1> 
+                                    <p className="m-0" style={{fontSize: '2cqw'}}>
                                         {form.bio}
                                     </p>
                                 </div>
                             : 
                             null}
                             
-                            <div className="output-body-section educations">
-                                {form.educations.length > 0 ? <h1 className="output-body-title">Education:</h1> : null}
-                                {form.educations.map((entry) => {
-                                    return (
-                                        <div className="output-entry education" key={entry.uuid}>
-                                            {(entry.educationStartDate != "" && entry.educationStartDate) || (entry.educationEndDate != "" && entry.educationEndDate)
-                                            ?
-                                                <div className="output-entry-head education">
-                                                    <div className="output-entry-dates start education">{entry.educationStartDate}</div>
-                                                    <div className="output-entry-dates end education">
-                                                        {entry.educationStartDate != "" && entry.educationEndDate != "" && entry.educationStartDate && entry.educationEndDate
-                                                        ? <p>-&nbsp;</p>
-                                                        : null}
-                                                        {entry.educationEndDate}
-                                                    </div>
-                                                </div>
-                                            :
-                                                null
-                                            }
-                                            <div className="output-entry-mid education">
-                                                <div className="output-entry-title">
-                                                    <h1>{entry.educationName}</h1>
-                                                    <p>{entry.educationLocation}</p>
-                                                </div>
-                                                <h5>{entry.educationDegree}</h5>
-                                                <p>{entry.educationDescription}</p>
-                                            </div>
-                                        </div>
-                                    )
-                                })}
-                            </div>
-
-                            <div className="output-body-section experiences">
-                            {form.experiences.length > 0 ? <h1 className="output-body-title">Experience:</h1> : null}
-                                {form.experiences.map((entry) => {
-                                    return (
-                                        <div className="output-entry experience" key={entry.uuid}>
-                                            {(entry.expStartDate != "" && entry.expStartDate) || (entry.expEndDate != "" && entry.expEndDate)
-                                            ?
-                                                <div className="output-entry-head experience">
-                                                    <div className="output-entry-dates start experience">{entry.expStartDate}</div>
-                                                    <div className="output-entry-dates end experience">
-                                                        {entry.expStartDate != "" && entry.expEndDate != "" && entry.expStartDate && entry.expEndDate  
-                                                        ? <p>-&nbsp;</p>
-                                                        : null}
-                                                        {entry.expEndDate}
-                                                    </div>
-                                                </div>
-                                            :
-                                                null
-                                            }
-                                            <div className="output-entry-mid experience">
-                                                <div className="output-entry-title">
-                                                    <h1>{entry.expCompanyName}</h1>
-                                                    <p>{entry.expLocation}</p>
-                                                </div>
-                                                <h5>{entry.expPosition}</h5>
-                                                <p>{entry.expDescription}</p>
-                                            </div>
-                                        </div>
-                                    )
-                                })}
-                            </div>
-
-                            {form.categories.map((category) => {
-                                return (<div className="output-body-section category" key={category.uuid}>
-                                    {category.categoryItems.length > 0 ? <h1 className="output-body-title">{category.categoryTitle}</h1> : null}
-                                    {category.categoryItems.map((item) => {
+                            {form.educations.length > 0
+                            ?
+                                <div>
+                                    <h1 className="border-bottom" style={{fontSize: '3cqw', marginBottom: '1cqh', marginTop:'1cqh'}}>Education:</h1>
+                                    {form.educations.map((entry) => {
                                         return (
-                                            <div className="output-entry category-item" key={item.uuid}>
-                                                {(item.StartDate != "" && item.StartDate) || (item.EndDate != "" && item.EndDate)
+                                            <div className="d-flex" style={{marginTop: '1cqh'}}key={entry.uuid}>
+                                                {(entry.educationStartDate != "" && entry.educationStartDate) || (entry.educationEndDate != "" && entry.educationEndDate)
                                                 ?
-                                                    <div className="output-entry-head category-item">
-                                                        <div className="output-entry-dates start category-item">{item.StartDate}</div>
-                                                        <div className="output-entry-dates end category-item">
-                                                            {item.StartDate != "" && item.EndDate != "" && item.StartDate && item.EndDate 
-                                                            ? <p>-&nbsp;</p>
+                                                    <div style={{marginRight: '2cqw'}}>
+                                                        <div style={{fontSize: '2cqw'}}>{entry.educationStartDate}</div>
+                                                        <div className='d-flex' style={{fontSize: '2cqw'}}>
+                                                            {entry.educationStartDate != "" && entry.educationEndDate != "" && entry.educationStartDate && entry.educationEndDate
+                                                            ? <p className='m-0'>-&nbsp;</p>
                                                             : null}
-                                                            {item.EndDate}
+                                                            {entry.educationEndDate}
                                                         </div>
                                                     </div>
                                                 :
                                                     null
                                                 }
-                                                <div className="output-entry-mid category-item">
-                                                    <div className="output-entry-title">
-                                                        <h1>{item.Title}</h1>
-                                                        <p>{item.Location}</p>
+                                                <div className="flex-fill d-flex flex-column justify-content-center">
+                                                    <div className="d-flex align-items-center">
+                                                        <h1 className="m-0 flex-fill" style={{fontSize: '2.5cqw'}}>
+                                                            {entry.educationName}
+                                                        </h1>
+                                                        <p className="m-0" style={{fontSize: '2cqw'}}>
+                                                            {entry.educationLocation}
+                                                        </p>
                                                     </div>
-                                                    <p>{item.Description}</p>
+                                                    <h5 className="m-0 fw-lighter" style={{fontSize: '2cqw'}}>
+                                                        {entry.educationDegree}
+                                                    </h5>
+                                                    <p className="fw-normal" style={{fontSize: '2cqw', marginTop: '0.2cqh', marginBottom: '0'}}>
+                                                        {entry.educationDescription}
+                                                    </p>
                                                 </div>
                                             </div>
                                         )
                                     })}
-                                </div>)
-                            })}
+                                </div>
+                            : 
+                                null
+                            }
+
+                            {form.experiences.length > 0
+                            ?
+                                <div>
+                                    <h1 className="border-bottom" style={{fontSize: '3cqw', marginBottom: '1cqh', marginTop:'1cqh'}}>Experience:</h1>
+                                    {form.experiences.map((entry) => {
+                                        return (
+                                            <div className="d-flex" style={{marginTop: '1cqh'}}key={entry.uuid}>
+                                                {(entry.expStartDate != "" && entry.expStartDate) || (entry.expEndDate != "" && entry.expEndDate)
+                                                ?
+                                                    <div style={{marginRight: '2cqw'}}>
+                                                        <div style={{fontSize: '2cqw'}}>
+                                                            {entry.expStartDate}
+                                                        </div>
+                                                        <div className='d-flex' style={{fontSize: '2cqw'}}>
+                                                            {entry.expStartDate != "" && entry.expEndDate != "" && entry.expStartDate && entry.expEndDate
+                                                            ? <p className='m-0'>-&nbsp;</p>
+                                                            : null}
+                                                            {entry.expEndDate}
+                                                        </div>
+                                                    </div>
+                                                :
+                                                    null
+                                                }
+                                                <div className="flex-fill d-flex flex-column justify-content-center">
+                                                    <div className="d-flex align-items-center">
+                                                        <h1 className="m-0 flex-fill" style={{fontSize: '2.5cqw'}}>
+                                                            {entry.expCompanyName}
+                                                        </h1>
+                                                        <p className="m-0" style={{fontSize: '2cqw'}}>
+                                                            {entry.expLocation}
+                                                        </p>
+                                                    </div>
+                                                    <h5 className="m-0 fw-lighter" style={{fontSize: '2cqw'}}>
+                                                        {entry.expPosition}
+                                                    </h5>
+                                                    <p className="fw-normal" style={{fontSize: '2cqw', marginTop: '0.2cqh', marginBottom: '0'}}>
+                                                        {entry.expDescription}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            :
+                                null
+                            }
+
+                            {form.categories.length > 0
+                            ?   
+                                form.categories.map((category) => {
+                                    return (
+                                        <div key={category.uuid}>
+                                            <h1 className="border-bottom" style={{fontSize: '3cqw', marginBottom: '1cqh', marginTop:'1cqh'}}>{category.categoryTitle}:</h1>
+                                            {category.categoryItems.map((entry) => {
+                                                return (
+                                                    <div className="d-flex" style={{marginTop: '1cqh'}}key={entry.uuid}>
+                                                        {(entry.StartDate != "" && entry.StartDate) || (entry.EndDate != "" && entry.EndDate)
+                                                        ?
+                                                            <div style={{marginRight: '2cqw'}}>
+                                                                <div style={{fontSize: '2cqw'}}>{entry.StartDate}</div>
+                                                                <div className='d-flex' style={{fontSize: '2cqw'}}>
+                                                                    {entry.StartDate != "" && entry.StartDate != "" && entry.EndDate && entry.EndDate
+                                                                    ? <p className='m-0'>-&nbsp;</p>
+                                                                    : null}
+                                                                    {entry.EndDate}
+                                                                </div>
+                                                            </div>
+                                                        :
+                                                            null
+                                                        }
+                                                        <div className="flex-fill d-flex flex-column justify-content-center">
+                                                            <div className="d-flex align-items-center">
+                                                                <h1 className="m-0 flex-fill" style={{fontSize: '2.5cqw'}}>
+                                                                    {entry.Title}
+                                                                </h1>
+                                                                <p className="m-0" style={{fontSize: '2cqw'}}>
+                                                                    {entry.Location}
+                                                                </p>
+                                                            </div>
+                                                            <p className="fw-normal" style={{fontSize: '2cqw', marginTop: '0.2cqh', marginBottom: '0'}}>
+                                                                {entry.Description}
+                                                            </p>
+                                                        </div>
+                                                    </div>)
+                                                })}
+                                        </div>)
+                                    })
+                            : 
+                                null
+                            }
                         </div>
                     </div>
-
                 </div>
             </div>
     )
