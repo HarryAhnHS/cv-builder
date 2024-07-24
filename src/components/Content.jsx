@@ -1,12 +1,10 @@
-import {useState} from 'react';
-// import '../styles/Content.css';
+import {useState, useEffect} from 'react';
 
 import Loader from './Loader';
 import Output from './Output';
 
 function Content() {
     // Init States
-    
     const [form, setForm] = useState({
         bio: "",
         personal: {},
@@ -20,7 +18,9 @@ function Content() {
         color: '#007bff',
     })
 
-    console.log(form)
+    useEffect(() => {
+        document.title = "Resume Generator"
+    }, []);
 
     return (
         <>
