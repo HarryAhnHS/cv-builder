@@ -135,7 +135,7 @@ function NewCategory({entry, categoriesList, setCategoriesList, onDataChange, ha
                                     <Form.Group className='mb-3' controlId={key}>
                                         {(key == 'EndDate'
                                         ?
-                                        <Form.Label>End Date<span className="text-muted fw-light justify-self-end mx-1" style={{fontSize:'0.8rem'}}>Leave empty if still present</span></Form.Label>
+                                        <Form.Label>End Date<span className="text-muted fw-light justify-self-end mx-1" style={{fontSize:'0.6rem'}}>Empty if present</span></Form.Label>
                                         :
                                         <Form.Label>{key == 'StartDate' ? 'Start Date' : key}</Form.Label>
                                         )}
