@@ -29,7 +29,9 @@ function Loader({setForm}) {
                 <Accordion>
                     <Accordion.Item style={{borderRadius: 0}} eventKey="0">
                             <Accordion.Header>
-                                <div className="fs-4 fw-lighter">Personal Information</div>
+                                <div className="fs-4 fw-lighter">
+                                    Personal Information
+                                </div>
                             </Accordion.Header>
                             <Accordion.Body>
                                 <Personal onDataChange = {handleFormField(setForm)}/>
