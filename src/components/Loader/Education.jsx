@@ -87,7 +87,7 @@ function Education({onDataChange}) {
                 <Form>
                     <Form.Group className="mb-3" controlId="educationName">
                         <Form.Label>School Name</Form.Label>
-                        <Form.Control type="text" placeholder="Harvard University" 
+                        <Form.Control type="text" placeholder="University of Southern California" 
                             name="educationName"
                             value = {formData.educationName}
                             onChange = {(e) => handleInputChange(e)}
@@ -96,7 +96,7 @@ function Education({onDataChange}) {
 
                     <Form.Group className="mb-3" controlId="educationDegree">
                         <Form.Label>Degree</Form.Label>
-                        <Form.Control type="text" placeholder="BS in Computer Science" 
+                        <Form.Control type="text" placeholder="Bachelor of Science in Computer Science" 
                             name="educationDegree"
                             value = {formData.educationDegree}
                             onChange = {(e) => handleInputChange(e)}
@@ -126,7 +126,7 @@ function Education({onDataChange}) {
 
                     <Form.Group className="mb-3" controlId="educationLocation">
                         <Form.Label>Location</Form.Label>
-                        <Form.Control type="text" placeholder="Boston, Massachusetts" 
+                        <Form.Control type="text" placeholder="Los Angeles, California" 
                             name="educationLocation"
                             value = {formData.educationLocation}
                             onChange = {(e) => handleInputChange(e)}
@@ -138,6 +138,7 @@ function Education({onDataChange}) {
                         <Form.Control as="textarea" rows={3} 
                             name="educationDescription"
                             type="textarea" 
+                            placeholder="Activities, societies, awards..."
                             value={formData.educationDescription} 
                             onChange={handleInputChange}
                         />

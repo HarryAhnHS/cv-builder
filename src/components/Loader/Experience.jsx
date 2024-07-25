@@ -134,6 +134,7 @@ function Experience({onDataChange}) {
                 <Form.Group className="mb-3" controlId="expDescription">
                     <Form.Label>Add a description</Form.Label>
                     <Form.Control as="textarea" rows={3} 
+                        placeholder="Job description, duties, achievements..."
                         name="expDescription"
                         type="textarea" 
                         value={formData.expDescription} 

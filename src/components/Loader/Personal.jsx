@@ -81,7 +81,7 @@ function Personal({onDataChange}) {
 
             <Form.Group className="mb-3" controlId="personalPhone">
                 <Form.Label>Phone</Form.Label>
-                <Form.Control type="tel" placeholder="123456789" 
+                <Form.Control type="tel" placeholder="(123) 456 7890" 
                     name="personalPhone"
                     value = {personalData.phone}
                     onChange = {handleInputChange}
