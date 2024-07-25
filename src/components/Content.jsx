@@ -7,7 +7,14 @@ function Content() {
     // Init States
     const [form, setForm] = useState({
         bio: "",
-        personal: {},
+        personal: {
+            personalName: '',
+            personalJob: '',
+            personalEmail: '',
+            personalPhone: '',
+            personalLocation: '',
+            avatar:'',
+        },
         educations: [],
         experiences: [],
         categories: []

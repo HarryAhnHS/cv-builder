@@ -16,6 +16,8 @@ import jsPdf from 'jspdf';
 
 function Output({form, theme, setTheme}) {
 
+    console.log(form);
+
     const [downloader, setDownloader] = useState(false);
 
     const downloadPdf = () => {
@@ -23,7 +25,7 @@ function Output({form, theme, setTheme}) {
         setDownloader(true);
         htmlCanvas(capture).then((canvas) => {
             const imgData = canvas.toDataURL('img/png');
-            const doc = new jsPdf('a', 'mm', 'a4');
+            const doc = new jsPdf('a', 'mm', 'A4');
             const componentWidth = doc.internal.pageSize.getWidth();
             const componentHeight = doc.internal.pageSize.getHeight();
             doc.addImage(imgData, 'PNG', 0, 0, componentWidth, componentHeight);
@@ -59,7 +61,7 @@ function Output({form, theme, setTheme}) {
     }
 
     function isPersonalEmpty() {
-        return Object.keys(form.personal).every((key) => !form.personal[key] || form.personal[key] == "")
+        return Object.keys(form.personal).every((key) => form.personal[key] == "")
     }
 
 
@@ -89,7 +91,6 @@ function Output({form, theme, setTheme}) {
 
                 <div className='mb-5 d-flex justify-content-center'>
                     <div 
-                        // ref={componentRef}
                         className='deliverable-output g-0 p-0 flex-fill'
                         style={
                             {
@@ -105,7 +106,7 @@ function Output({form, theme, setTheme}) {
                                 }
                             }>
                             <div 
-                                className={`flex-fill ${!form.personal.avatar 
+                                className={`flex-fill ${form.personal.avatar == ''
                                         ? 'd-flex justify-content-between' 
                                         : 'd-flex flex-column'}`}
                                         style={isPersonalEmpty() ? null : {margin: '2cqh 4cqw'}}>
@@ -115,7 +116,7 @@ function Output({form, theme, setTheme}) {
                                 </div>
                                 <div className=
                                     "output-head-details fw-light" style={{fontSize: '2cqw'}}>
-                                    {form.personal.personalEmail != "" && form.personal.personalEmail
+                                    {form.personal.personalEmail != ""
                                     ?
                                         <div className="d-flex">
                                             <div className="detail-label mt-1 mb-0 mx-2">
@@ -127,7 +128,7 @@ function Output({form, theme, setTheme}) {
                                         null
                                     } 
                                     
-                                    {form.personal.personalPhone != ""  && form.personal.personalPhone
+                                    {form.personal.personalPhone != ""
                                     ? 
                                         <div className="d-flex">
                                             <div className="detail-label mt-1 mb-0 mx-2">
@@ -140,7 +141,7 @@ function Output({form, theme, setTheme}) {
                                     }
                                     
                                     
-                                    {form.personal.personalLocation != "" && form.personal.personalLocation
+                                    {form.personal.personalLocation != ""
                                     ?
                                         <div className="d-flex">
                                             <div className="detail-label mt-1 mb-0 mx-2">
@@ -155,7 +156,7 @@ function Output({form, theme, setTheme}) {
                                 </div>
                             </div>
                             
-                            {form.personal.avatar 
+                            {form.personal.avatar != ""
                             ? 
                                 <div className="col-md-4 d-flex align-items-center" style={{width: '18%', margin:'2cqh 4cqw 2cqh 0'}}>
                                     <img src={form.personal.avatar} style={{

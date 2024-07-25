@@ -19,7 +19,7 @@ function Personal({onDataChange}) {
     function handleInputChange(e) {
         const {name, value} = e.target;
         const updatedPersonalData = {
-            ... personalData, 
+            ...personalData, 
             [name]: value
         }
 
@@ -43,7 +43,7 @@ function Personal({onDataChange}) {
 
         const updatedPersonalData = {
             ...personalData,
-            avatar: null,
+            avatar: '',
         }
         setPersonalData(updatedPersonalData);
         onDataChange("personal", updatedPersonalData);
@@ -56,8 +56,8 @@ function Personal({onDataChange}) {
                 <Form.Label>Name</Form.Label>
                 <Form.Control type="text" placeholder="John Doe" 
                     name="personalName"
-                    value = {personalData.name}
-                    onChange = {handleInputChange}
+                    value = {personalData.personalName}
+                    onChange = {(e) => handleInputChange(e)}
                 />
             </Form.Group>
 
@@ -65,8 +65,8 @@ function Personal({onDataChange}) {
                 <Form.Label>Job</Form.Label>
                 <Form.Control type="text" placeholder="Software Engineer" 
                     name="personalJob"
-                    value = {personalData.job}
-                    onChange = {handleInputChange}
+                    value = {personalData.personalJob}
+                    onChange = {(e) => handleInputChange(e)}
                 />
             </Form.Group>
 
@@ -74,8 +74,8 @@ function Personal({onDataChange}) {
                 <Form.Label>Email</Form.Label>
                 <Form.Control type="email" placeholder="name@example.com" 
                     name="personalEmail"
-                    value = {personalData.email}
-                    onChange = {handleInputChange}
+                    value = {personalData.personalEmail}
+                    onChange = {(e) => handleInputChange(e)}
                 />
             </Form.Group>
 
@@ -83,8 +83,8 @@ function Personal({onDataChange}) {
                 <Form.Label>Phone</Form.Label>
                 <Form.Control type="tel" placeholder="+1 123 456 7890" 
                     name="personalPhone"
-                    value = {personalData.phone}
-                    onChange = {handleInputChange}
+                    value = {personalData.personalPhone}
+                    onChange = {(e) => handleInputChange(e)}
                 />
             </Form.Group>
 
@@ -92,8 +92,8 @@ function Personal({onDataChange}) {
                 <Form.Label>Location</Form.Label>
                 <Form.Control type="text" placeholder="Los Angeles, California" 
                     name="personalLocation"
-                    value = {personalData.location}
-                    onChange = {handleInputChange}
+                    value = {personalData.personalLocation}
+                    onChange = {(e) => handleInputChange(e)}
                 />
             </Form.Group>
 
@@ -107,7 +107,7 @@ function Personal({onDataChange}) {
                         accept="image/png, image/jpeg"
                         className="flex-fill"
                     />
-                    <Button as="input" size="sm" variant="outline-secondary" value="Reset Photo" onClick= {resetProfilePhoto}/>
+                    <Button as="input" size="sm" variant="outline-secondary" value="Reset Photo" onClick= {resetProfilePhoto} readOnly/>
                 </div>
                 
             </Form.Group> 
