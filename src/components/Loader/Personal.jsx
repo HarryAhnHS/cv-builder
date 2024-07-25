@@ -107,7 +107,7 @@ function Personal({onDataChange}) {
                         accept="image/png, image/jpeg"
                         className="flex-fill"
                     />
-                    <Button as="input" size="sm" variant="outline-secondary" type="reset" value="Reset Photo" onClick= {resetProfilePhoto}/>
+                    <Button as="input" size="sm" variant="outline-secondary" value="Reset Photo" onClick= {resetProfilePhoto}/>
                 </div>
                 
             </Form.Group> 
