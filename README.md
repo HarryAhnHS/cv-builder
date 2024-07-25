@@ -1,9 +1,7 @@
 # Resume Generator
 **A flexible resume generator using ReactJS and Bootstrap**
-
-Live: https://superb-duckanoo-a223b4.netlify.app/
-
 ![Desktop Demo Gameplay](./public/demoScreenshot.png)
+Live: https://superb-duckanoo-a223b4.netlify.app/
 
 ## Main Functionalities:
 
