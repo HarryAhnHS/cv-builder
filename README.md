@@ -3,7 +3,7 @@
 
 Live: https://superb-duckanoo-a223b4.netlify.app/
 
-![Desktop Demo Gameplay](./public/demoScreenshot.png);
+![Desktop Demo Gameplay](./public/demoScreenshot.png)
 
 ## Main Functionalities:
 
