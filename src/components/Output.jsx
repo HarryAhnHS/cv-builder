@@ -4,21 +4,33 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faPhone, faLocationCrosshairs } from '@fortawesome/free-solid-svg-icons';
 
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 
 import Modal from  'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Styles from './Loader/Styles';
 
-import { useReactToPrint } from 'react-to-print'
+import htmlCanvas from 'html2canvas';
+import jsPdf from 'jspdf';
 
 
 function Output({form, theme, setTheme}) {
-    console.log("Rendering output with form:", form);
-    console.log("Rendering output with theme:", theme);
 
-    const componentRef = useRef(null);
-    const handlePrint = useReactToPrint({content: () => componentRef.current,})
+    const [downloader, setDownloader] = useState(false);
+
+    const downloadPdf = () => {
+        const capture = document.querySelector('.deliverable-output');
+        setDownloader(true);
+        htmlCanvas(capture).then((canvas) => {
+            const imgData = canvas.toDataURL('img/png');
+            const doc = new jsPdf('a', 'mm', 'a4');
+            const componentWidth = doc.internal.pageSize.getWidth();
+            const componentHeight = doc.internal.pageSize.getHeight();
+            doc.addImage(imgData, 'PNG', 0, 0, componentWidth, componentHeight);
+            setDownloader(false);
+            doc.save(`Resume.pdf`);
+        })
+    }
 
 
     const [showModal, setShowModal] = useState(false);
@@ -61,7 +73,7 @@ function Output({form, theme, setTheme}) {
                         Customize
                     </Button>
                     <Button variant="primary" size="sm" className='align-middle mx-1' 
-                        onClick={handlePrint}>
+                        onClick={downloadPdf} disabled={!(downloader === false)}>
                         Download
                     </Button>
                 </div>  
@@ -77,7 +89,7 @@ function Output({form, theme, setTheme}) {
 
                 <div className='mb-5 d-flex justify-content-center'>
                     <div 
-                        ref={componentRef}
+                        // ref={componentRef}
                         className='deliverable-output g-0 p-0 flex-fill'
                         style={
                             {

@@ -14,7 +14,7 @@ function Personal({onDataChange}) {
         avatar:'',
     })
 
-    const fileRef = useRef()
+    const fileRef = useRef();
 
     function handleInputChange(e) {
         const {name, value} = e.target;
